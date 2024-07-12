@@ -1,0 +1,42 @@
+{
+  "notebook.formatOnSave.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  "workbench.settings.applyToAllProfiles": ["editor.formatOnSave"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "liveServer.settings.donotShowInfoMsg": true,
+  "workbench.preferredDarkColorTheme": "Monokai",
+  "git.openRepositoryInParentFolders": "never",
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.run": "onSave",
+  "git.confirmSync": false,
+  "json.schemas": [],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 100,
+  "tabnine.experimentalAutoImports": true,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "debug.console.fontFamily": "Fira Code",
+  "editor.fontSize": 16,
+  "terminal.integrated.fontFamily": "Fira Code",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#472323",
+    "titleBar.activeBackground": "#633131",
+    "titleBar.activeForeground": "#FCF9F9"
+  }
+}
