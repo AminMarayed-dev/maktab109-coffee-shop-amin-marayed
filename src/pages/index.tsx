@@ -1,3 +1,6 @@
+import RootLayout from "@/components/layout/RootLayout";
+import { ReactElement } from "react";
+
 export default function Home() {
   return (
     <>
@@ -5,3 +8,7 @@ export default function Home() {
     </>
   );
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <RootLayout>{page}</RootLayout>;
+};
