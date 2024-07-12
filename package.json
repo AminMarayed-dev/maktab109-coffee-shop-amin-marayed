@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@fontsource/vazirmatn": "^5.0.20",
     "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
