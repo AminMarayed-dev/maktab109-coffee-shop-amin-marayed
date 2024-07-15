@@ -1,4 +1,18 @@
 export const localization = {
+  home: {
+    menuList: {
+      home: "خانه",
+      marayedCoffee: "قهوه های مراید",
+      foreignCoffee: "قهوه های خارجی",
+      InstantCoffee: "قهوه های فوری",
+      coffeeMakers: "قهوه سازها",
+      accessories: "لوازم جانبی",
+      arabicaCoffee: "قهوه عربیکا",
+      robustaCoffee: "قهوه ربوستا",
+      turkCoffee: "قهوه ترک",
+      loginOrSignUp: "ورود/ثبت نام",
+    },
+  },
   auth: {
     email: "ایمیل",
     password: "رمز عبور",
