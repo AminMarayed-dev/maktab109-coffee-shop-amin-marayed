@@ -8,19 +8,24 @@ import useLogin from "@/hooks/auth/login/useLogin";
 import { FormData } from "@/types/auth/login/login.type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
+  Alert,
   Box,
   Button,
   InputAdornment,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginValidationSchema } from "../validation/auth.valiation";
 
 function LoginComponent() {
   const { auth } = localization;
+  const [open, setOpen] = useState(false);
+  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
   const {
     register,
     handleSubmit,
@@ -35,12 +40,15 @@ function LoginComponent() {
         data: { token },
       } = await mutateAsync(userData);
       if (status === 200) {
+        setIsLoginSuccess(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
       }
     } catch (error) {
+      setIsLoginSuccess(false);
       console.log(error);
     }
+    setOpen(true);
   };
 
   const router = useRouter();
@@ -75,6 +83,20 @@ function LoginComponent() {
           />
         ))}
         <ButtonAuth loading={isPending} text={auth.login} />
+        <Snackbar
+          open={open}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          autoHideDuration={3000}
+          onClose={() => setOpen(false)}
+        >
+          <Alert
+            severity={isLoginSuccess ? "success" : "error"}
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            {isLoginSuccess ? auth.loginSuccess : auth.loginFail}
+          </Alert>
+        </Snackbar>
         <Button onClick={() => router.push(routes.register)} color="secondary">
           {auth.submit}
         </Button>

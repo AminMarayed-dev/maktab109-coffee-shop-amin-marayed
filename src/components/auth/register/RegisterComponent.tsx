@@ -23,7 +23,7 @@ import { registerValidationSchema } from "../validation/auth.valiation";
 
 function RegisterComponent() {
   const [open, setOpen] = useState(false);
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegisterSuccess, setIsRegisterSucces] = useState(false);
   const { auth } = localization;
 
   const {
@@ -38,15 +38,17 @@ function RegisterComponent() {
         status,
         data: { token },
       } = await mutateAsync(userData);
-      setOpen(true);
+
       if (status === 201) {
-        setIsRegister(true);
+        setIsRegisterSucces(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
       }
     } catch (error) {
+      setIsRegisterSucces(false);
       console.log(error);
     }
+    setOpen(true);
   };
   const router = useRouter();
 
@@ -87,15 +89,16 @@ function RegisterComponent() {
         <ButtonAuth loading={isPending} text={auth.submit} />
         <Snackbar
           open={open}
-          autoHideDuration={6000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          autoHideDuration={3000}
           onClose={() => setOpen(false)}
         >
           <Alert
-            severity={isRegister ? "success" : "error"}
+            severity={isRegisterSuccess ? "success" : "error"}
             variant="filled"
             sx={{ width: "100%" }}
           >
-            {isRegister ? "ورود موفقیت آمیز" : "ورود ناموفق"}
+            {isRegisterSuccess ? auth.registerSuccess : auth.registerFail}
           </Alert>
         </Snackbar>
 

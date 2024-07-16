@@ -33,7 +33,9 @@ export const localization = {
     loginPage: "صفحه ورود",
     errorMessage: "پر کردن این فیلد الزامی است",
     registerSuccess: "ثبت نام با موفقیت انجام شد",
-    registerFail: "ثبت نام ",
+    registerFail: "این نام کاربری قبلا ثبت نام شده",
+    loginSuccess: "ورود شما با موفقیت انجام شد",
+    loginFail: "نام کاربری یا رمز عبور اشتباه است",
     validation: {
       errorEmptyField: "پر کردن این فیلد الزامی است",
       errorPasswordRegex: "رمز عبور باید ترکیبی از کاراکتر و عدد باشد",
