@@ -1,8 +1,11 @@
+import textFieldItems from "@/components/auth/register/register.data";
+import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
-
+import { localization } from "@/constant/localization";
 import { routes } from "@/constant/routes";
-
 import useRegister from "@/hooks/auth/register/useRegister";
+import { FormData } from "@/types/auth/register/register.type";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Alert,
   Box,
@@ -16,9 +19,7 @@ import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import ButtonAuth from "@/components/auth/shared/ButtonAuth";
-import { localization } from "@/constant/localization";
-import textFieldItems from "@/components/auth/register/register.data";
+import { registerValidationSchema } from "../validation/auth.valiation";
 
 function RegisterComponent() {
   const [open, setOpen] = useState(false);
@@ -29,9 +30,9 @@ function RegisterComponent() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>({ resolver: yupResolver(registerValidationSchema) });
   const { mutateAsync, isPending } = useRegister();
-  const handleRegister = async (userData: any) => {
+  const handleRegister = async (userData: FormData) => {
     try {
       const {
         status,
@@ -70,17 +71,17 @@ function RegisterComponent() {
           <TextField
             key={index}
             fullWidth
-            // error={isError}
+            error={!!errors[item.name as keyof FormData]}
             placeholder={item.placeholder}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">{item.icon}</InputAdornment>
               ),
             }}
-            {...register(item.name)}
+            {...register(item.name as keyof FormData)}
             type={item.type}
             sx={{ mb: 2 }}
-            // helperText={errors[item.name]?.message}
+            helperText={errors[item.name as keyof FormData]?.message}
           />
         ))}
         <ButtonAuth loading={isPending} text={auth.submit} />

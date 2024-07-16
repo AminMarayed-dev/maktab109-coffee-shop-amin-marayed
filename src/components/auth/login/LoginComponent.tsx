@@ -5,6 +5,8 @@ import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
 import useLogin from "@/hooks/auth/login/useLogin";
+import { FormData } from "@/types/auth/login/login.type";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Box,
   Button,
@@ -15,6 +17,7 @@ import {
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { loginValidationSchema } from "../validation/auth.valiation";
 
 function LoginComponent() {
   const { auth } = localization;
@@ -22,7 +25,7 @@ function LoginComponent() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(loginValidationSchema) });
   const { mutateAsync, isPending } = useLogin();
 
   const handleLogin = async (userData: any) => {
@@ -58,17 +61,17 @@ function LoginComponent() {
           <TextField
             key={index}
             fullWidth
-            // error={isError}
+            error={!!errors[item.name as keyof FormData]}
             placeholder={item.placeholder}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">{item.icon}</InputAdornment>
               ),
             }}
-            {...register(item.name)}
+            {...register(item.name as keyof FormData)}
             type={item.type}
             sx={{ mb: 2 }}
-            // helperText={errors[item.name]?.message}
+            helperText={errors[item.name as keyof FormData]?.message}
           />
         ))}
         <ButtonAuth loading={isPending} text={auth.login} />

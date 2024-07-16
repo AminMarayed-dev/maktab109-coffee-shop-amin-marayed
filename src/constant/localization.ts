@@ -34,6 +34,11 @@ export const localization = {
     errorMessage: "پر کردن این فیلد الزامی است",
     registerSuccess: "ثبت نام با موفقیت انجام شد",
     registerFail: "ثبت نام ",
+    validation: {
+      errorEmptyField: "پر کردن این فیلد الزامی است",
+      errorPasswordRegex: "رمز عبور باید ترکیبی از کاراکتر و عدد باشد",
+      errorPasswordLength: "رمز عبور حداقل باید هشت رقم باشد",
+    },
   },
   dashboard: {
     adminPanel: "پنل ادمین",
