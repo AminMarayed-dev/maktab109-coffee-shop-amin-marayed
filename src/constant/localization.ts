@@ -1,4 +1,10 @@
 export const localization = {
+  common: {
+    price: "قیمت",
+    inventory: "موجودی",
+    description: "توضیحات",
+    rial: "ریال",
+  },
   home: {
     menuList: {
       home: "خانه",
@@ -28,5 +34,27 @@ export const localization = {
     errorMessage: "پر کردن این فیلد الزامی است",
     registerSuccess: "ثبت نام با موفقیت انجام شد",
     registerFail: "ثبت نام ",
+  },
+  dashboard: {
+    adminPanel: "پنل ادمین",
+    products: "کالاها",
+    product: "کالا",
+    InventoryAndPrices: "موجودی و قیمت ها",
+    orders: "سفارش ها",
+    addProduct: "افزودن کالا",
+    save: "ذخیره",
+    deliveredOrders: "سفارش های تحویل داده شده",
+    ordersPendingShipment: "سفارش های در انتظار ارسال",
+    edit: "ویرایش",
+    delete: "حذف",
+    checkOrder: "برسی سفارش",
+    totalAmount: "مجموع مبلغ",
+    orderRegistrationTime: "زمان ثبت سفارش",
+    category: "دسته بندی",
+    picture: "تصویر",
+    nameProduct: "نام کالا",
+    actions: "اقدامات",
+    table: "جدول",
+    username: "نام کاربر",
   },
 };
