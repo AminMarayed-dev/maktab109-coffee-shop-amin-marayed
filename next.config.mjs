@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  images: {
+    domains: ["localhost"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.melocoffee.com",
+        port: "",
+        pathname: "/wp-content/uploads/**/**/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
