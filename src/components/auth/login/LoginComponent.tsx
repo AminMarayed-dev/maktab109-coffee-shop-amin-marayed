@@ -38,11 +38,16 @@ function LoginComponent() {
       const {
         status,
         data: { token },
+        data: {
+          data: { user },
+        },
       } = await mutateAsync(userData);
       if (status === 200) {
         setIsLoginSuccess(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
+        setCookie("role", user.role);
+        // setCookie("userID", user.id);
       }
     } catch (error) {
       setIsLoginSuccess(false);
