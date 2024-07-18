@@ -6,7 +6,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
-  Button,
   IconButton,
   Paper,
   Table,
@@ -20,12 +19,19 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
-import ButtonActionTable from "./ButtonActionTable";
+import ButtonActionTable from "../ButtonActionTable";
+
+import useDashboardStore from "@/zustand/dashboard/store";
+import { useMediaQuery } from "@mui/material";
+import TableModalProducts from "./TableModalProducts";
+
+const { dashboard } = localization;
+const { center, styleModal } = cssClass;
 
 function TableProducts() {
-  const { dashboard } = localization;
-  const { center } = cssClass;
+  const matchesMdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const [page, setPage] = useState(0);
+  const handleOpenModal = useDashboardStore((state) => state.handleOpenModal);
 
   const { data, isLoading, isError } = useGetAllProductsToDashboard({
     page: page + 1,
@@ -45,7 +51,13 @@ function TableProducts() {
   }
 
   return (
-    <Box sx={{ ...center, flexDirection: "column", mb: 4, gap: 3 }}>
+    <Box
+      sx={{
+        ...center,
+        flexDirection: "column",
+        gap: 3,
+      }}
+    >
       <Typography variant="h4">
         {dashboard.table} {dashboard.products}
       </Typography>
@@ -53,10 +65,13 @@ function TableProducts() {
         <Table stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell>{dashboard.picture}</TableCell>
+              <TableCell align="center">{dashboard.picture}</TableCell>
               <TableCell align="center">{dashboard.nameProduct}</TableCell>
-              <TableCell>{dashboard.category}</TableCell>
-              <TableCell align="center">{dashboard.actions}</TableCell>
+              <TableCell align="center">{dashboard.category}</TableCell>
+              <TableCell align="center">{dashboard.subCategory}</TableCell>
+              <TableCell align={`${matchesMdDown ? "left" : "center"}`}>
+                {dashboard.actions}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -71,10 +86,14 @@ function TableProducts() {
                   />
                 </TableCell>
                 <TableCell align="center">
-                  {truncateText(item.name, 13)}
+                  {matchesMdDown ? truncateText(item.name, 13) : item.name}
                 </TableCell>
                 <TableCell align="center">{item.category.name}</TableCell>
-                <TableCell align="left">
+                <TableCell align="center">{item.subcategory.name}</TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ whiteSpace: matchesMdDown ? "wrap" : "nowrap" }}
+                >
                   <IconButton>
                     <EditIcon />
                   </IconButton>
@@ -93,9 +112,14 @@ function TableProducts() {
           rowsPerPage={5}
           page={page}
           onPageChange={handleChangePage}
+          sx={{ ...center }}
         />
       </TableContainer>
-      <ButtonActionTable text={dashboard.addProduct} />
+      <ButtonActionTable
+        text={dashboard.addProduct}
+        onClick={handleOpenModal}
+      />
+      <TableModalProducts />
     </Box>
   );
 }
