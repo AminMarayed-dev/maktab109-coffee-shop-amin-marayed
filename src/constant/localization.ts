@@ -3,6 +3,7 @@ export const localization = {
     price: "قیمت",
     inventory: "موجودی",
     description: "توضیحات",
+    brand: "برند",
     rial: "ریال",
   },
   home: {
@@ -56,5 +57,8 @@ export const localization = {
     actions: "اقدامات",
     table: "جدول",
     username: "نام کاربر",
+    addAndEditProduct: "افزودن/ویرایش کالا ",
+    uploadPicture: "آپلود تصویر",
+    subCategory: "زیر دسته",
   },
 };
