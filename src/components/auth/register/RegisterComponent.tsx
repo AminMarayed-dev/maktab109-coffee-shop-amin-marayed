@@ -6,10 +6,12 @@ import { routes } from "@/constant/routes";
 import useRegister from "@/hooks/auth/register/useRegister";
 import { FormData } from "@/types/auth/register/register.type";
 import { yupResolver } from "@hookform/resolvers/yup";
+
 import {
   Alert,
   Box,
   Button,
+  Container,
   InputAdornment,
   Snackbar,
   TextField,
@@ -25,6 +27,7 @@ function RegisterComponent() {
   const [open, setOpen] = useState(false);
   const [isRegisterSuccess, setIsRegisterSucces] = useState(false);
   const { auth } = localization;
+  const router = useRouter();
 
   const {
     register,
@@ -43,6 +46,9 @@ function RegisterComponent() {
         setIsRegisterSucces(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
+        setTimeout(() => {
+          router.push(routes.login);
+        }, 2000);
       }
     } catch (error) {
       setIsRegisterSucces(false);
@@ -50,16 +56,17 @@ function RegisterComponent() {
     }
     setOpen(true);
   };
-  const router = useRouter();
 
   return (
-    <Box
+    <Container
       sx={{
-        my: 8,
-        mx: 4,
         flexDirection: "column",
         ...cssClass.center,
+        bgcolor: "primary.main",
+        py: 3,
+        borderRadius: 3,
       }}
+      maxWidth="sm"
     >
       <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
         {auth.submitPage}
@@ -104,7 +111,7 @@ function RegisterComponent() {
 
         <Button onClick={() => router.push(routes.login)}>{auth.login}</Button>
       </Box>
-    </Box>
+    </Container>
   );
 }
 

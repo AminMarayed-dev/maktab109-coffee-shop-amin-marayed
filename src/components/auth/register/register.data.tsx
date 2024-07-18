@@ -1,5 +1,6 @@
 import { localization } from "@/constant/localization";
 import EmailIcon from "@mui/icons-material/Email";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import StayCurrentPortraitIcon from "@mui/icons-material/StayCurrentPortrait";
@@ -19,7 +20,7 @@ const textFieldItems = [
   },
   {
     placeholder: auth.firstname,
-    icon: <LockIcon />,
+    icon: <PersonIcon />,
     name: "firstname",
     type: "text",
   },
@@ -31,7 +32,7 @@ const textFieldItems = [
   },
   {
     placeholder: auth.address,
-    icon: <PersonIcon />,
+    icon: <LocationOnIcon />,
     name: "address",
     type: "text",
   },
