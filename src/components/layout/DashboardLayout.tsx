@@ -1,12 +1,13 @@
+import { Box, Stack } from "@mui/material";
 import { PropsWithChildren } from "react";
+import Header from "./dashboard-layout/header/Header";
 
 function DashboardLayout({ children }: PropsWithChildren) {
   return (
-    <div>
-      <header>header-da</header>
+    <Stack sx={{ bgcolor: "secondary.light", minHeight: "100vh" }}>
+      <Header />
       {children}
-      <footer>footer-da</footer>
-    </div>
+    </Stack>
   );
 }
 
