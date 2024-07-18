@@ -1,6 +1,5 @@
 import DrawerBasket from "@/components/layout/root-layout/header/DrawerBasket";
 import DrawerMenu from "@/components/layout/root-layout/header/DrawerMenu";
-import PopOver from "@/components/layout/root-layout/header/PopOver";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
