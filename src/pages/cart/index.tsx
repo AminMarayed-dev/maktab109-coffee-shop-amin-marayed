@@ -1,4 +1,5 @@
-import RootLayout from "@/components/layout/RootLayout";
+
+import RootLayout from "@/components/layout/root-layout/RootLayout";
 import { ReactElement } from "react";
 
 function Cart() {

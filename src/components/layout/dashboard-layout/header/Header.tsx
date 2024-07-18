@@ -1,10 +1,11 @@
 import { Home, Logout } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
+import { Box, Container, IconButton } from "@mui/material";
 import Image from "next/image";
 
 function Header() {
   return (
-    <Box
+    <Container
+      maxWidth="lg"
       sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -25,7 +26,7 @@ function Header() {
           <Logout />
         </IconButton>
       </Box>
-    </Box>
+    </Container>
   );
 }
 

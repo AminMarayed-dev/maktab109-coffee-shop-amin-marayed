@@ -1,9 +1,14 @@
-import { parseISO } from "date-fns";
-import { format } from "date-fns-jalali";
+export function toLocalDateString(date: Date | string | number): string {
+  const options: Intl.DateTimeFormatOptions = {
+    // weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
 
-const formatDatePersian = (isoDateString: string) => {
-  const date = parseISO(isoDateString);
-  return format(date, "yyyy/MM/dd");
-};
+  return new Date(date).toLocaleDateString("fa-IR", options);
+}
 
-export default formatDatePersian;
+export function toLocalDateStringShort(date: Date | string | number): string {
+  return new Date(date).toLocaleDateString("fa-IR");
+}

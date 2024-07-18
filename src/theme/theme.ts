@@ -63,6 +63,24 @@ let theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "gray",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "darkgray",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgb(211,169,127)",
+          },
+        },
+        icon: {
+          color: "rgb(15,15,15)",
+        },
+      },
+    },
   },
 });
 
