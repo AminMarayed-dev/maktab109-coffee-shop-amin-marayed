@@ -18,13 +18,17 @@
     "@tanstack/react-query": "^5.50.1",
     "axios": "^1.7.2",
     "cookies-next": "^4.2.1",
+    "date-fns": "^3.6.0",
+    "date-fns-jalali": "^3.6.0-1",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
+    "react-quill": "^2.0.0",
     "stylis": "^4.3.2",
     "stylis-plugin-rtl": "^2.1.1",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",
