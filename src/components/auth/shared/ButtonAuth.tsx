@@ -1,6 +1,6 @@
 import { Button, CircularProgress } from "@mui/material";
 
-function ButtonAuth({ loading, text }) {
+function ButtonAuth({ loading, text, ...rest }) {
   return (
     <>
       {loading ? (
@@ -9,6 +9,7 @@ function ButtonAuth({ loading, text }) {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          {...rest}
         >
           <CircularProgress color="inherit" size={24} />
         </Button>

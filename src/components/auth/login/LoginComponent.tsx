@@ -11,6 +11,7 @@ import {
   Alert,
   Box,
   Button,
+  Container,
   InputAdornment,
   Snackbar,
   TextField,
@@ -47,6 +48,10 @@ function LoginComponent() {
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
         setCookie("role", user.role);
+        setTimeout(() => {
+          router.push(routes.home);
+        }, 2000);
+
         // setCookie("userID", user.id);
       }
     } catch (error) {
@@ -58,13 +63,16 @@ function LoginComponent() {
 
   const router = useRouter();
   return (
-    <Box
+    <Container
       sx={{
         my: 8,
-        mx: 4,
+        bgcolor: "primary.main",
         flexDirection: "column",
         ...cssClass.center,
+        py: 3,
+        borderRadius: 3,
       }}
+      maxWidth="sm"
     >
       <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
         {auth.loginPage}
@@ -106,7 +114,7 @@ function LoginComponent() {
           {auth.submit}
         </Button>
       </Box>
-    </Box>
+    </Container>
   );
 }
 

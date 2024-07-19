@@ -24,4 +24,22 @@ export const cssClass = {
     boxShadow: 24,
     p: 4,
   },
+  onlyDesktop: {
+    display: {
+      md: "inline",
+      xs: "none",
+    },
+  },
+  onlyMobile: {
+    display: {
+      md: "none",
+      xs: "inline ",
+    },
+  },
+  styleContainerToobar: {
+    display: "flex",
+    justifyContent: "space-between",
+    py: 2.5,
+    alignItems: "center",
+  },
 };
