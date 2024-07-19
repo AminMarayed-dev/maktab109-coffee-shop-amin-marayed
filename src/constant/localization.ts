@@ -31,6 +31,7 @@ export const localization = {
       frenchPress: "فرنچ پرس",
       electricEspressoMachine: "اسپرسو ساز برقی",
       loginOrSignUp: "ورود/ثبت نام",
+      myAccount: "حساب کاربری من",
     },
   },
   auth: {

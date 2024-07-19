@@ -10,14 +10,11 @@ import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const persistMenuItems =
-  getCookie("accessToken") && menuItems.slice(0, menuItems.length - 1);
-const {
-  home: { menuList },
-} = localization;
 // need refactor
 function DrawerMenu() {
   const [openItems, setOpenItems] = useState<{ [key: number]: boolean }>({});
+  const persistMenuItems =
+    getCookie("accessToken") && menuItems.slice(0, menuItems.length - 1);
 
   const handleOpen: (index: number) => void = (index) => {
     setOpenItems((prevOpenItems) => ({

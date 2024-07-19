@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import MenuAdminUser from "./mobile/MenuAdminUser";
 
@@ -28,6 +29,7 @@ const {
 const { onlyDesktop, onlyMobile, center, styleContainerToobar } = cssClass;
 
 function Header() {
+  const router = useRouter();
   const openDrawer = useHeaderStore((state) => state.openDrawer);
   const anchorDrawer = useHeaderStore((state) => state.anchorDrawer);
   const isPersist = useHeaderStore((state) => state.isPersist);
@@ -68,8 +70,9 @@ function Header() {
                 ...onlyDesktop,
                 mr: 2,
               }}
+              onClick={() => router.push("/auth/login")}
             >
-              {menuList.loginOrSignUp}
+              {isPersist ? menuList.myAccount : menuList.loginOrSignUp}
             </Button>
 
             <IconButton

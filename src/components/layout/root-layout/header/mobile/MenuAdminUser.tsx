@@ -2,14 +2,8 @@ import { cssClass } from "@/constant/cssClass";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import PersonIcon from "@mui/icons-material/Person";
 import { IconButton, Menu, MenuItem, Stack } from "@mui/material";
-import { getCookie } from "cookies-next";
 
-const role = getCookie("role");
-const menuUserAdmin = {
-  user: ["پیشخوان", "سفارش ها", "خروج"],
-  admin: ["پیشخوان", "خروج"],
-};
-const menuItems = role === "USER" ? menuUserAdmin.user : menuUserAdmin.admin;
+const menuItems = ["پیشخوان", "سفارش ها", "خروج"];
 
 const { onlyMobile } = cssClass;
 function MenuAdminUser() {

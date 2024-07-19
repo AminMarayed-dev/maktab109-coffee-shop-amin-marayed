@@ -48,6 +48,7 @@ function LoginComponent() {
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
         setCookie("role", user.role);
+
         setTimeout(() => {
           router.push(routes.home);
         }, 2000);
