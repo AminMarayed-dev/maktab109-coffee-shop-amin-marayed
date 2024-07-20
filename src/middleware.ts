@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   if (pathname.startsWith("/dashboard")) {
     const role = req.cookies.get("role")?.value;
 
-    if (accessToken && role !== "ADMIN") {
+    if (role !== "ADMIN") {
       return NextResponse.redirect(new URL("/", url));
     }
   }
