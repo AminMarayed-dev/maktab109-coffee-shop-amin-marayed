@@ -5,7 +5,8 @@ import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
 import useLogin from "@/hooks/auth/login/useLogin";
-import { FormData } from "@/types/auth/login/login.type";
+import { IUserDataLogin } from "@/types/auth/login/login.type";
+import useHeaderStore from "@/zustand/root-layout/header/store";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Alert,
@@ -17,16 +18,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginValidationSchema } from "../validation/auth.valiation";
 
+const { auth } = localization;
+const { styleContainerAuth } = cssClass;
+
 function LoginComponent() {
-  const { auth } = localization;
   const [open, setOpen] = useState(false);
   const [isLoginSuccess, setIsLoginSuccess] = useState(false);
+  const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
   const {
     register,
     handleSubmit,
@@ -34,7 +38,7 @@ function LoginComponent() {
   } = useForm({ resolver: yupResolver(loginValidationSchema) });
   const { mutateAsync, isPending } = useLogin();
 
-  const handleLogin = async (userData: any) => {
+  const handleLogin = async (userData) => {
     try {
       const {
         status,
@@ -49,11 +53,13 @@ function LoginComponent() {
         setCookie("refreshToken", token.refreshToken);
         setCookie("role", user.role);
 
-        setTimeout(() => {
-          router.push(routes.home);
-        }, 2000);
+        // close drawer when success
+        handleCloseDrawer();
 
-        // setCookie("userID", user.id);
+        setTimeout(() => {
+          if (getCookie("role") === "ADMIN") router.push(routes.dashboard);
+          else router.push(routes.home);
+        }, 2000);
       }
     } catch (error) {
       setIsLoginSuccess(false);
@@ -64,17 +70,7 @@ function LoginComponent() {
 
   const router = useRouter();
   return (
-    <Container
-      sx={{
-        my: 8,
-        bgcolor: "primary.main",
-        flexDirection: "column",
-        ...cssClass.center,
-        py: 3,
-        borderRadius: 3,
-      }}
-      maxWidth="sm"
-    >
+    <Container sx={styleContainerAuth} maxWidth="sm">
       <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
         {auth.loginPage}
       </Typography>
@@ -83,17 +79,17 @@ function LoginComponent() {
           <TextField
             key={index}
             fullWidth
-            error={!!errors[item.name as keyof FormData]}
+            error={!!errors[item.name as keyof IUserDataLogin]}
             placeholder={item.placeholder}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">{item.icon}</InputAdornment>
               ),
             }}
-            {...register(item.name as keyof FormData)}
+            {...register(item.name as keyof IUserDataLogin)}
             type={item.type}
             sx={{ mb: 2 }}
-            helperText={errors[item.name as keyof FormData]?.message}
+            helperText={errors[item.name as keyof IUserDataLogin]?.message}
           />
         ))}
         <ButtonAuth loading={isPending} text={auth.login} />

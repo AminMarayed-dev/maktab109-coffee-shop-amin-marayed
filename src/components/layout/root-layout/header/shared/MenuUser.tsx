@@ -1,23 +1,28 @@
 import { cssClass } from "@/constant/cssClass";
+import { routes } from "@/constant/routes";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import PersonIcon from "@mui/icons-material/Person";
 import { IconButton, Menu, MenuItem, Stack } from "@mui/material";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const menuItems = ["پیشخوان", "سفارش ها", "خروج"];
 
 const { onlyMobile } = cssClass;
-function MenuAdminUser() {
+function MenuUser() {
+  const router = useRouter();
   const anchorMenu = useHeaderStore((state) => state.anchorMenu);
   const handleCloseMenu = useHeaderStore((state) => state.handleCloseMenu);
   const handleOpenMenu = useHeaderStore((state) => state.handleOpenMenu);
+  const handleUserLogOut = () => {
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+    deleteCookie("role");
+    router.push(routes.login);
+  };
   return (
     <Stack>
-      <IconButton
-        size="large"
-        edge="start"
-        sx={{ ...onlyMobile, mt: 1 }}
-        onClick={handleOpenMenu}
-      >
+      <IconButton size="large" edge="start" onClick={handleOpenMenu}>
         <PersonIcon />
       </IconButton>
       <Menu
@@ -34,7 +39,13 @@ function MenuAdminUser() {
         }}
       >
         {menuItems.map((item, index) => (
-          <MenuItem key={index} onClick={handleCloseMenu}>
+          <MenuItem
+            key={index}
+            onClick={() => {
+              handleCloseMenu();
+              if (item === "خروج") handleUserLogOut();
+            }}
+          >
             {item}
           </MenuItem>
         ))}
@@ -43,4 +54,4 @@ function MenuAdminUser() {
   );
 }
 
-export default MenuAdminUser;
+export default MenuUser;

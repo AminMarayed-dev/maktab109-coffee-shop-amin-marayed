@@ -5,4 +5,5 @@ export const routes = {
   productCategory: `/product-category/:slug`,
   productCategoryGenre: `/product-category/:slug/:genre`,
   login: "/auth/login",
+  dashboard: "/dashboard",
 };

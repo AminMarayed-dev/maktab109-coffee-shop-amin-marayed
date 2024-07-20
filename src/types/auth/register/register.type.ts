@@ -1,4 +1,4 @@
-export type FormData = {
+export type IUserDataRegister = {
   username: string;
   firstname: string;
   lastname: string;

@@ -4,6 +4,7 @@ import DrawerBasket from "@/components/layout/root-layout/header/shared/DrawerBa
 import ToolbarStyled from "@/components/layout/root-layout/header/shared/ToolbarStyled";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
+import { routes } from "@/constant/routes";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -21,7 +22,7 @@ import { getCookie } from "cookies-next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import MenuAdminUser from "./mobile/MenuAdminUser";
+import MenuUser from "./shared/MenuUser";
 
 const {
   home: { menuList },
@@ -65,15 +66,19 @@ function Header() {
             alt="Logo"
           />
           <Box sx={center}>
-            <Button
-              sx={{
-                ...onlyDesktop,
-                mr: 2,
-              }}
-              onClick={() => router.push("/auth/login")}
-            >
-              {isPersist ? menuList.myAccount : menuList.loginOrSignUp}
-            </Button>
+            {isPersist ? (
+              <MenuUser />
+            ) : (
+              <Button
+                sx={{
+                  ...onlyDesktop,
+                  mr: 2,
+                }}
+                onClick={() => router.push(routes.login)}
+              >
+                {menuList.loginOrSignUp}
+              </Button>
+            )}
 
             <IconButton
               size="large"
@@ -85,7 +90,6 @@ function Header() {
             >
               <SearchIcon />
             </IconButton>
-            {isPersist && <MenuAdminUser />}
             <IconButton size="large" edge="start" onClick={handleDrawerBasket}>
               <LocalMallIcon />
             </IconButton>

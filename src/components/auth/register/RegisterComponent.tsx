@@ -4,7 +4,7 @@ import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { routes } from "@/constant/routes";
 import useRegister from "@/hooks/auth/register/useRegister";
-import { FormData } from "@/types/auth/register/register.type";
+import { IUserDataRegister } from "@/types/auth/register/register.type";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -23,19 +23,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { registerValidationSchema } from "../validation/auth.valiation";
 
+const { auth } = localization;
+const { styleContainerAuth } = cssClass;
+
 function RegisterComponent() {
   const [open, setOpen] = useState(false);
   const [isRegisterSuccess, setIsRegisterSucces] = useState(false);
-  const { auth } = localization;
+
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(registerValidationSchema) });
+  } = useForm<IUserDataRegister>({
+    resolver: yupResolver(registerValidationSchema),
+  });
   const { mutateAsync, isPending } = useRegister();
-  const handleRegister = async (userData: FormData) => {
+  const handleRegister = async (userData: IUserDataRegister) => {
     try {
       const {
         status,
@@ -58,16 +63,7 @@ function RegisterComponent() {
   };
 
   return (
-    <Container
-      sx={{
-        flexDirection: "column",
-        ...cssClass.center,
-        bgcolor: "primary.main",
-        py: 3,
-        borderRadius: 3,
-      }}
-      maxWidth="sm"
-    >
+    <Container sx={styleContainerAuth} maxWidth="sm">
       <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
         {auth.submitPage}
       </Typography>
@@ -80,17 +76,17 @@ function RegisterComponent() {
           <TextField
             key={index}
             fullWidth
-            error={!!errors[item.name as keyof FormData]}
+            error={!!errors[item.name as keyof IUserDataRegister]}
             placeholder={item.placeholder}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">{item.icon}</InputAdornment>
               ),
             }}
-            {...register(item.name as keyof FormData)}
+            {...register(item.name as keyof IUserDataRegister)}
             type={item.type}
             sx={{ mb: 2 }}
-            helperText={errors[item.name as keyof FormData]?.message}
+            helperText={errors[item.name as keyof IUserDataRegister]?.message}
           />
         ))}
         <ButtonAuth loading={isPending} text={auth.submit} />

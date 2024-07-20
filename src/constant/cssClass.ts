@@ -42,4 +42,13 @@ export const cssClass = {
     py: 2.5,
     alignItems: "center",
   },
+  styleContainerAuth: {
+    flexDirection: "column",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    bgcolor: "primary.main",
+    py: 3,
+    borderRadius: 3,
+  },
 };
