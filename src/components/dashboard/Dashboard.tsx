@@ -1,16 +1,18 @@
 import TableProducts from "@/components/dashboard/table-products/TableProducts";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
-import { Container, Tab, Tabs, Typography, useMediaQuery } from "@mui/material";
+import useResponsive from "@/hooks/shared/useResponsive";
+import { Stack, Tab, Tabs, Typography } from "@mui/material";
 import { useState } from "react";
 import { a11yProps, CustomTabPanel } from "./CustomTabPanel";
 import TableInventory from "./TableInventory";
 import TableOrders from "./TableOrders";
 
+const { dashboard } = localization;
+const { center } = cssClass;
+
 function Dashboard() {
-  const { dashboard } = localization;
-  const { center } = cssClass;
-  const matchesMdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [value, setValue] = useState(0);
   const handleChangeValue = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -29,14 +31,14 @@ function Dashboard() {
   ];
 
   return (
-    <Container
+    <Stack
       sx={{
         ...center,
-        flexDirection: matchesMdDown ? "column" : "row",
-        gap: matchesMdDown ? 2 : 5,
+        flexDirection: mdDown ? "column" : "row",
+        gap: mdDown ? 2 : 5,
         mb: 3,
         position: "relative",
-        padding: matchesMdDown ? 2 : 0,
+        padding: mdDown ? 2 : 0,
       }}
     >
       <Typography variant="h3" color="secondary">
@@ -47,7 +49,12 @@ function Dashboard() {
         onChange={handleChangeValue}
         textColor="secondary"
         indicatorColor="primary"
-        orientation={`${matchesMdDown ? "horizontal" : "vertical"}`}
+        orientation={`${mdDown ? "horizontal" : "vertical"}`}
+        sx={{
+          borderRight: 1,
+          borderColor: "divider",
+          bgcolor: "primary.main",
+        }}
       >
         <Tab label={dashboard.products} {...a11yProps(0)} />
         <Tab label={dashboard.InventoryAndPrices} {...a11yProps(1)} />
@@ -58,7 +65,7 @@ function Dashboard() {
           {tabPanel.component}
         </CustomTabPanel>
       ))}
-    </Container>
+    </Stack>
   );
 }
 

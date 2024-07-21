@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 const menuItems = ["پیشخوان", "سفارش ها", "خروج"];
 
-const { onlyMobile } = cssClass;
 function MenuUser() {
   const router = useRouter();
   const anchorMenu = useHeaderStore((state) => state.anchorMenu);

@@ -1,6 +1,7 @@
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { useGetAllProductsToDashboard } from "@/hooks/dashboard/useGetAllProducts";
+import useResponsive from "@/hooks/shared/useResponsive";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
@@ -14,7 +15,6 @@ import {
   TablePagination,
   TableRow,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { useState } from "react";
 import ButtonActionTable from "./ButtonActionTable";
@@ -24,7 +24,7 @@ const { dashboard, common } = localization;
 
 function TableInventory() {
   const [page, setPage] = useState(0);
-  const matchesMdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -35,7 +35,7 @@ function TableInventory() {
         {dashboard.table} {dashboard.InventoryAndPrices}
       </Typography>
       <TableContainer component={Paper} sx={{ margin: "auto" }}>
-        <Table sx={{ minWidth: matchesMdDown ? "auto" : "700px" }}>
+        <Table sx={{ minWidth: mdDown ? "auto" : "700px" }}>
           <TableHead>
             <TableRow>
               <TableCell align="center">{dashboard.product}</TableCell>
@@ -47,7 +47,7 @@ function TableInventory() {
             {data?.products?.map((item, index) => (
               <TableRow key={index}>
                 <TableCell align="center">
-                  {matchesMdDown ? truncateText(item.name, 22) : item.name}
+                  {mdDown ? truncateText(item.name, 22) : item.name}
                 </TableCell>
                 <TableCell align="center">
                   {toPersianNumbers(item.price)} {common.rial}

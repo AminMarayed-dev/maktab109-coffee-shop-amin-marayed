@@ -1,6 +1,7 @@
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { useGetAllOrdersToDashboard } from "@/hooks/dashboard/useGetAllOrders";
+import useResponsive from "@/hooks/shared/useResponsive";
 import { toLocalDateStringShort } from "@/utils/formatDatePersian";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 
@@ -19,7 +20,6 @@ import {
   TableHead,
   TableRow,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ const { center } = cssClass;
 const { dashboard, common } = localization;
 
 function TableOrders() {
-  const matchesMdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [page, setPage] = useState(0);
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -39,7 +39,7 @@ function TableOrders() {
       <Box
         sx={{
           ...center,
-          flexDirection: matchesMdDown ? "column" : "row",
+          flexDirection: mdDown ? "column" : "row",
           mb: 4,
           gap: 3,
         }}
@@ -51,7 +51,7 @@ function TableOrders() {
           <RadioGroup
             name="orders"
             defaultValue={dashboard.deliveredOrders}
-            row={!matchesMdDown}
+            row={!mdDown}
           >
             <FormControlLabel
               value={dashboard.deliveredOrders}
@@ -78,11 +78,11 @@ function TableOrders() {
               </TableCell>
               <TableCell
                 sx={{ whiteSpace: "nowrap" }}
-                align={matchesMdDown ? "left" : "center"}
+                align={mdDown ? "left" : "center"}
               >
                 {dashboard.orderRegistrationTime}
               </TableCell>
-              <TableCell align={matchesMdDown ? "left" : "center"}>
+              <TableCell align={mdDown ? "left" : "center"}>
                 {dashboard.actions}
               </TableCell>
             </TableRow>

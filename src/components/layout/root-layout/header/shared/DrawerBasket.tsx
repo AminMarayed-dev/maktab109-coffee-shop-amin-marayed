@@ -1,5 +1,6 @@
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
+import useResponsive from "@/hooks/shared/useResponsive";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -9,17 +10,16 @@ import {
   IconButton,
   Stack,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 
 const { cart } = localization;
 const { center } = cssClass;
 
 function DrawerBasket() {
-  const matchesDownMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
   return (
-    <Stack sx={{ mb: 2, width: matchesDownMd ? 280 : 350 }}>
+    <Stack sx={{ mb: 2, width: mdDown ? 280 : 350 }}>
       <Box
         sx={{
           display: "flex",

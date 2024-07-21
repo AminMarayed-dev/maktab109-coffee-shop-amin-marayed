@@ -21,15 +21,15 @@ import Image from "next/image";
 import { useState } from "react";
 import ButtonActionTable from "../ButtonActionTable";
 
+import useResponsive from "@/hooks/shared/useResponsive";
 import useDashboardStore from "@/zustand/dashboard/store";
-import { useMediaQuery } from "@mui/material";
 import TableModalProducts from "./TableModalProducts";
 
 const { dashboard } = localization;
 const { center, styleModal } = cssClass;
 
 function TableProducts() {
-  const matchesMdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [page, setPage] = useState(0);
   const handleOpenModal = useDashboardStore((state) => state.handleOpenModal);
 
@@ -69,7 +69,7 @@ function TableProducts() {
               <TableCell align="center">{dashboard.nameProduct}</TableCell>
               <TableCell align="center">{dashboard.category}</TableCell>
               <TableCell align="center">{dashboard.subCategory}</TableCell>
-              <TableCell align={`${matchesMdDown ? "left" : "center"}`}>
+              <TableCell align={`${mdDown ? "left" : "center"}`}>
                 {dashboard.actions}
               </TableCell>
             </TableRow>
@@ -86,13 +86,13 @@ function TableProducts() {
                   />
                 </TableCell>
                 <TableCell align="center">
-                  {matchesMdDown ? truncateText(item.name, 13) : item.name}
+                  {mdDown ? truncateText(item.name, 13) : item.name}
                 </TableCell>
                 <TableCell align="center">{item.category.name}</TableCell>
                 <TableCell align="center">{item.subcategory.name}</TableCell>
                 <TableCell
                   align="left"
-                  sx={{ whiteSpace: matchesMdDown ? "wrap" : "nowrap" }}
+                  sx={{ whiteSpace: mdDown ? "wrap" : "nowrap" }}
                 >
                   <IconButton>
                     <EditIcon />
