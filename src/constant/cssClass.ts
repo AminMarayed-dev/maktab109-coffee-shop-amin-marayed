@@ -51,4 +51,17 @@ export const cssClass = {
     py: 3,
     borderRadius: 3,
   },
+  styleSidbar: {
+    "& .MuiDrawer-paper": {
+      backgroundColor: "secondary.main",
+      color: "primary.main",
+    },
+  },
+  hoverButtonSidebar: {
+    "&:hover": {
+      backgroundColor: "#f0f0f0",
+      color: "#000000",
+      borderRadius: "8px",
+    },
+  },
 };

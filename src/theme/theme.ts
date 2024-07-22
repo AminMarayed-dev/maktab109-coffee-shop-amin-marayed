@@ -26,7 +26,8 @@ let theme = createTheme({
       contrastText: "rgb(15,15,15)",
     },
     secondary: {
-      main: "rgb(65,42,34)",
+      main: "rgb(75, 54, 33)",
+      dark: "rgb(65,42,34)",
       light: "rgb(211,169,127)",
     },
   },

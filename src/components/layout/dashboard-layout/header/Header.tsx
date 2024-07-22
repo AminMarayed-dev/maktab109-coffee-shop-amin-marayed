@@ -1,8 +1,12 @@
+import useLogout from "@/hooks/dashboard/useLogout";
+
 import { Home, Logout } from "@mui/icons-material";
 import { Box, Container, IconButton } from "@mui/material";
 import Image from "next/image";
 
 function Header() {
+  // const router = useRouter();
+  const logout = useLogout();
   return (
     <Container
       maxWidth="lg"
@@ -22,7 +26,7 @@ function Header() {
         <IconButton>
           <Home />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={logout}>
           <Logout />
         </IconButton>
       </Box>

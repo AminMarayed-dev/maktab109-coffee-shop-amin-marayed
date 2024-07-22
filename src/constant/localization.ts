@@ -5,6 +5,7 @@ export const localization = {
     description: "توضیحات",
     brand: "برند",
     rial: "ریال",
+    logout: "خروج",
   },
   home: {
     menuList: {

@@ -2,9 +2,10 @@ import { localization } from "@/constant/localization";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { IconButton, Stack, TextField, Typography } from "@mui/material";
 import "react-quill/dist/quill.snow.css";
+
+import { textFieldItems } from "./utils/textFieldItems.data";
 import SelectFormModal from "./SelectFormModal";
 import TextAreaModal from "./TextAreaModal";
-import { textFieldItems } from "./utils/textFieldItems.data";
 
 function FormModal({ onClose }) {
   const {

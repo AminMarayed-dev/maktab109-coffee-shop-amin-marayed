@@ -1,24 +1,22 @@
-import { cssClass } from "@/constant/cssClass";
-import { routes } from "@/constant/routes";
+import useLogout from "@/hooks/dashboard/useLogout";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import PersonIcon from "@mui/icons-material/Person";
 import { IconButton, Menu, MenuItem, Stack } from "@mui/material";
-import { deleteCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
 
 const menuItems = ["پیشخوان", "سفارش ها", "خروج"];
 
 function MenuUser() {
-  const router = useRouter();
+  // const router = useRouter();
+  const logout = useLogout();
   const anchorMenu = useHeaderStore((state) => state.anchorMenu);
   const handleCloseMenu = useHeaderStore((state) => state.handleCloseMenu);
   const handleOpenMenu = useHeaderStore((state) => state.handleOpenMenu);
-  const handleUserLogOut = () => {
-    deleteCookie("accessToken");
-    deleteCookie("refreshToken");
-    deleteCookie("role");
-    router.push(routes.login);
-  };
+  // const handleUserLogOut = () => {
+  //   deleteCookie("accessToken");
+  //   deleteCookie("refreshToken");
+  //   deleteCookie("role");
+  //   router.push(routes.login);
+  // };
   return (
     <Stack>
       <IconButton size="large" edge="start" onClick={handleOpenMenu}>
@@ -42,7 +40,7 @@ function MenuUser() {
             key={index}
             onClick={() => {
               handleCloseMenu();
-              if (item === "خروج") handleUserLogOut();
+              if (item === "خروج") logout();
             }}
           >
             {item}

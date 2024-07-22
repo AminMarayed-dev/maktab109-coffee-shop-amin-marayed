@@ -4,7 +4,8 @@ const ResponsiveButton = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     position: "absolute",
     right: "44px",
-    top: "0",
+    top: "15px",
+    width: "15%",
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",

@@ -77,11 +77,11 @@ function TableProducts() {
           <TableBody>
             {data?.products?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell>
+                <TableCell align={`${mdDown ? "left" : "center"}`}>
                   <Image
                     src={`http://${item.images[0]}`}
-                    width={50}
-                    height={50}
+                    width={mdDown ? 50 : 60}
+                    height={mdDown ? 50 : 60}
                     alt="Logo"
                   />
                 </TableCell>
@@ -91,7 +91,7 @@ function TableProducts() {
                 <TableCell align="center">{item.category.name}</TableCell>
                 <TableCell align="center">{item.subcategory.name}</TableCell>
                 <TableCell
-                  align="left"
+                  align={`${mdDown ? "left" : "center"}`}
                   sx={{ whiteSpace: mdDown ? "wrap" : "nowrap" }}
                 >
                   <IconButton>

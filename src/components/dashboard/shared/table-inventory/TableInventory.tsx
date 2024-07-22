@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import ButtonActionTable from "./ButtonActionTable";
+import ButtonActionTable from "../ButtonActionTable";
 
 const { center } = cssClass;
 const { dashboard, common } = localization;
@@ -34,22 +34,31 @@ function TableInventory() {
       <Typography variant="h4">
         {dashboard.table} {dashboard.InventoryAndPrices}
       </Typography>
-      <TableContainer component={Paper} sx={{ margin: "auto" }}>
+      <TableContainer
+        component={Paper}
+        sx={{ margin: "auto", maxWidth: mdDown ? "100%" : "90%" }}
+      >
         <Table sx={{ minWidth: mdDown ? "auto" : "700px" }}>
           <TableHead>
             <TableRow>
-              <TableCell align="center">{dashboard.product}</TableCell>
-              <TableCell align="center">{common.price}</TableCell>
-              <TableCell>{common.inventory}</TableCell>
+              <TableCell align={`${mdDown ? "center" : "left"}`}>
+                {dashboard.product}
+              </TableCell>
+              <TableCell align={`${mdDown ? "center" : "left"}`}>
+                {common.price}
+              </TableCell>
+              <TableCell align={`${mdDown ? "left" : "center"}`}>
+                {common.inventory}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data?.products?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell align="center">
+                <TableCell align={`${mdDown ? "center" : "left"}`}>
                   {mdDown ? truncateText(item.name, 22) : item.name}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align={`${mdDown ? "center" : "left"}`}>
                   {toPersianNumbers(item.price)} {common.rial}
                 </TableCell>
                 <TableCell align="center">
@@ -66,6 +75,7 @@ function TableInventory() {
           rowsPerPage={5}
           page={page}
           onPageChange={handleChangePage}
+          sx={{ ...center }}
         />
       </TableContainer>
       <ButtonActionTable text={dashboard.save} />
