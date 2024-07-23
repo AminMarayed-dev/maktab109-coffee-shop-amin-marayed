@@ -28,7 +28,17 @@ function TableInventory() {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-  const { data } = useGetAllProductsToDashboard({ page: page + 1, limit: 5 });
+  const { data, isLoading, isError } = useGetAllProductsToDashboard({
+    page: page + 1,
+    limit: 5,
+  });
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading products</div>;
+  }
   return (
     <Box sx={{ ...center, flexDirection: "column", mb: 4, gap: 3 }}>
       <Typography variant="h4">

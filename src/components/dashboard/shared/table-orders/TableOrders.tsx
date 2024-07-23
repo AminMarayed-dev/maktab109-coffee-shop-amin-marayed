@@ -6,12 +6,7 @@ import { toLocalDateStringShort } from "@/utils/formatDatePersian";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 
 import {
-  Box,
-  FormControl,
-  FormControlLabel,
   Paper,
-  Radio,
-  RadioGroup,
   Stack,
   Table,
   TableBody,
@@ -19,9 +14,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { useState } from "react";
+import RadioGroupOrders from "./RadioGroupOrders";
 
 const { center } = cssClass;
 const { dashboard, common } = localization;
@@ -32,40 +27,22 @@ function TableOrders() {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-  const { data } = useGetAllOrdersToDashboard({ page: page + 1, limit: 5 });
+  const { data, isLoading, isError } = useGetAllOrdersToDashboard({
+    page: page + 1,
+    limit: 5,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading products</div>;
+  }
 
   return (
     <Stack spacing={3}>
-      <Box
-        sx={{
-          ...center,
-          flexDirection: mdDown ? "column" : "row",
-          mb: 4,
-          gap: 3,
-        }}
-      >
-        <Typography variant="h4">
-          {dashboard.table} {dashboard.orders}
-        </Typography>
-        <FormControl>
-          <RadioGroup
-            name="orders"
-            defaultValue={dashboard.deliveredOrders}
-            row={!mdDown}
-          >
-            <FormControlLabel
-              value={dashboard.deliveredOrders}
-              control={<Radio />}
-              label={dashboard.deliveredOrders}
-            />
-            <FormControlLabel
-              value={dashboard.ordersPendingShipment}
-              control={<Radio />}
-              label={dashboard.ordersPendingShipment}
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
+      <RadioGroupOrders />
       <TableContainer component={Paper} sx={{ margin: "auto" }}>
         <Table>
           <TableHead>
