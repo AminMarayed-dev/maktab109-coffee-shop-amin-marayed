@@ -1,4 +1,5 @@
 import { Button, styled } from "@mui/material";
+import { SxProps, Theme } from "@mui/system";
 
 const ResponsiveButton = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -12,22 +13,29 @@ const ResponsiveButton = styled("div")(({ theme }) => ({
   },
 }));
 
+interface ButtonActionTableProps {
+  text: string;
+  onClick?: () => void;
+  sx?: SxProps<Theme>;
+}
+
 function ButtonActionTable({
   text,
   onClick,
-}: {
-  text: string;
-  onClick?: () => void;
-}) {
+  sx,
+  ...rest
+}: ButtonActionTableProps) {
   return (
     <ResponsiveButton>
       <Button
         sx={{
           bgcolor: "secondary.dark",
           color: "primary.main",
+          ...sx,
         }}
         fullWidth
         onClick={onClick}
+        {...rest}
       >
         {text}
       </Button>
