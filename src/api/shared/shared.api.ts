@@ -30,3 +30,23 @@ export async function getAllOrders({ page, limit }: Props) {
     console.log(error);
   }
 }
+
+async function urlToFile(url, filename, mimeType) {
+  const response = await fetch(`http://${url}`);
+  const blob = await response.blob();
+  return new File([blob], filename, { type: mimeType });
+}
+
+export async function convertImagesToFiles(imageUrls) {
+  const files = await Promise.all(
+    imageUrls.map((imageUrl, index) => {
+      const mimeType = imageUrl.split(".").pop();
+      return urlToFile(
+        imageUrl,
+        `image${index}.${mimeType}`,
+        `image/${mimeType}`
+      );
+    })
+  );
+  return files;
+}
