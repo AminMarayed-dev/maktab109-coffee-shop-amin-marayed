@@ -17,7 +17,7 @@ function ButtonActionTable({
   onClick,
 }: {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
   return (
     <ResponsiveButton>

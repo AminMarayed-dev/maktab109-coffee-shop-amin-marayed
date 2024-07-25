@@ -4,41 +4,74 @@ import { create } from "zustand";
 const { dashboard } = localization;
 
 type State = {
-  category: string;
+  categoryID: string;
   description: string;
-  subCategory: string;
-  openModal: boolean;
+  subCategoryID: string;
+  productID: string;
+  subCategoryList: string[] | null;
+  images: string[];
+  openModalAdd: boolean;
+  openModalEdit: boolean;
   step: number;
   selectedTab: string;
+  openDialogDelete: boolean;
 };
 
 type Action = {
-  setCategory: (category: State["category"]) => void;
-  setSubCategory: (subCategory: State["subCategory"]) => void;
+  setCategoryID: (categoryID: State["categoryID"]) => void;
+  setSubCategoryID: (subCategoryID: State["subCategoryID"]) => void;
   setDescription: (description: State["description"]) => void;
-  setOpenModal: (openModal: State["openModal"]) => void;
+  setOpenModalAdd: (openModalAdd: State["openModalAdd"]) => void;
+  setImages: (images: State["images"]) => void;
   setStep: (step: State["step"]) => void;
   setSelectedTab: (selectedTab: State["selectedTab"]) => void;
-  handleOpenModal: () => void;
+  setSubCategoryList: (subCategoryList: State["subCategoryList"]) => void;
+  setProductID: (productID: State["productID"]) => void;
+  handleOpenModalAdd: () => void;
   handleCloseModal: () => void;
+  handleOpenModalEdit: () => void;
+  // handleCloseModalEdit: () => void;
+  handleOpenDialogDelete: () => void;
+  handleCloseDialogDelete: () => void;
+  resetFieldsEdit: () => void;
 };
 
 const useDashboardStore = create<State & Action>((set) => ({
-  category: "",
-  subCategory: "",
+  categoryID: "",
+  subCategoryID: "",
+  productID: "",
+
   description: "",
-  openModal: false,
+  openModalEdit: false,
+  openModalAdd: false,
   step: 0,
   selectedTab: dashboard.products,
+  images: [],
+  subCategoryList: [],
+  openDialogDelete: false,
 
-  setCategory: (category) => set(() => ({ category })),
-  setSubCategory: (subCategory) => set(() => ({ subCategory })),
+  setCategoryID: (categoryID) => set(() => ({ categoryID })),
+  setSubCategoryID: (subCategoryID) => set(() => ({ subCategoryID })),
+  setProductID: (productID) => set(() => ({ productID })),
   setDescription: (description) => set(() => ({ description })),
-  setOpenModal: (openModal) => set(() => ({ openModal })),
+  setOpenModalAdd: (openModalAdd) => set(() => ({ openModalAdd })),
   setStep: (step) => set(() => ({ step })),
   setSelectedTab: (selectedTab) => set(() => ({ selectedTab })),
-  handleOpenModal: () => set({ openModal: true }),
-  handleCloseModal: () => set({ openModal: false }),
+  setImages: (images) => set(() => ({ images })),
+  setSubCategoryList: (subCategoryList) => set(() => ({ subCategoryList })),
+  handleOpenModalAdd: () => set({ openModalAdd: true }),
+  handleCloseModal: () => set({ openModalAdd: false, openModalEdit: false }),
+  handleOpenDialogDelete: () => set({ openDialogDelete: true }),
+  handleCloseDialogDelete: () => set({ openDialogDelete: false }),
+  handleOpenModalEdit: () => set({ openModalEdit: true }),
+  // handleCloseModalEdit: () => set({ openModalEdit: false }),
+  resetFieldsEdit: () =>
+    set({
+      categoryID: "",
+      subCategoryID: "",
+      description: "",
+      images: [],
+    }),
 }));
 
 export default useDashboardStore;

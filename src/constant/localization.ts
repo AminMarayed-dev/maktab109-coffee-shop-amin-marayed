@@ -6,6 +6,9 @@ export const localization = {
     brand: "برند",
     rial: "ریال",
     logout: "خروج",
+    quantity: "تعداد",
+    yes: "بله",
+    no: "خیر",
   },
   home: {
     menuList: {
@@ -82,6 +85,12 @@ export const localization = {
     addAndEditProduct: "افزودن/ویرایش کالا ",
     uploadPicture: "آپلود تصویر",
     subCategory: "زیر دسته",
+    questionDeleteProduct: "آیا می خواهید این محصول را حذف کنید؟",
+    successAddProduct: "محصول با موفقیت افزوده شد",
+    failAddProduct: "محصول اضافه نشد",
+    successEditProduct: "محصول با موفقیت ویرایش شد",
+    failEditProduct: "محصول ویرایش نشد",
+    deleteProduct: "محصول از جدول محصولات حذف شد",
   },
   cart: {
     basket: "سبد خرید",
