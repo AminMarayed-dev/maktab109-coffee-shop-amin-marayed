@@ -1,31 +1,55 @@
-import { Backdrop, Box, Fade, Modal } from "@mui/material";
-import FormModal from "./FormModal";
-import useDashboardStore from "@/zustand/dashboard/store";
 import { cssClass } from "@/constant/cssClass";
+import useDashboardStore from "@/zustand/dashboard/store";
+import { Backdrop, Box, Fade, Modal } from "@mui/material";
+import { ReactNode } from "react";
+import AddProductModal from "./AddProductModal";
+import EditProductModal from "./editProductModal";
+import useResponsive from "@/hooks/shared/useResponsive";
 
 const { styleModal } = cssClass;
-
+type Props = { children: ReactNode };
 function TableModalProducts() {
-  const openModal = useDashboardStore((state) => state.openModal);
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const openModalAdd = useDashboardStore((state) => state.openModalAdd);
+  const openModalEdit = useDashboardStore((state) => state.openModalEdit);
   const handleCloseModal = useDashboardStore((state) => state.handleCloseModal);
   return (
-    <Modal
-      open={openModal}
-      onClose={handleCloseModal}
-      closeAfterTransition
-      slots={{ backdrop: Backdrop }}
-      slotProps={{
-        backdrop: {
-          timeout: 500,
-        },
-      }}
-    >
-      <Fade in={openModal}>
-        <Box sx={styleModal}>
-          <FormModal onClose={handleCloseModal} />
-        </Box>
-      </Fade>
-    </Modal>
+    <>
+      <Modal
+        open={openModalAdd}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={openModalAdd}>
+          <Box sx={styleModal} width={mdDown ? 400 : 800}>
+            <AddProductModal />
+          </Box>
+        </Fade>
+      </Modal>
+      <Modal
+        open={openModalEdit}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={openModalEdit}>
+          <Box sx={styleModal}>
+            <EditProductModal />
+          </Box>
+        </Fade>
+      </Modal>
+    </>
   );
 }
 

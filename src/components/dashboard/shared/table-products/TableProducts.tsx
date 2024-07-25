@@ -23,6 +23,7 @@ import ButtonActionTable from "../ButtonActionTable";
 
 import useResponsive from "@/hooks/shared/useResponsive";
 import useDashboardStore from "@/zustand/dashboard/store";
+import DeleteDialogProduct from "./DeleteDialogProduct";
 import TableModalProducts from "./TableModalProducts";
 
 const { dashboard } = localization;
@@ -31,7 +32,31 @@ const { center, styleModal } = cssClass;
 function TableProducts() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [page, setPage] = useState(0);
-  const handleOpenModal = useDashboardStore((state) => state.handleOpenModal);
+  const handleOpenModalAdd = useDashboardStore(
+    (state) => state.handleOpenModalAdd
+  );
+  const handleOpenModalEdit = useDashboardStore(
+    (state) => state.handleOpenModalEdit
+  );
+  const handleOpenDialogDelete = useDashboardStore(
+    (state) => state.handleOpenDialogDelete
+  );
+  const setProductID = useDashboardStore((state) => state.setProductID);
+  // reset description, images, categoryid and subcategory id state
+  const resetFieldsEdit = useDashboardStore((state) => state.resetFieldsEdit);
+  const handleShowModalAdd = () => {
+    resetFieldsEdit();
+    handleOpenModalAdd();
+  };
+  const handleDeleteIcon = (id: string) => {
+    setProductID(id);
+    handleOpenDialogDelete();
+  };
+
+  const handleEditIcon = (id: string) => {
+    setProductID(id);
+    handleOpenModalEdit();
+  };
 
   const { data, isLoading, isError } = useGetAllProductsToDashboard({
     page: page + 1,
@@ -76,7 +101,7 @@ function TableProducts() {
           </TableHead>
           <TableBody>
             {data?.products?.map((item, index) => (
-              <TableRow key={index}>
+              <TableRow key={data._id}>
                 <TableCell align={`${mdDown ? "left" : "center"}`}>
                   <Image
                     src={`http://${item.images[0]}`}
@@ -94,10 +119,10 @@ function TableProducts() {
                   align={`${mdDown ? "left" : "center"}`}
                   sx={{ whiteSpace: mdDown ? "wrap" : "nowrap" }}
                 >
-                  <IconButton>
+                  <IconButton onClick={() => handleEditIcon(item?._id)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={() => handleDeleteIcon(item?._id)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -117,9 +142,10 @@ function TableProducts() {
       </TableContainer>
       <ButtonActionTable
         text={dashboard.addProduct}
-        onClick={handleOpenModal}
+        onClick={handleShowModalAdd}
       />
       <TableModalProducts />
+      <DeleteDialogProduct />
     </Box>
   );
 }

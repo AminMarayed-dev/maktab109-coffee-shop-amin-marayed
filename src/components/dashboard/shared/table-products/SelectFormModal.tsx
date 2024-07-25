@@ -1,76 +1,75 @@
 import { localization } from "@/constant/localization";
+import { useGetAllCategory } from "@/hooks/dashboard/useGetAllCategory";
+import useGetAllSubCategory from "@/hooks/dashboard/useGetAllSubCategory";
 import useDashboardStore from "@/zustand/dashboard/store";
 import {
+  Box,
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Stack,
 } from "@mui/material";
-import { menuSelectItems } from "./utils/selectItems.data";
+import { useEffect } from "react";
 
-const {
-  dashboard,
-  common,
-  home: { menuList },
-} = localization;
+const { dashboard } = localization;
 
 function SelectFormModal() {
-  const { categoryList, subCategoryList } = menuSelectItems;
-  const category = useDashboardStore((state) => state.category);
-  const setCategory = useDashboardStore((state) => state.setCategory);
-  const subCategory = useDashboardStore((state) => state.subCategory);
-  const setSubCategory = useDashboardStore((state) => state.setSubCategory);
-  const handleChangeCategory = (event: SelectChangeEvent) =>
-    setCategory(event.target.value);
-  const handleChangeSubCategory = (event: SelectChangeEvent) =>
-    setSubCategory(event.target.value);
+  const categoryID = useDashboardStore((state) => state.categoryID);
+  const setCategoryID = useDashboardStore((state) => state.setCategoryID);
+  const subCategoryID = useDashboardStore((state) => state.subCategoryID);
+  const setSubCategoryID = useDashboardStore((state) => state.setSubCategoryID);
+  const handleChangeCategoryID = (event: SelectChangeEvent) =>
+    setCategoryID(event.target.value);
+  const handleChangeSubCategoryID = (event: SelectChangeEvent) =>
+    setSubCategoryID(event.target.value);
+  const { data: categoryList, isLoading, isError } = useGetAllCategory();
+  const { data: subCategoryList, refetch } = useGetAllSubCategory(categoryID);
+
+  useEffect(() => {
+    if (categoryID) {
+      refetch();
+    }
+  }, [categoryID, refetch]);
+
+  if (isLoading) <div>loading...</div>;
+  if (isError) <div>Errro...</div>;
+  console.log(categoryID);
   return (
-    <>
-      <FormControl>
+    <Stack direction="row" spacing={2}>
+      <FormControl fullWidth>
         <Select
-          value={category}
-          onChange={handleChangeCategory}
+          value={categoryID}
+          onChange={handleChangeCategoryID}
           displayEmpty
-          renderValue={(selected) => {
-            if (selected.length === 0) {
-              return <em>{dashboard.category}</em>;
-            }
-            return selected;
-          }}
         >
           <MenuItem value="" disabled>
             <em>{dashboard.category}</em>
           </MenuItem>
-          {categoryList.map((category, index) => (
-            <MenuItem key={index} value={category.value}>
-              {category.text}
+          {categoryList?.map((category, index) => (
+            <MenuItem key={index} value={category._id}>
+              {category.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl fullWidth>
         <Select
-          value={subCategory}
-          onChange={handleChangeSubCategory}
+          value={subCategoryID}
+          onChange={handleChangeSubCategoryID}
           displayEmpty
-          renderValue={(selected) => {
-            if (selected.length === 0) {
-              return <em>{dashboard.subCategory}</em>;
-            }
-            return selected;
-          }}
         >
           <MenuItem value="" disabled>
             <em>{dashboard.subCategory}</em>
           </MenuItem>
-          {subCategoryList.map((subCategory, index) => (
-            <MenuItem key={index} value={subCategory.value}>
-              {subCategory.text}
+          {subCategoryList?.map((subCategory, index) => (
+            <MenuItem key={index} value={subCategory._id}>
+              {subCategory.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </>
+    </Stack>
   );
 }
 

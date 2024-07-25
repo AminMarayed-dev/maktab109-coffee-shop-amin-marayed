@@ -4,13 +4,8 @@ import { Box } from "@mui/material";
 import dynamic from "next/dynamic";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
+const { common } = localization;
 function TextAreaModal() {
-  const {
-    dashboard,
-    common,
-    home: { menuList },
-  } = localization;
   const description = useDashboardStore((state) => state.description);
   const setDescription = useDashboardStore((state) => state.setDescription);
   return (
