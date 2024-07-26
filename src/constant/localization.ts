@@ -37,6 +37,8 @@ export const localization = {
       loginOrSignUp: "ورود/ثبت نام",
       myAccount: "حساب کاربری من",
     },
+    typeCoffee: "انواع قهوه",
+    typeCoffeeMaker: "ابزار دم آوری قهوه",
   },
   auth: {
     email: "ایمیل",
