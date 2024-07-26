@@ -2,3 +2,8 @@
   min-width: 0px;
   color: #000;
 }
+
+.image-rounded {
+  border-radius: 16px;
+  overflow: hidden;
+}
