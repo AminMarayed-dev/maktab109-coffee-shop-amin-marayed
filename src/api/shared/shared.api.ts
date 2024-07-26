@@ -1,8 +1,9 @@
 import { api } from "../config/config";
 
-type Props = {
+export type Props = {
   page: number;
   limit: number;
+  category?: string;
 };
 
 export async function getAllProducts({ page, limit }: Props) {

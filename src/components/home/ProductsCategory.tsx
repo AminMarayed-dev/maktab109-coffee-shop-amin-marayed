@@ -1,0 +1,62 @@
+import { localization } from "@/constant/localization";
+import useResponsive from "@/hooks/shared/useResponsive";
+import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
+import truncateText from "@/utils/trancateText";
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Image from "next/image";
+import TextDivider from "./TextDivider";
+
+const { common, home } = localization;
+function ProductsCategory({ title, data }) {
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  return (
+    <Stack mt={5} rowGap={4} justifyContent="center" alignItems="center">
+      <TextDivider text={title} />
+      <Grid container lg={12} xs={12} spacing={2}>
+        {data.products.map((product, index) => (
+          <Grid item lg={4} xs={6} key={index}>
+            <Card
+              sx={{
+                height: `${mdDown} ? 200px : 400px`,
+                bgcolor: "primary.dark",
+              }}
+            >
+              <Image
+                src={`http://${product.images[0]}`}
+                width={mdDown ? 200 : 380}
+                height={mdDown ? 200 : 300}
+                objectFit="cover"
+                alt={product.name}
+                loading="lazy"
+              />
+              <CardContent>
+                <Typography
+                  sx={{ whiteSpace: "nowrap" }}
+                  variant="body1"
+                  fontWeight={"bold"}
+                >
+                  {mdDown
+                    ? truncateText(product.name, 16)
+                    : truncateText(product.name, 40)}
+                </Typography>
+                <Typography variant="body2" mt={1} color="secondary.dark">
+                  {toPersianNumbersWithComma(product.price)} {common.rial}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <Button sx={{ bgColor: "secondary.main" }}>{home.showAllProducts}</Button>
+    </Stack>
+  );
+}
+
+export default ProductsCategory;
