@@ -51,7 +51,7 @@ function Header() {
   }, []);
 
   return (
-    <AppBar elevation={0}>
+    <AppBar elevation={0} position="sticky">
       <ToolbarStyled>
         <Container sx={styleContainerToobar}>
           {onlyMobile && (
