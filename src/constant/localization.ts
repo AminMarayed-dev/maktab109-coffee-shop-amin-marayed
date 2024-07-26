@@ -39,6 +39,8 @@ export const localization = {
     },
     typeCoffee: "انواع قهوه",
     typeCoffeeMaker: "ابزار دم آوری قهوه",
+    showAllProducts: "مشاهده تمام محصولات",
+    sampleOfProducts: "نمونه محصولات",
   },
   auth: {
     email: "ایمیل",
