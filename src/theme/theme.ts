@@ -1,6 +1,5 @@
-import { colors } from "@mui/material";
+import { yellow } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-
 let theme = createTheme({
   direction: "rtl",
   typography: {
@@ -84,6 +83,16 @@ let theme = createTheme({
         },
         icon: {
           color: "rgb(15,15,15)",
+        },
+      },
+    },
+    MuiRating: {
+      styleOverrides: {
+        iconFilled: {
+          color: yellow[700],
+        },
+        iconHover: {
+          color: yellow[800],
         },
       },
     },

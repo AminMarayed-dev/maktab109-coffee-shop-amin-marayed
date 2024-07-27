@@ -9,6 +9,7 @@ export const localization = {
     quantity: "تعداد",
     yes: "بله",
     no: "خیر",
+    addProductToBasket: "افزودن به سبد خرید",
   },
   home: {
     menuList: {
@@ -128,5 +129,11 @@ export const localization = {
     branchValiaser2: "شعبه خیابان ولیعصر",
     eightToTen: "8 صبح تا 10 شب",
     copyRight: "تمامی حقوق این سایت متعلق به فروشگاه مراید می باشد",
+  },
+  shop: {
+    shopInternet: "فروشگاه اینترنتی",
+    moreProducts: "مشاهده محصول بیشتر",
+    unavailable: "ناموجود",
+    available: "موجود در انبار",
   },
 };
