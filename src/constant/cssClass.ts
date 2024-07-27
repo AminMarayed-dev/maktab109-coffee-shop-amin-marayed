@@ -64,4 +64,14 @@ export const cssClass = {
       borderRadius: "8px",
     },
   },
+  styleButtonLink: {
+    backgroundColor: "primary.main",
+    color: "white",
+    borderRadius: 0,
+    "&:hover": {
+      backgroundColor: "primary.main",
+    },
+    width: "100%",
+    padding: 0,
+  },
 };
