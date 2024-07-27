@@ -5,8 +5,7 @@ import useGetProductsByLimit from "@/hooks/home/useGetAllProductsByLimit";
 import { ReactElement } from "react";
 
 export default function HomePage(props) {
-  const { data: productsByLimit } = useGetProductsByLimit({ limit: 12, props });
-  return <Home data={productsByLimit} />;
+  return <Home data={props.serverData} />;
 }
 
 HomePage.getLayout = function getLayout(page: ReactElement) {

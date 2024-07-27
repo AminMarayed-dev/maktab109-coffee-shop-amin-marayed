@@ -2,13 +2,15 @@ import { api } from "../config/config";
 
 export type Props = {
   page: number;
-  limit: number;
+  limit: number | string;
   category?: string;
 };
 
 export async function getAllProducts({ page, limit }: Props) {
   try {
-    const response = await api.get(`/products?page=${page}&limit=${limit}`);
+    const response = await api.get(
+      `/products?sort=createdAt&page=${page}&limit=${limit}`
+    );
     return {
       products: response.data.data.products,
       totalProducts: response.data.total,
