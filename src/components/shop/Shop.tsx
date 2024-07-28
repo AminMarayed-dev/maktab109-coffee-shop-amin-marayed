@@ -21,7 +21,6 @@ import CheckQuantityAndRate from "./checkQuantityAndRate";
 const { shop, common } = localization;
 const { center } = cssClass;
 function Shop({ data }) {
-  console.log(data);
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   return (
     <Container>

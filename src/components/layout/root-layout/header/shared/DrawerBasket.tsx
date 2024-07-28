@@ -11,6 +11,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 const { cart } = localization;
 const { center } = cssClass;
@@ -18,6 +19,7 @@ const { center } = cssClass;
 function DrawerBasket() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
+  const router = useRouter();
   return (
     <Stack sx={{ mb: 2, width: mdDown ? 280 : 350 }}>
       <Box
@@ -36,7 +38,14 @@ function DrawerBasket() {
       <Divider />
       <Box padding={3} sx={{ ...center, flexDirection: "column", gap: 3 }}>
         <Typography variant="body1">{cart.noProduct}</Typography>
-        <Button>{cart.backToShop}</Button>
+        <Button
+          onClick={() => {
+            router.push("/shop");
+            handleCloseDrawer();
+          }}
+        >
+          {cart.backToShop}
+        </Button>
       </Box>
     </Stack>
   );

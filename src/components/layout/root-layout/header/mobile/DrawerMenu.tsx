@@ -1,5 +1,5 @@
 import menuItems from "@/components/layout/root-layout/header/utils/menu.data";
-import { localization } from "@/constant/localization";
+import useHeaderStore from "@/zustand/root-layout/header/store";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { Collapse, Divider, List, ListItemIcon } from "@mui/material";
@@ -12,6 +12,7 @@ import { useState } from "react";
 
 // need refactor
 function DrawerMenu() {
+  const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
   const [openItems, setOpenItems] = useState<{ [key: number]: boolean }>({});
   const persistMenuItems =
     getCookie("accessToken") && menuItems.slice(0, menuItems.length - 1);
@@ -30,6 +31,10 @@ function DrawerMenu() {
           <ListItemButton
             onClick={() => {
               if (menuItem.icon) router.push("/auth/login");
+              else {
+                router.push(`/product-category/${menuItem.slug}`);
+                handleCloseDrawer();
+              }
             }}
           >
             <ListItemIcon sx={{ minWidth: 0, paddingRight: 1 }}>

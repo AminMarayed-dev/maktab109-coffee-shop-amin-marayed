@@ -2,8 +2,8 @@ import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { Button, Grid, Stack } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import TextDivider from "./TextDivider";
-import { Scale } from "@mui/icons-material";
 
 type LinkImagesType = {
   title: string;
@@ -12,6 +12,7 @@ type LinkImagesType = {
 const { home } = localization;
 function LinkImages({ title, imageList }: LinkImagesType) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const router = useRouter();
   return (
     <Stack rowGap={3}>
       <TextDivider text={title} />
@@ -27,6 +28,9 @@ function LinkImages({ title, imageList }: LinkImagesType) {
                 borderRadius: "16px",
                 overflow: "hidden",
               }}
+              onClick={() =>
+                router.push(`/product-category/${item.slug}/${item.subSlug}`)
+              }
               fullWidth
             >
               <Image
