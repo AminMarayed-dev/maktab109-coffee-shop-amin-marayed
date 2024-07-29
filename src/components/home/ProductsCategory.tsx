@@ -26,7 +26,10 @@ function ProductsCategory({ title, data }) {
       <Grid container lg={12} xs={12} spacing={2}>
         {data.products.map((product, index) => (
           <Grid item lg={4} xs={6} key={index}>
-            <Button sx={styleButtonLink} onClick={() => router.push("/shop/1")}>
+            <Button
+              sx={styleButtonLink}
+              onClick={() => router.push(`/shop/${product._id}`)}
+            >
               <Card
                 sx={{
                   height: `${mdDown} ? 200px : 400px`,

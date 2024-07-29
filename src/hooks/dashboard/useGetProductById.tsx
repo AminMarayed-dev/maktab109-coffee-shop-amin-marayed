@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 function useGetProductById(id: string) {
   return useQuery<any>({
-    queryKey: ["product-dashboard", id],
+    queryKey: ["product-dashboard", "single-product", id],
     queryFn: () => getProductById(id),
     enabled: !!id,
     refetchOnMount: "always",

@@ -136,4 +136,10 @@ export const localization = {
     unavailable: "ناموجود",
     available: "موجود در انبار",
   },
+  singleProduct: {
+    productID: "شناسه محصول",
+    category: "دسته",
+    shared: "اشتراک گذاری",
+    productsRelated: "محصولات مرتبط",
+  },
 };
