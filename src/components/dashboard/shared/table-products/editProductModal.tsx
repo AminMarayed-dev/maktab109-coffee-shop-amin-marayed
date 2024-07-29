@@ -114,7 +114,7 @@ function EditProductModal() {
       >
         {textFieldItems.map((item, index) => {
           return (
-            <Grid item lg={5} xs={12}>
+            <Grid key={index} item lg={5} xs={12}>
               <TextField
                 type={`${item.name === "quantity" ? "number" : "text"}`}
                 key={index}
