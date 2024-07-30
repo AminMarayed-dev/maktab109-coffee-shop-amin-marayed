@@ -1,16 +1,10 @@
 import { getAllProductsShop } from "@/api/shop/getAllProductsShop";
 import { useQuery } from "@tanstack/react-query";
 
-function useGetAllProductsToShop({
-  initialData,
-  limit,
-}: {
-  initialData: any;
-  limit: string | number;
-}) {
+function useGetAllProductsToShop(initialData: any) {
   return useQuery<any>({
-    queryKey: ["products-shop", limit],
-    queryFn: () => getAllProductsShop({ page: 1, limit }),
+    queryKey: ["products-shop"],
+    queryFn: getAllProductsShop,
     initialData,
     refetchOnWindowFocus: false,
   });

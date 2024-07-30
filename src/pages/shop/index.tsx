@@ -1,10 +1,12 @@
-import { api } from "@/api/config/config";
+import { getAllProductsShop } from "@/api/shop/getAllProductsShop";
 import RootLayout from "@/components/layout/root-layout/RootLayout";
 import Shop from "@/components/shop/Shop";
+import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 import { ReactElement } from "react";
 
 function ShopPage(props) {
-  return <Shop data={props.serverData} />;
+  const { data: productsShop } = useGetAllProductsToShop(props.serverData);
+  return <Shop data={productsShop} />;
 }
 
 ShopPage.getLayout = function getLayout(page: ReactElement) {
@@ -12,11 +14,11 @@ ShopPage.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getStaticProps() {
-  const response = await api.get("/products?sort=createdAt&page=1&limit=15");
-  const serverData = response.data.data.products;
+  const products = await getAllProductsShop();
+
   return {
     props: {
-      serverData,
+      serverData: products,
     },
     revalidate: 60 * 30,
   };

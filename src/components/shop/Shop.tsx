@@ -16,12 +16,17 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 import CheckQuantityAndRate from "./checkQuantityAndRate";
 
 const { shop, common } = localization;
 const { center } = cssClass;
 function Shop({ data }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const [limit, setLimit] = useState(15);
+  const handleLimitProduct = () => {
+    setLimit((prevLimit) => prevLimit + 15);
+  };
   return (
     <Container>
       <Typography variant="h4" mb={7} textAlign="center">
@@ -39,9 +44,9 @@ function Shop({ data }) {
         <Typography variant="body1">نمایش 1–48 از 2584 نتیجه</Typography>
       </Box>
       <Divider />
-      <Stack justifyContent="center" alignItems="center">
+      <Stack justifyContent="center" alignItems="center" rowGap={2}>
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {data.map((product, index) => (
+          {data.slice(0, limit).map((product, index) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
@@ -111,6 +116,9 @@ function Shop({ data }) {
             </Grid>
           ))}
         </Grid>
+        {data.length > limit && (
+          <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button>
+        )}
       </Stack>
     </Container>
   );

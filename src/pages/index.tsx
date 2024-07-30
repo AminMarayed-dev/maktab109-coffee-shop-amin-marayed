@@ -1,7 +1,6 @@
 import { getAllProducts } from "@/api/shared/shared.api";
 import Home from "@/components/home/Home";
 import RootLayout from "@/components/layout/root-layout/RootLayout";
-import useGetProductsByLimit from "@/hooks/home/useGetAllProductsByLimit";
 import { ReactElement } from "react";
 
 export default function HomePage(props) {
