@@ -3,6 +3,11 @@ import { create } from "zustand";
 
 const { dashboard } = localization;
 
+// type Image = {
+//   name: string;
+//   // Add other properties if necessary
+// };
+
 type State = {
   categoryID: string;
   description: string;
@@ -15,6 +20,8 @@ type State = {
   step: number;
   selectedTab: string;
   openDialogDelete: boolean;
+  isEdit: boolean;
+  isUpload: boolean;
 };
 
 type Action = {
@@ -34,6 +41,9 @@ type Action = {
   handleOpenDialogDelete: () => void;
   handleCloseDialogDelete: () => void;
   resetFieldsEdit: () => void;
+  setIsEdit: (isEdit: State["isEdit"]) => void;
+  setIsUpload: (isEdit: State["isUpload"]) => void;
+  removeImage: (imageName: string) => void;
 };
 
 const useDashboardStore = create<State & Action>((set) => ({
@@ -49,6 +59,8 @@ const useDashboardStore = create<State & Action>((set) => ({
   images: [],
   subCategoryList: [],
   openDialogDelete: false,
+  isEdit: false,
+  isUpload: false,
 
   setCategoryID: (categoryID) => set(() => ({ categoryID })),
   setSubCategoryID: (subCategoryID) => set(() => ({ subCategoryID })),
@@ -59,11 +71,14 @@ const useDashboardStore = create<State & Action>((set) => ({
   setSelectedTab: (selectedTab) => set(() => ({ selectedTab })),
   setImages: (images) => set(() => ({ images })),
   setSubCategoryList: (subCategoryList) => set(() => ({ subCategoryList })),
+  setIsEdit: (isEdit) => set(() => ({ isEdit })),
+  setIsUpload: (isUpload) => set(() => ({ isUpload })),
   handleOpenModalAdd: () => set({ openModalAdd: true }),
   handleCloseModal: () => set({ openModalAdd: false, openModalEdit: false }),
   handleOpenDialogDelete: () => set({ openDialogDelete: true }),
   handleCloseDialogDelete: () => set({ openDialogDelete: false }),
   handleOpenModalEdit: () => set({ openModalEdit: true }),
+
   // handleCloseModalEdit: () => set({ openModalEdit: false }),
   resetFieldsEdit: () =>
     set({
@@ -71,7 +86,13 @@ const useDashboardStore = create<State & Action>((set) => ({
       subCategoryID: "",
       description: "",
       images: [],
+      isEdit: false,
+      isUpload: false,
     }),
+  removeImage: (imageName) =>
+    set((state) => ({
+      images: state.images.filter((image) => image.name !== imageName),
+    })),
 }));
 
 export default useDashboardStore;

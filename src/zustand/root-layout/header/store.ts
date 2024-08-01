@@ -25,6 +25,7 @@ const useHeaderStore = create<State & Action>((set) => ({
   anchorDrawer: "",
   isPersist: false,
   anchorMenu: null,
+  openDrawerFilter: false,
   //   setOpenDrawer: (openDrawer) => set(() => ({ openDrawer })),
   //   setAnchorDrawer: (anchorDrawer) => set(() => ({ anchorDrawer })),
   setIsPersist: (isPersist) => set(() => ({ isPersist })),
