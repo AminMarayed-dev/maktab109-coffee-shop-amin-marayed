@@ -20,9 +20,15 @@ export const cssClass = {
     transform: "translate(-50%, -50%)",
     // width: 800,
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "none",
     boxShadow: 24,
     p: 4,
+    borderRadius: "8px",
+    overflowY: "auto",
+    maxHeight: 625,
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   onlyDesktop: {
     display: {

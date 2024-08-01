@@ -10,6 +10,16 @@ export const localization = {
     yes: "بله",
     no: "خیر",
     addProductToBasket: "افزودن به سبد خرید",
+    filterQuantity: "مرتب سازی براساس موجودی",
+    filterOlder: "مرتب سازی براساس قدیمی ترین",
+    filterNewer: "مرتب سازی براساس جدید ترین",
+    filterHighPrice: "مرتب سازی براساس گرانترین",
+    filterLowPrice: "مرتب سازی براساس ارزانترین",
+    showFilter: "مشاهده فیلترها",
+    pageFilter: "صفحه فیلترها",
+    filterCategory: "فیلتر براساس دسته",
+    filterSubCategory: "فیلتر براساس زیر دسته",
+    submitFilter: "اعمال فیلتر",
   },
   home: {
     menuList: {
@@ -96,6 +106,9 @@ export const localization = {
     successEditProduct: "محصول با موفقیت ویرایش شد",
     failEditProduct: "محصول ویرایش نشد",
     deleteProduct: "محصول از جدول محصولات حذف شد",
+    olderPicture: "عکس فعلی",
+    newerPicture: "عکس جدید",
+    noPicture: "عکسی آپلود نشده",
   },
   cart: {
     basket: "سبد خرید",
