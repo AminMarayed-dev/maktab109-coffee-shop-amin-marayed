@@ -3,6 +3,7 @@ import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
+import useCommonStore from "@/zustand/common/store";
 import {
   Box,
   Button,
@@ -11,22 +12,43 @@ import {
   CardContent,
   Container,
   Divider,
+  Drawer,
   Grid,
   Stack,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import ButtonDrawerFilter from "../shared/ButtonDrawerFilter";
+import DrawerFilter from "../shared/DrawerFilter";
+import SelectFilter from "../shared/SelectFilter";
 import CheckQuantityAndRate from "./checkQuantityAndRate";
 
 const { shop, common } = localization;
-const { center } = cssClass;
-function Shop({ data }) {
-  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
-  const [limit, setLimit] = useState(15);
+const { center, styleButtonLink } = cssClass;
+
+function Shop({ data, status }) {
+  const openDrawerFilter = useCommonStore((state) => state.openDrawerFilter);
+  const handleCloseDrawerFilter = useCommonStore(
+    (state) => state.handleCloseDrawerFilter
+  );
+  const router = useRouter();
   const handleLimitProduct = () => {
-    setLimit((prevLimit) => prevLimit + 15);
+    const currentLimit = router.query.limit ? parseInt(router.query.limit) : 15;
+    const newLimit = currentLimit + 15;
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, limit: newLimit },
+    });
   };
+  const handleSelectFilterProduct = (filter) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, sort: filter },
+    });
+  };
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+
   return (
     <Container>
       <Typography variant="h4" mb={7} textAlign="center">
@@ -44,9 +66,28 @@ function Shop({ data }) {
         <Typography variant="body1">نمایش 1–48 از 2584 نتیجه</Typography>
       </Box>
       <Divider />
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mt: 3,
+        }}
+      >
+        <ButtonDrawerFilter />
+        <SelectFilter handleSelectFilterProduct={handleSelectFilterProduct} />
+        <Drawer
+          open={openDrawerFilter}
+          anchor={"left"}
+          onClose={handleCloseDrawerFilter}
+        >
+          <DrawerFilter />
+        </Drawer>
+      </Box>
+
       <Stack justifyContent="center" alignItems="center" rowGap={2}>
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {data.slice(0, limit).map((product, index) => (
+          {data.queries[0].state.data.map((product, index) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
@@ -54,8 +95,10 @@ function Shop({ data }) {
                   flexDirection: "column",
                   height: `${mdDown} ? 200px : 400px`,
                   border: "1px solid #52525b",
+                  cursor: "pointer",
                 }}
                 elevation={0}
+                onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
                   src={`http://${product.images[0]}`}
@@ -116,22 +159,10 @@ function Shop({ data }) {
             </Grid>
           ))}
         </Grid>
-        {data.length > limit && (
-          <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button>
-        )}
+        <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button>
       </Stack>
     </Container>
   );
 }
 
 export default Shop;
-
-{
-  /* <ButtonLoading
-        text={shop.moreProducts}
-        loading={isLoading}
-        onClick={() => {
-          handleSetLimit();
-        }}
-      /> */
-}

@@ -1,9 +1,17 @@
 import { api } from "../config/config";
-import { Props } from "../shared/shared.api";
 
-export async function getAllProductsShop() {
+export async function getAllProductsShop({
+  limit,
+  sort,
+}: {
+  limit: string | number;
+  sort: string;
+}) {
   try {
-    const response = await api.get(`/products?sort=createdAt&page=1&limit=all`);
+    const response = await api.get(
+      `/products?sort=${sort}&page=1&limit=${limit}
+      }`
+    );
     return response.data.data.products;
   } catch (error) {
     console.log(error);
