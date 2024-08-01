@@ -17,7 +17,7 @@ const TooltipStyled = styled(({ className, ...props }: TooltipProps) => (
 }));
 
 const LinkCategory = () => {
-  const OnlyDesktop = useResponsive({ query: "only", breakpoints: "lg" });
+  const OnlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
   const router = useRouter();
 
   // delete first and last element

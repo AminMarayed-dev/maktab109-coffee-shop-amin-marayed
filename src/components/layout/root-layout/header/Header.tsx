@@ -33,7 +33,8 @@ const { center, styleContainerToobar } = cssClass;
 function Header() {
   const router = useRouter();
   const onlyMobile = useResponsive({ query: "only", breakpoints: "xs" });
-  const onlyDesktop = useResponsive({ query: "only", breakpoints: "lg" });
+  // const onlyDesktop = useResponsive({ query: "only", breakpoints: "lg" });
+  const onlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
   const openDrawer = useHeaderStore((state) => state.openDrawer);
   const anchorDrawer = useHeaderStore((state) => state.anchorDrawer);
   const isPersist = useHeaderStore((state) => state.isPersist);
