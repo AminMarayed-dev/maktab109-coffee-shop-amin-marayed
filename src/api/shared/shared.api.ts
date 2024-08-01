@@ -9,7 +9,7 @@ export type Props = {
 export async function getAllProducts({ page, limit }: Props) {
   try {
     const response = await api.get(
-      `/products?sort=createdAt&page=${page}&limit=${limit}`
+      `/products?sort=-createdAt&page=${page}&limit=${limit}`
     );
     return {
       products: response.data.data.products,
