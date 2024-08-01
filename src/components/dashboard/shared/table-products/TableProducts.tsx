@@ -42,6 +42,8 @@ function TableProducts() {
     (state) => state.handleOpenDialogDelete
   );
   const setProductID = useDashboardStore((state) => state.setProductID);
+  const setIsEdit = useDashboardStore((state) => state.setIsEdit);
+  const setIsUpload = useDashboardStore((state) => state.setIsUpload);
   // reset description, images, categoryid and subcategory id state
   const resetFieldsEdit = useDashboardStore((state) => state.resetFieldsEdit);
   const handleShowModalAdd = () => {
@@ -119,10 +121,21 @@ function TableProducts() {
                   align={`${mdDown ? "left" : "center"}`}
                   sx={{ whiteSpace: mdDown ? "wrap" : "nowrap" }}
                 >
-                  <IconButton onClick={() => handleEditIcon(item?._id)}>
+                  <IconButton
+                    onClick={() => {
+                      handleEditIcon(item?._id);
+                      setIsEdit(true);
+                      setIsUpload(false);
+                    }}
+                  >
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => handleDeleteIcon(item?._id)}>
+                  <IconButton
+                    onClick={() => {
+                      handleDeleteIcon(item?._id);
+                      setIsEdit(false);
+                    }}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

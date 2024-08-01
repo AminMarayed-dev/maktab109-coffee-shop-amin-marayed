@@ -2,6 +2,7 @@ import { localization } from "@/constant/localization";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
   Alert,
+  Chip,
   Grid,
   IconButton,
   Snackbar,
@@ -13,6 +14,8 @@ import "react-quill/dist/quill.snow.css";
 
 import ButtonLoading from "@/components/shared/ButtonLoading";
 import useAddProducts from "@/hooks/dashboard/useAddProducts";
+import useResponsive from "@/hooks/shared/useResponsive";
+import truncateText from "@/utils/trancateText";
 import useDashboardStore from "@/zustand/dashboard/store";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,14 +28,22 @@ const { dashboard } = localization;
 function AddProductModal() {
   const [open, setOpen] = useState(false);
   const [isAddSuccess, setIsAddSuccess] = useState(false);
-  const { description, categoryID, subCategoryID, images, handleCloseModal } =
-    useDashboardStore((state) => ({
-      description: state.description,
-      categoryID: state.categoryID,
-      subCategoryID: state.subCategoryID,
-      images: state.images,
-      handleCloseModal: state.handleCloseModal,
-    }));
+  const {
+    description,
+    categoryID,
+    subCategoryID,
+    images,
+    handleCloseModal,
+    removeImage,
+  } = useDashboardStore((state) => ({
+    description: state.description,
+    categoryID: state.categoryID,
+    subCategoryID: state.subCategoryID,
+    images: state.images,
+    handleCloseModal: state.handleCloseModal,
+    removeImage: state.removeImage,
+  }));
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const { mutate: addProductApi, isPending } = useAddProducts();
   const { register, handleSubmit } = useForm();
   const addProducts = (productData: any) => {
@@ -80,7 +91,7 @@ function AddProductModal() {
       >
         {textFieldItems.map((item, index) => {
           return (
-            <Grid item lg={5} xs={12}>
+            <Grid key={index} item lg={5} xs={12}>
               <TextField
                 type={`${item.name === "quantity" ? "number" : "text"}`}
                 key={index}
@@ -95,7 +106,21 @@ function AddProductModal() {
           <SelectFormModal />
         </Grid>
         <Grid item lg={12} xs={12}>
-          <UploadImageModal />
+          <Stack direction="row" spacing={2} alignItems="center">
+            <UploadImageModal />
+            {images.length > 0 &&
+              images.map((image, index) => (
+                <Chip
+                  key={index}
+                  label={
+                    mdDown
+                      ? truncateText(image.name, 4)
+                      : truncateText(image.name, 8)
+                  }
+                  onDelete={() => removeImage(image.name)}
+                />
+              ))}
+          </Stack>
         </Grid>
         <Grid item lg={12} xs={12}>
           <TextAreaModal />

@@ -1,10 +1,10 @@
 import { cssClass } from "@/constant/cssClass";
+import useResponsive from "@/hooks/shared/useResponsive";
 import useDashboardStore from "@/zustand/dashboard/store";
 import { Backdrop, Box, Fade, Modal } from "@mui/material";
 import { ReactNode } from "react";
 import AddProductModal from "./AddProductModal";
 import EditProductModal from "./editProductModal";
-import useResponsive from "@/hooks/shared/useResponsive";
 
 const { styleModal } = cssClass;
 type Props = { children: ReactNode };

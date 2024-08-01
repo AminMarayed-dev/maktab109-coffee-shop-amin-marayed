@@ -2,6 +2,7 @@ import { localization } from "@/constant/localization";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
   Alert,
+  Box,
   Grid,
   IconButton,
   Snackbar,
@@ -15,9 +16,12 @@ import { convertImagesToFiles } from "@/api/shared/shared.api";
 import ButtonLoading from "@/components/shared/ButtonLoading";
 import useEditProduct from "@/hooks/dashboard/useEditProductById";
 import useGetProductById from "@/hooks/dashboard/useGetProductById";
+import useResponsive from "@/hooks/shared/useResponsive";
 import useDashboardStore from "@/zustand/dashboard/store";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
+import ResultEditImage from "./ResultEditImage";
 import SelectFormModal from "./SelectFormModal";
 import TextAreaModal from "./TextAreaModal";
 import UploadImageModal from "./UploadImageModal";
@@ -27,6 +31,8 @@ const { dashboard } = localization;
 function EditProductModal() {
   const [open, setOpen] = useState(false);
   const [isEditSuccess, setIsEditSuccess] = useState(false);
+
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
 
   const {
     description,
@@ -39,6 +45,7 @@ function EditProductModal() {
     setImages,
     setCategoryID,
     setSubCategoryID,
+    isUpload,
   } = useDashboardStore((state) => ({
     description: state.description,
     categoryID: state.categoryID,
@@ -50,6 +57,7 @@ function EditProductModal() {
     setImages: state.setImages,
     setCategoryID: state.setCategoryID,
     setSubCategoryID: state.setSubCategoryID,
+    isUpload: state.isUpload,
   }));
 
   const { data: product } = useGetProductById(productID);
@@ -100,7 +108,7 @@ function EditProductModal() {
       <Typography variant="h5">{dashboard.addAndEditProduct}</Typography>
       <IconButton
         onClick={handleCloseModal}
-        sx={{ position: "absolute", right: 10, top: 8 }}
+        sx={{ position: "absolute", right: 10, top: mdDown ? 8 : 18 }}
       >
         <CancelIcon />
       </IconButton>
@@ -129,7 +137,10 @@ function EditProductModal() {
           <SelectFormModal />
         </Grid>
         <Grid item lg={12} xs={12}>
-          <UploadImageModal />
+          <Box sx={{ display: "flex", alignItems: "center", columnGap: 2 }}>
+            <UploadImageModal />
+            <ResultEditImage productImages={product?.images} />
+          </Box>
         </Grid>
 
         <Grid item lg={12} xs={12}>
