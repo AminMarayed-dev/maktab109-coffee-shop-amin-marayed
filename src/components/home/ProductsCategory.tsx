@@ -21,10 +21,10 @@ function ProductsCategory({ title, data }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const router = useRouter();
   return (
-    <Stack mt={5} rowGap={4} justifyContent="center" alignItems="center">
+    <Stack mt={5} mb={3} rowGap={4} justifyContent="center" alignItems="center">
       <TextDivider text={title} />
       <Grid container lg={12} xs={12} spacing={2}>
-        {data.products.map((product, index) => (
+        {data.queries[0].state.data.map((product, index) => (
           <Grid item lg={4} xs={6} key={index}>
             <Button
               sx={styleButtonLink}

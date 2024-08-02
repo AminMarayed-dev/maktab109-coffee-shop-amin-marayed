@@ -12,9 +12,10 @@ function SingleProduct({ product }: { product: any }) {
     <Container>
       <Stack
         direction={mdDown ? "column-reverse" : "row-reverse"}
-        alignItems="center"
+        // alignItems="center"
         gap={4}
         mb={2}
+        justifyContent={mdDown ? "center" : "space-between"}
       >
         <SingleProductDetail product={product} />
         <SingleProductImages product={product} />

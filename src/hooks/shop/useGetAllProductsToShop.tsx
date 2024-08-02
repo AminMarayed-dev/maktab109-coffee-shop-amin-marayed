@@ -6,7 +6,6 @@ function useGetAllProductsToShop({ limit, initialData, sort }) {
     queryKey: ["products-shop", limit, sort],
     queryFn: () => getAllProductsShop({ limit, sort }),
     initialData,
-    enabled: !!initialData,
   });
 }
 

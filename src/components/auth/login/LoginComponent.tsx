@@ -1,10 +1,12 @@
 import { localization } from "@/constant/localization";
 
+import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
 import textFieldItems from "@/components/auth/login/login.data";
 import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
 import useLogin from "@/hooks/auth/login/useLogin";
+import useResponsive from "@/hooks/shared/useResponsive";
 import { IUserDataLogin } from "@/types/auth/login/login.type";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,9 +18,9 @@ import {
   InputAdornment,
   Snackbar,
   TextField,
-  Typography,
 } from "@mui/material";
 import { getCookie, setCookie } from "cookies-next";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -31,6 +33,7 @@ function LoginComponent() {
   const [open, setOpen] = useState(false);
   const [isLoginSuccess, setIsLoginSuccess] = useState(false);
   const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const {
     register,
     handleSubmit,
@@ -71,9 +74,8 @@ function LoginComponent() {
   const router = useRouter();
   return (
     <Container sx={styleContainerAuth} maxWidth="sm">
-      <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
-        {auth.loginPage}
-      </Typography>
+      <Image src={logo} alt="Logo" width={130} height={130} />
+
       <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(handleLogin)}>
         {textFieldItems.map((item, index) => (
           <TextField

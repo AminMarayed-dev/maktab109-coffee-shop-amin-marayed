@@ -87,16 +87,16 @@ let theme = createTheme({
         },
       },
     },
-    MuiRating: {
-      styleOverrides: {
-        iconFilled: {
-          color: yellow[700],
-        },
-        iconHover: {
-          color: yellow[800],
-        },
-      },
-    },
+    // MuiRating: {
+    //   styleOverrides: {
+    //     iconFilled: {
+    //       color: yellow[700],
+    //     },
+    //     iconHover: {
+    //       color: yellow[800],
+    //     },
+    //   },
+    // },
   },
 });
 

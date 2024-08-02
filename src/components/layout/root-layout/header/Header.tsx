@@ -1,3 +1,4 @@
+import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
 import LinkCategory from "@/components/layout/root-layout/header/desktop/LinkCategory";
 import DrawerMenu from "@/components/layout/root-layout/header/mobile/DrawerMenu";
 import DrawerBasket from "@/components/layout/root-layout/header/shared/DrawerBasket";
@@ -28,13 +29,13 @@ import MenuUser from "./shared/MenuUser";
 const {
   home: { menuList },
 } = localization;
-const { center, styleContainerToobar } = cssClass;
+const { center, styleContainerToobar, styleButtonLink } = cssClass;
 
 function Header() {
   const router = useRouter();
   const onlyMobile = useResponsive({ query: "only", breakpoints: "xs" });
-  // const onlyDesktop = useResponsive({ query: "only", breakpoints: "lg" });
   const onlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const openDrawer = useHeaderStore((state) => state.openDrawer);
   const anchorDrawer = useHeaderStore((state) => state.anchorDrawer);
   const isPersist = useHeaderStore((state) => state.isPersist);
@@ -56,17 +57,33 @@ function Header() {
       <ToolbarStyled>
         <Container sx={styleContainerToobar}>
           {onlyMobile && (
-            <IconButton size="large" edge="start" onClick={handleDrawerMenu}>
+            <IconButton
+              size="large"
+              edge="start"
+              onClick={handleDrawerMenu}
+              sx={{ mr: `${isPersist && 3}` }}
+            >
               <MenuIcon />
             </IconButton>
           )}
 
-          <Image
-            src="https://www.melocoffee.com/wp-content/uploads/2019/11/logo-png.png"
-            width={60}
-            height={60}
-            alt="Logo"
-          />
+          <Button
+            sx={{
+              backgroundColor: "primary.main",
+              color: "white",
+              borderRadius: 0,
+              "&:hover": {
+                backgroundColor: "primary.main",
+              },
+              cursor: "pointer",
+            }}
+            onClick={() => router.push("/")}
+          >
+            <Box width={mdDown ? 80 : 100} height={mdDown ? 80 : 100}>
+              <Image src={logo} layout="fill" alt="Logo" />
+            </Box>
+          </Button>
+
           <Box sx={center}>
             {isPersist ? (
               <MenuUser />

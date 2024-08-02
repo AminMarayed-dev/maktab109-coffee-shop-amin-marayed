@@ -1,3 +1,4 @@
+import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
 import textFieldItems from "@/components/auth/register/register.data";
 import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
@@ -15,9 +16,9 @@ import {
   InputAdornment,
   Snackbar,
   TextField,
-  Typography,
 } from "@mui/material";
 import { setCookie } from "cookies-next";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -64,9 +65,9 @@ function RegisterComponent() {
 
   return (
     <Container sx={styleContainerAuth} maxWidth="sm">
-      <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
-        {auth.submitPage}
-      </Typography>
+      <Box sx={{ transform: "scale(1.4)", display: "inline-block" }}>
+        <Image src={logo} alt="Logo" width={80} height={80} />
+      </Box>
       <Box
         component="form"
         sx={{ mt: 1 }}

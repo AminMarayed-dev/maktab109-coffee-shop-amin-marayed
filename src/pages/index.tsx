@@ -1,10 +1,12 @@
 import { getAllProducts } from "@/api/shared/shared.api";
+import { getAllProductsShop } from "@/api/shop/getAllProductsShop";
 import Home from "@/components/home/Home";
 import RootLayout from "@/components/layout/root-layout/RootLayout";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ReactElement } from "react";
 
 export default function HomePage(props) {
-  return <Home data={props.serverData} />;
+  return <Home data={props.dehydratedState} />;
 }
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
@@ -12,10 +14,17 @@ HomePage.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getStaticProps() {
-  const serverData = await getAllProducts({ page: 1, limit: 12 });
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["products-shop"],
+    queryFn: () => getAllProductsShop({ limit: 12, sort: "createdAt" }),
+  });
+
+  const dehydratedState = dehydrate(queryClient);
   return {
     props: {
-      serverData,
+      dehydratedState,
     },
     revalidate: 60 * 30,
   };

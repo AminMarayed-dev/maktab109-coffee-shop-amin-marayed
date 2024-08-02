@@ -1,6 +1,10 @@
 import { api } from "@/api/config/config";
 
-export async function loginUserApi(data: any) {
+type userDataLogin = {
+  username: string;
+  password: string;
+};
+export async function loginUserApi(data: userDataLogin) {
   try {
     const response = await api.post("/auth/login", data);
     return response;

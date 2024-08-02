@@ -19,11 +19,13 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
+import { useRouter } from "next/router";
 
 const { shop, common } = localization;
 const { center } = cssClass;
 function ProductsCategory({ slug }: { slug: string }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const router = useRouter();
   const { data: categoryData } = useGetCategoryBySlug(slug);
   const {
     data: productsByCategory,
@@ -59,8 +61,10 @@ function ProductsCategory({ slug }: { slug: string }) {
                   flexDirection: "column",
                   height: `${mdDown} ? 200px : 400px`,
                   border: "1px solid #52525b",
+                  cursor: "pointer",
                 }}
                 elevation={0}
+                onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
                   src={`http://${product.images[0]}`}

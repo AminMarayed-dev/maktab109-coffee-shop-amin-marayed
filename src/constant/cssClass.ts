@@ -45,7 +45,7 @@ export const cssClass = {
   styleContainerToobar: {
     display: "flex",
     justifyContent: "space-between",
-    py: 2.5,
+    // py: 2.5,
     alignItems: "center",
   },
   styleContainerAuth: {

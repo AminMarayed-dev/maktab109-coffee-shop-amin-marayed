@@ -10,7 +10,7 @@ export async function getAllProductsShop({
   try {
     const response = await api.get(
       `/products?sort=${sort}&page=1&limit=${limit}
-      }`
+     `
     );
     return response.data.data.products;
   } catch (error) {

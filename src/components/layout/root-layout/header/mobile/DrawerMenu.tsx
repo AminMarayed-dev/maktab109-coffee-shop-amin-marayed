@@ -43,15 +43,16 @@ function DrawerMenu() {
             <ListItemText primary={menuItem.category} />
             {menuItem.isChevron ? (
               <ListItemIcon
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   handleOpen(index);
                 }}
-                sx={{ minWidth: 0 }}
+                sx={{ minWidth: 0, bgcolor: "rgb(75, 54, 33)" }}
               >
                 {openItems[index] ? (
-                  <KeyboardArrowDownIcon />
+                  <KeyboardArrowDownIcon sx={{ fill: "#fff" }} />
                 ) : (
-                  <KeyboardArrowLeftIcon />
+                  <KeyboardArrowLeftIcon sx={{ fill: "#fff" }} />
                 )}
               </ListItemIcon>
             ) : (

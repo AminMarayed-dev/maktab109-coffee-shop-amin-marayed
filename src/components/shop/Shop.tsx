@@ -23,15 +23,21 @@ import ButtonDrawerFilter from "../shared/ButtonDrawerFilter";
 import DrawerFilter from "../shared/DrawerFilter";
 import SelectFilter from "../shared/SelectFilter";
 import CheckQuantityAndRate from "./checkQuantityAndRate";
+import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 
 const { shop, common } = localization;
 const { center, styleButtonLink } = cssClass;
 
-function Shop({ data, status }) {
-  const openDrawerFilter = useCommonStore((state) => state.openDrawerFilter);
-  const handleCloseDrawerFilter = useCommonStore(
-    (state) => state.handleCloseDrawerFilter
-  );
+function Shop({ props }) {
+  const {
+    data: productsShop,
+    isLoading,
+    isError,
+  } = useGetAllProductsToShop({
+    limit: props.limit,
+    sort: props.sort,
+    initialData: props.dehydratedState,
+  });
   const router = useRouter();
   const handleLimitProduct = () => {
     const currentLimit = router.query.limit ? parseInt(router.query.limit) : 15;
@@ -47,7 +53,12 @@ function Shop({ data, status }) {
       query: { ...router.query, sort: filter },
     });
   };
+
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const openDrawerFilter = useCommonStore((state) => state.openDrawerFilter);
+  const handleCloseDrawerFilter = useCommonStore(
+    (state) => state.handleCloseDrawerFilter
+  );
 
   return (
     <Container>
@@ -87,13 +98,12 @@ function Shop({ data, status }) {
 
       <Stack justifyContent="center" alignItems="center" rowGap={2}>
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {data.queries[0].state.data.map((product, index) => (
+          {productsShop?.map((product, index) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
                   ...center,
                   flexDirection: "column",
-                  height: `${mdDown} ? 200px : 400px`,
                   border: "1px solid #52525b",
                   cursor: "pointer",
                 }}
@@ -108,6 +118,7 @@ function Shop({ data, status }) {
                   alt={product.name}
                   loading="lazy"
                 />
+
                 {product.quantity > 0 ? (
                   <>
                     <CardContent>

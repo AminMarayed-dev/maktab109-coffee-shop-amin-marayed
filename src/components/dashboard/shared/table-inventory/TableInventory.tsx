@@ -18,6 +18,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { green } from "@mui/material/colors";
 import { useState } from "react";
 import ButtonActionTable from "../ButtonActionTable";
 
@@ -30,6 +31,7 @@ function TableInventory() {
   const [newPrice, setNewPrice] = useState(0);
   const [newQuantity, setNewQuantity] = useState(0);
   const [showInput, setShowInput] = useState(false);
+  const [buttonBgColor, setButtonBgColor] = useState("secondary.dark");
 
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -45,6 +47,13 @@ function TableInventory() {
   const handleShowInput = (event, item) => {
     setShowInput(true);
     setRowData(item);
+    setButtonBgColor(green[500]);
+  };
+
+  const handleCloseInput = () => {
+    setShowInput(false);
+    setRowData(null);
+    setButtonBgColor("secondary.dark");
   };
 
   const editQuantityOrPrice = () => {
@@ -64,9 +73,7 @@ function TableInventory() {
       setNewPrice(0);
       setNewQuantity(0);
     }
-
-    setShowInput(false);
-    setRowData(null);
+    handleCloseInput();
   };
 
   if (isLoading) {
@@ -155,7 +162,12 @@ function TableInventory() {
       <ButtonActionTable
         text={dashboard.save}
         onClick={editQuantityOrPrice}
-        // sx={{ bgcolor: "#000 !important" }}
+        sx={{
+          bgcolor: buttonBgColor,
+          "&:hover": {
+            backgroundColor: buttonBgColor,
+          },
+        }}
       />
     </Box>
   );

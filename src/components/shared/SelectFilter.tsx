@@ -1,5 +1,4 @@
 import { localization } from "@/constant/localization";
-import useShopStore from "@/zustand/shop/store";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
@@ -7,6 +6,10 @@ import NativeSelect from "@mui/material/NativeSelect";
 const { common } = localization;
 
 const options = [
+  {
+    text: common.filterNewer,
+    value: "-createdAt",
+  },
   {
     text: common.filterQuantity,
     value: "-quantity",
@@ -18,10 +21,6 @@ const options = [
   {
     text: common.filterLowPrice,
     value: "price",
-  },
-  {
-    text: common.filterNewer,
-    value: "-createdAt",
   },
   {
     text: common.filterOlder,

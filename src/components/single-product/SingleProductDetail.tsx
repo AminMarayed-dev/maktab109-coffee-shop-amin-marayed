@@ -19,7 +19,7 @@ import SocialMedia from "./SocialMedia";
 const { common, singleProduct, shop } = localization;
 function SingleProductDetail({ product }: { product: any }) {
   return (
-    <Stack rowGap={2}>
+    <Stack rowGap={2} flexGrow={1.5}>
       <Box
         sx={{
           display: "flex",

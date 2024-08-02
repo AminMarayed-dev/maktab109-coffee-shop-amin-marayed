@@ -20,17 +20,16 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
+import { useRouter } from "next/router";
 
 const { shop, common } = localization;
 const { center } = cssClass;
 function ProductsSubCategory({ slug }: { slug: any }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const router = useRouter();
   const { data: categoryData } = useGetCategoryBySlug(slug[0]);
-  console.log(slug[1]);
   const { data: subCategoryData } = useGetSubCategoryBySlug(slug[1]);
-  console.log(subCategoryData);
 
-  console.log(categoryData?._id, subCategoryData?._id);
   const {
     data: productsBySubCategory,
     isLoading,
@@ -39,7 +38,6 @@ function ProductsSubCategory({ slug }: { slug: any }) {
     categoryID: categoryData?._id,
     subCategoryID: subCategoryData?._id,
   });
-  console.log(productsBySubCategory);
   if (isLoading) <div>loading...</div>;
   if (isError) <div>isError...</div>;
   return (
@@ -69,8 +67,10 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                   flexDirection: "column",
                   height: `${mdDown} ? 200px : 400px`,
                   border: "1px solid #52525b",
+                  cursor: "pointer",
                 }}
                 elevation={0}
+                onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
                   src={`http://${product.images[0]}`}

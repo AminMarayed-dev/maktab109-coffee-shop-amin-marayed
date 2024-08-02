@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 function ListSubCategory({ subCategoryItems, slugCategory }) {
   const router = useRouter();
   return (
-    <List>
+    <List sx={{ fontSize: "1rem" }}>
       {subCategoryItems.map((subCategory, index) => (
         <ListItem key={index}>
           <ListItemButton
@@ -12,6 +12,13 @@ function ListSubCategory({ subCategoryItems, slugCategory }) {
               router.push(
                 `/product-category/${slugCategory}/${subCategory.slug}`
               );
+            }}
+            sx={{
+              "&:hover": {
+                color: "black",
+                backgroundColor: "white",
+                borderRadius: "8px",
+              },
             }}
           >
             {subCategory.text}
