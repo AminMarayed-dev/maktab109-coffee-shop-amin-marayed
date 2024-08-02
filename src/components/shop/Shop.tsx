@@ -29,13 +29,9 @@ const { shop, common } = localization;
 const { center, styleButtonLink } = cssClass;
 
 function Shop({ props }) {
-  const {
-    data: productsShop,
-    isLoading,
-    isError,
-  } = useGetAllProductsToShop({
-    limit: props.limit,
-    sort: props.sort,
+  const { data: productsShop } = useGetAllProductsToShop({
+    limit: props.limit || 15,
+    sort: props?.sort || "-createdAt",
     initialData: props.dehydratedState,
   });
   const router = useRouter();
@@ -106,6 +102,7 @@ function Shop({ props }) {
                   flexDirection: "column",
                   border: "1px solid #52525b",
                   cursor: "pointer",
+                  height: "400px",
                 }}
                 elevation={0}
                 onClick={() => router.push(`/shop/${product._id}`)}
