@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   ListItemIcon,
   Rating,
@@ -12,12 +13,18 @@ import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import GridViewIcon from "@mui/icons-material/GridView";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import ButtonAddToCart from "./ButtonAddToCart";
 
+import { useCartStore } from "@/zustand/cart/store";
+import useShopStore from "@/zustand/shop/store";
+import CountBox from "../shared/CountBox";
+import DialogAddProducts from "./DialogAddProducts";
 import SocialMedia from "./SocialMedia";
 
 const { common, singleProduct, shop } = localization;
 function SingleProductDetail({ product }: { product: any }) {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const handleOpenDialog = useShopStore((state) => state.handleOpenDialog);
+
   return (
     <Stack rowGap={2} flexGrow={1.5}>
       <Box
@@ -49,7 +56,19 @@ function SingleProductDetail({ product }: { product: any }) {
       <Typography variant="body2" color="primary.light">
         {product.description}
       </Typography>
-      <ButtonAddToCart />
+      <Stack direction="row" columnGap={3}>
+        <CountBox product={product} />
+        <Button
+          variant="contained"
+          onClick={() => {
+            addToCart(product);
+            handleOpenDialog();
+          }}
+        >
+          {common.addProductToBasket}
+        </Button>
+      </Stack>
+      <DialogAddProducts />
       <Divider />
       <Box>
         <Typography variant="body2">
