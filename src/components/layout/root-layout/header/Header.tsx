@@ -1,18 +1,20 @@
 import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
 import LinkCategory from "@/components/layout/root-layout/header/desktop/LinkCategory";
 import DrawerMenu from "@/components/layout/root-layout/header/mobile/DrawerMenu";
-import DrawerBasket from "@/components/layout/root-layout/header/shared/DrawerBasket";
+import DrawerBasket from "@/components/layout/root-layout/header/shared/drawer-basket/DrawerBasket";
 import ToolbarStyled from "@/components/layout/root-layout/header/shared/ToolbarStyled";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { routes } from "@/constant/routes";
 import useResponsive from "@/hooks/shared/useResponsive";
+import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   Container,
@@ -22,9 +24,10 @@ import {
 } from "@mui/material";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import MenuUser from "./shared/MenuUser";
+import { useCartStore } from "@/zustand/cart/store";
 
 const {
   home: { menuList },
@@ -32,6 +35,7 @@ const {
 const { center, styleContainerToobar, styleButtonLink } = cssClass;
 
 function Header() {
+  const totalItems = useCartStore((state) => state.totalItems);
   const router = useRouter();
   const onlyMobile = useResponsive({ query: "only", breakpoints: "xs" });
   const onlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
@@ -104,8 +108,20 @@ function Header() {
                 <SearchIcon />
               </IconButton>
             )}
-            <IconButton size="large" edge="start" onClick={handleDrawerBasket}>
-              <LocalMallIcon />
+            <IconButton
+              size="large"
+              edge="start"
+              onClick={() => {
+                if (router.pathname !== "/cart") handleDrawerBasket();
+                // else router.reload();
+              }}
+            >
+              <Badge
+                badgeContent={toPersianNumbers(totalItems)}
+                color="secondary"
+              >
+                <LocalMallIcon />
+              </Badge>
             </IconButton>
           </Box>
         </Container>
