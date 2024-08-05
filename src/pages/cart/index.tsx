@@ -1,12 +1,13 @@
+import Cart from "@/components/cart/Cart";
 import RootLayout from "@/components/layout/root-layout/RootLayout";
 import { ReactElement } from "react";
 
-function Cart() {
-  return <div>Cart</div>;
+function CartPage() {
+  return <Cart />;
 }
 
-Cart.getLayout = function getLayout(page: ReactElement) {
+CartPage.getLayout = function getLayout(page: ReactElement) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export default Cart;
+export default CartPage;
