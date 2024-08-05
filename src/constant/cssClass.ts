@@ -80,4 +80,10 @@ export const cssClass = {
     width: "100%",
     padding: 0,
   },
+  styleDrawerBasket: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
 };
