@@ -26,7 +26,7 @@ import CheckQuantityAndRate from "./checkQuantityAndRate";
 import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 
 const { shop, common } = localization;
-const { center, styleButtonLink } = cssClass;
+const { styleCard, styleButtonLink } = cssClass;
 
 function Shop({ props }) {
   const { data: productsShop } = useGetAllProductsToShop({
@@ -98,11 +98,8 @@ function Shop({ props }) {
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
-                  ...center,
-                  flexDirection: "column",
-                  border: "1px solid #52525b",
                   cursor: "pointer",
-                  height: "400px",
+                  ...styleCard,
                 }}
                 elevation={0}
                 onClick={() => router.push(`/shop/${product._id}`)}

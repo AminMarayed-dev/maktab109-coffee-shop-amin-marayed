@@ -1,4 +1,5 @@
 import { localization } from "@/constant/localization";
+import useNavigateToPaymentOrLogin from "@/hooks/shared/useNavigateToPaymentOrLogin";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import { useCartStore } from "@/zustand/cart/store";
 import {
@@ -10,9 +11,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 const { cart, common } = localization;
 function FactorCart() {
+  const router = useRouter();
+
   const carts = useCartStore((state) => state.cart);
   const totalPrice = carts.reduce(
     (acc, cart) => acc + cart.count * cart.price,
@@ -68,7 +72,9 @@ function FactorCart() {
         </Stack>
       </CardContent>
       <CardActions>
-        <Button fullWidth>{cart.continuePayment}</Button>
+        <Button fullWidth onClick={() => router.push("/payment")}>
+          {cart.continuePayment}
+        </Button>
       </CardActions>
     </Card>
   );

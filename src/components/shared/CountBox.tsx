@@ -99,7 +99,6 @@ function CountBox({ product }: { product: any }) {
       handleOpenDialog();
     }
   };
-
   const displayCount =
     router.pathname === "/cart"
       ? cart.find((item) => item._id === product._id)?.count || count

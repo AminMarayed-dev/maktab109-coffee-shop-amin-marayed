@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginValidationSchema } from "../validation/auth.valiation";
+import { useStorage } from "@/hooks/shared/useStorage";
 
 const { auth } = localization;
 const { styleContainerAuth } = cssClass;
@@ -32,6 +33,7 @@ const { styleContainerAuth } = cssClass;
 function LoginComponent() {
   const [open, setOpen] = useState(false);
   const [isLoginSuccess, setIsLoginSuccess] = useState(false);
+  const [user, setUser] = useStorage("user", null);
   const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const {
@@ -55,6 +57,7 @@ function LoginComponent() {
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
         setCookie("role", user.role);
+        setUser(user);
 
         // close drawer when success
         handleCloseDrawer();

@@ -39,7 +39,14 @@ function ButtonDrawerBasket() {
       >
         {cart.showBasket}
       </Button>
-      <Button onClick={() => router.push("/payment")}>{cart.payment}</Button>
+      <Button
+        onClick={() => {
+          router.push("/payment");
+          handleCloseDrawer();
+        }}
+      >
+        {cart.payment}
+      </Button>
     </Stack>
   );
 }

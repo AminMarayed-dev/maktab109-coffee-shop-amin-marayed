@@ -19,11 +19,11 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
 import { useRouter } from "next/router";
+import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
 
 const { shop, common } = localization;
-const { center } = cssClass;
+const { center, styleCard } = cssClass;
 function ProductsSubCategory({ slug }: { slug: any }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const router = useRouter();
@@ -63,10 +63,7 @@ function ProductsSubCategory({ slug }: { slug: any }) {
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
-                  ...center,
-                  flexDirection: "column",
-                  height: `${mdDown} ? 200px : 400px`,
-                  border: "1px solid #52525b",
+                  ...styleCard,
                   cursor: "pointer",
                 }}
                 elevation={0}
