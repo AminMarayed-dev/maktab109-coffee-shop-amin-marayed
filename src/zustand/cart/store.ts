@@ -54,7 +54,7 @@ export const useCartStore = create(
             totalPrice: state.totalPrice + product.price * count,
             productCounts: {
               ...state.productCounts,
-              [product._id]: (state.productCounts[product._id] || 0) + count,
+              [product._id]: state.productCounts[product._id] || 0,
             },
           }));
         } else {
