@@ -34,6 +34,14 @@ export async function getAllOrders({ page, limit }: Props) {
   }
 }
 
+export async function addOrdersApi(data: any) {
+  try {
+    return await api.post("/orders", data);
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function urlToFile(url, filename, mimeType) {
   const response = await fetch(`http://${url}`);
   const blob = await response.blob();
