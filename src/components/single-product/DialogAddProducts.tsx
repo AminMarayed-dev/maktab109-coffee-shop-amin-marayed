@@ -21,8 +21,7 @@ function DialogAddProducts() {
     router.push("/cart");
     handleCloseDialog();
   };
-  const nagigateToPayment = () => {
-    router.push("/payment");
+  const continueToBuy = () => {
     handleCloseDialog();
   };
   return (
@@ -40,7 +39,7 @@ function DialogAddProducts() {
         <DialogTitle mt={5}>{cart.messageAddCartToBasket}</DialogTitle>
         <DialogActions sx={center}>
           <Button onClick={navigateToCart}>{cart.showBasket}</Button>
-          <Button onClick={nagigateToPayment}>{cart.continueBuy}</Button>
+          <Button onClick={continueToBuy}>{cart.continueBuy}</Button>
         </DialogActions>
         <IconButton
           aria-label="close"

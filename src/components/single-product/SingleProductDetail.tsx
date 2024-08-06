@@ -1,9 +1,11 @@
 import {
+  Alert,
   Box,
   Button,
   Divider,
   ListItemIcon,
   Rating,
+  Snackbar,
   Stack,
   Typography,
 } from "@mui/material";
@@ -16,15 +18,27 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import { useCartStore } from "@/zustand/cart/store";
 import useShopStore from "@/zustand/shop/store";
+import { useState } from "react";
 import CountBox from "../shared/CountBox";
 import DialogAddProducts from "./DialogAddProducts";
 import SocialMedia from "./SocialMedia";
 
-const { common, singleProduct, shop } = localization;
+const { common, singleProduct, shop, cart } = localization;
 function SingleProductDetail({ product }: { product: any }) {
+  const [open, setOpen] = useState(false);
+  const carts = useCartStore((state) => state.cart);
+
   const addToCart = useCartStore((state) => state.addToCart);
   const handleOpenDialog = useShopStore((state) => state.handleOpenDialog);
 
+  const handleAddToCart = () => {
+    const cart = carts.find((cart) => cart._id === product?._id);
+    if (cart && cart.count >= product?.quantity) setOpen(true);
+    else {
+      addToCart(product);
+      handleOpenDialog();
+    }
+  };
   return (
     <Stack rowGap={2} flexGrow={1.5}>
       <Box
@@ -56,18 +70,30 @@ function SingleProductDetail({ product }: { product: any }) {
       <Typography variant="body2" color="primary.light">
         {product.description}
       </Typography>
-      <Stack direction="row" columnGap={3}>
-        <CountBox product={product} />
-        <Button
-          variant="contained"
-          onClick={() => {
-            addToCart(product);
-            handleOpenDialog();
-          }}
-        >
-          {common.addProductToBasket}
-        </Button>
-      </Stack>
+      {product.quantity > 0 ? (
+        <Stack direction="row" columnGap={3}>
+          <CountBox product={product} />
+          <Button variant="contained" onClick={handleAddToCart}>
+            {common.addProductToBasket}
+          </Button>
+          <Snackbar
+            open={open}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={3000}
+            onClose={() => setOpen(false)}
+          >
+            <Alert severity="error" variant="filled" sx={{ width: "100%" }}>
+              {cart.messageGratherQuantity}{" "}
+              {`مقدار موجودی: ${product.quantity}`}
+            </Alert>
+          </Snackbar>
+        </Stack>
+      ) : (
+        <Typography variant="h5" color="error">
+          {shop.unavailable}
+        </Typography>
+      )}
+
       <DialogAddProducts />
       <Divider />
       <Box>

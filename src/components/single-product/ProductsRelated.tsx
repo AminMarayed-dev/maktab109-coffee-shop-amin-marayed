@@ -22,7 +22,7 @@ import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
 import { useRouter } from "next/router";
 
 const { singleProduct, shop, common } = localization;
-const { center, styleButtonLink } = cssClass;
+const { styleCard, styleButtonLink } = cssClass;
 function ProductsRelated({ product }: { product: any }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -66,15 +66,7 @@ function ProductsRelated({ product }: { product: any }) {
                       sx={styleButtonLink}
                       onClick={() => router.push(`/shop/${product._id}`)}
                     >
-                      <Card
-                        sx={{
-                          ...center,
-                          flexDirection: "column",
-                          height: mdDown ? "auto" : "400px",
-                          border: "1px solid #52525b",
-                        }}
-                        elevation={0}
-                      >
+                      <Card sx={styleCard} elevation={0}>
                         <Image
                           src={`http://${product.images[0]}`}
                           width={mdDown ? 200 : 300}
