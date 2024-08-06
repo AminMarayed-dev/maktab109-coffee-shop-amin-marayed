@@ -142,6 +142,8 @@ export const localization = {
     messageDeleteCart: "محصول مورد نظر با موفقیت حذف شد",
     messageAddCartToBasket: "محصول با موفقیت به سبد خرید شما افزوده شد",
     continueBuy: "ادامه خرید",
+    messageGratherQuantity:
+      "مقدار انتخاب شده بیشتر از موجودی این کالا در انبار است",
   },
   footerRoot: {
     instantLink: "لینک های سریع",
@@ -182,5 +184,34 @@ export const localization = {
     category: "دسته",
     shared: "اشتراک گذاری",
     productsRelated: "محصولات مرتبط",
+  },
+  payment: {
+    factorPayment: "صورت حساب و حمل و نقل",
+    state: "استان",
+    city: "شهر",
+    placeholderState: "لطفا استان مورد نظر را انتخاب کنید",
+    placeholderCity: "لطفا شهر مورد نظر را انتخاب کنید",
+    orderNotes: "یادداشت های سفارش",
+    placeholderOrderNotes:
+      "نکته ای درباره سفارش یا زمان ارسال دارید ؟ در این قسمت یاداشت خود را بنویسید",
+    order: "سفارش شما",
+    pasian: "درگاه پرداخت بانک پارسیان",
+    zarin: "پرداخت امن زرین پال",
+    warningMessage:
+      "لطفا قبل از ثبت سفارش تمامی قوانین و مقررات موجود در وب سایت را مطالعه نموده و با زدن تیک زیر توافق خود را با آن اعلام کنید",
+    messageCheckBox: "من شرایط و مقررات سایت را خوانده ام و آن را می پذیرم. *",
+    submitOrder: "ثبت سفارش",
+  },
+  resultPayment: {
+    internetPortal: "درگاه اینترنتی",
+    questionResultPayment: "آیا از خرید خود مطمئن هستید؟",
+    pay: "پرداخت",
+    cancel: "انصراف",
+    successPaymentTitle: "ممنون از اعتماد شما",
+    successPaymentBody:
+      "پرداخت شما با موفقیت انجام شد و در لیست انتظار قرار گرفت",
+    backToHome: "بازگشت به صفحه اصلی",
+    failPaymentTitle: "پرداخت ناموفق",
+    failPaymentBody: "متاسفانه مشکلی در پرداخت به وجود آمد",
   },
 };

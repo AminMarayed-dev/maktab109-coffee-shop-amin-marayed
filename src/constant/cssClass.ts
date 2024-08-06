@@ -86,4 +86,30 @@ export const cssClass = {
     flexDirection: "column",
     justifyContent: "space-between",
   },
+  styleCard: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    display: "flex",
+    flexDirection: "column",
+    border: "1px solid #52525b",
+  },
+  styleButtonResultPayment: {
+    pay: {
+      backgroundColor: "green",
+      color: "white",
+      "&:hover": { backgroundColor: "darkgreen" },
+    },
+    cancel: {
+      backgroundColor: "red",
+      color: "white",
+      "&:hover": { backgroundColor: "darkred" },
+    },
+  },
+  styleCardResultPayment: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 1.5,
+    alignItems: "center",
+    border: "3px solid rgb(211,169,127)",
+  },
 };
