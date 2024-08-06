@@ -12,8 +12,23 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL("/", url));
     }
   }
+  if (
+    pathname.startsWith("/payment") ||
+    pathname.startsWith("/result-payment")
+  ) {
+    const role = req.cookies.get("role")?.value;
+    const accessToken = req.cookies.get("accessToken")?.value;
+    if (!accessToken && role !== "USER") {
+      return NextResponse.redirect(new URL("/auth/login", url));
+    }
+  }
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/auth/login/:path*"],
+  matcher: [
+    "/dashboard/:path*",
+    "/auth/login/:path*",
+    "/payment/:path*",
+    "/result-payment/:path*",
+  ],
 };
