@@ -1,12 +1,13 @@
 import RootLayout from "@/components/layout/root-layout/RootLayout";
+import Payment from "@/components/payment/Payment";
 import { ReactElement } from "react";
 
-function Payment() {
-  return <div>Payment</div>;
+function PaymentPage() {
+  return <Payment />;
 }
 
-Payment.getLayout = function getLayout(page: ReactElement) {
+PaymentPage.getLayout = function getLayout(page: ReactElement) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export default Payment;
+export default PaymentPage;
