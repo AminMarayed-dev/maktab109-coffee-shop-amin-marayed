@@ -1,6 +1,7 @@
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
+import useDashboardStore from "@/zustand/dashboard/store";
 import {
   Box,
   FormControl,
@@ -15,6 +16,13 @@ const { dashboard, common } = localization;
 
 function RadioGroupOrders() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const setDeliveryStatus = useDashboardStore(
+    (state) => state.setDelivaryStatus
+  );
+  const deliveryStatus = useDashboardStore((state) => state.delivaryStatus);
+  const handleDeliveryStatus = (e) => {
+    setDeliveryStatus(e.target.value);
+  };
   return (
     <Box
       sx={{
@@ -30,18 +38,19 @@ function RadioGroupOrders() {
       <FormControl>
         <RadioGroup
           name="orders"
-          defaultValue={dashboard.deliveredOrders}
+          defaultValue={deliveryStatus}
           row={!mdDown}
+          onChange={(e) => handleDeliveryStatus(e)}
         >
           <FormControlLabel
-            value={dashboard.deliveredOrders}
-            control={<Radio />}
-            label={dashboard.deliveredOrders}
-          />
-          <FormControlLabel
-            value={dashboard.ordersPendingShipment}
+            value={"false"}
             control={<Radio />}
             label={dashboard.ordersPendingShipment}
+          />
+          <FormControlLabel
+            value={"true"}
+            control={<Radio />}
+            label={dashboard.deliveredOrders}
           />
         </RadioGroup>
       </FormControl>

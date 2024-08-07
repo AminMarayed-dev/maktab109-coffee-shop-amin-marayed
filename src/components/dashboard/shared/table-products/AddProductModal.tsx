@@ -70,9 +70,6 @@ function AddProductModal() {
       spacing={{ xs: 2, lg: 1 }}
       component="form"
       onSubmit={handleSubmit(addProducts)}
-      // direction="row"
-      // useFlexGap
-      // flexWrap="wrap"
     >
       <Typography variant="h5">{dashboard.addAndEditProduct}</Typography>
       <IconButton
@@ -85,7 +82,6 @@ function AddProductModal() {
         container
         xs={12}
         lg={12}
-        // spacing={{ xs: 0, lg: 2 }}
         gap={{ xs: 2, lg: 2 }}
         justifyContent="center"
       >
