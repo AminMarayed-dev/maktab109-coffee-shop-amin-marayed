@@ -15,7 +15,7 @@ function InputPayment({
   ...rest
 }: InputPaymentProps) {
   return (
-    <Box>
+    <Box width="100%">
       <Typography variant="body1" mb={1}>
         {label}
       </Typography>

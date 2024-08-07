@@ -1,4 +1,11 @@
-import { FormControl, MenuItem, Select, Typography } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
 
 function SelectPayment({
   placeholder,
@@ -9,12 +16,17 @@ function SelectPayment({
   menuList: string[];
   label: string;
 }) {
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedValue(event.target.value as string);
+  };
   return (
     <FormControl fullWidth>
       <Typography variant="body1" mb={1}>
         {label}
       </Typography>
-      <Select displayEmpty>
+      <Select displayEmpty value={selectedValue} onChange={handleChange}>
         <MenuItem value="" disabled>
           <em>{placeholder}</em>
         </MenuItem>

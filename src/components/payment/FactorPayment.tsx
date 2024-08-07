@@ -5,9 +5,15 @@ import InputPayment from "./InputPayment";
 import SelectPayment from "./SelectPayment";
 import { cities, textFieldItems } from "./utils/cities.data";
 
+interface User {
+  firstname: string;
+  lastname: string;
+  phoneNumber: string;
+}
+
 const { payment, auth } = localization;
 function FactorPayment() {
-  const [user] = useStorage("user", null);
+  const [user] = useStorage<User | null>("user", null);
   if (!user) {
     return <Typography>Loading...</Typography>;
   }
@@ -25,7 +31,7 @@ function FactorPayment() {
           gap: 3,
         }}
       >
-        <Stack direction="row" columnGap={2}>
+        <Stack direction="row" spacing={2}>
           <InputPayment
             label={auth.firstname}
             disabled={true}
