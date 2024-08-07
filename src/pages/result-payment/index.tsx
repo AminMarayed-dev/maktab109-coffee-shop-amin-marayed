@@ -1,7 +1,12 @@
-import ResultPayment from "@/components/result-payment/ResultPayment";
+import dynamic from "next/dynamic";
+
+const NoSSR = dynamic(
+  () => import("@/components/result-payment/ResultPayment"),
+  { ssr: false }
+);
 
 function ResultPaymentPage() {
-  return <ResultPayment />;
+  return <NoSSR />;
 }
 
 export default ResultPaymentPage;

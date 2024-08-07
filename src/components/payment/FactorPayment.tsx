@@ -5,10 +5,11 @@ import InputPayment from "./InputPayment";
 import SelectPayment from "./SelectPayment";
 import { cities, textFieldItems } from "./utils/cities.data";
 
-interface User {
+export interface User {
   firstname: string;
   lastname: string;
   phoneNumber: string;
+  _id: string;
 }
 
 const { payment, auth } = localization;

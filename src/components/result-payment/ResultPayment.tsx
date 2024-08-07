@@ -1,4 +1,3 @@
-import resultPaymantLogo from "@/assets/images/result-payment-img.jpg";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useEditProduct from "@/hooks/dashboard/useEditProductById";
@@ -6,27 +5,17 @@ import useAddOrders from "@/hooks/result-payment/useAddOrders";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { useStorage } from "@/hooks/shared/useStorage";
 import { useCartStore } from "@/zustand/cart/store";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Container,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
-import Image from "next/image";
+import { Container, Divider, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Timer from "./Timer";
+import CartResultPayment from "./CartResultPayment";
+import UserCartResultPayment from "./UserCartResultPayment";
 
 const { resultPayment } = localization;
 const { styleButtonResultPayment, styleCardResultPayment } = cssClass;
 
 function ResultPayment() {
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(300);
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const { mutate: editQuantityProduct } = useEditProduct();
   const { mutate: addOrders } = useAddOrders();
@@ -61,18 +50,25 @@ function ResultPayment() {
       product: cart._id,
       count: cart.count,
     }));
-    addOrders({
-      user: user._id,
-      products: productsOrders,
-    });
-    // delete local storage
-    removeCartBasket();
-    //
-    location.href = "/result-payment/success";
+    addOrders(
+      {
+        user: user._id,
+        products: productsOrders,
+      },
+      {
+        onSuccess: () => {
+          location.href = "/result-payment/success";
+          removeCartBasket();
+        },
+        onError: () => {
+          location.href = "/result-payment/fail";
+        },
+      }
+    );
   };
 
   const handleFailPayment = () => {
-    location.href = "/result-payment/fail";
+    location.href = "/";
   };
 
   return (
@@ -81,47 +77,24 @@ function ResultPayment() {
         {resultPayment.internetPortal}
       </Typography>
       <Divider />
-      <Container>
-        <Card
-          sx={{
-            minHeight: mdDown ? 300 : 600,
-            justifyContent: mdDown ? "center" : "space-between",
-            ...styleCardResultPayment,
-            position: "relative",
-          }}
-          elevation={0}
-        >
-          <CardMedia>
-            <Image
-              src={resultPaymantLogo}
-              width={mdDown ? 300 : 500}
-              height={mdDown ? 200 : 300}
-              alt="result"
-            />
-          </CardMedia>
-          <CardContent>
-            <Typography variant={mdDown ? "h4" : "h3"}>
-              {resultPayment.questionResultPayment}
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ display: "flex", gap: 2, width: "100%" }}>
-            <Button
-              fullWidth
-              onClick={handleSuccessPayment}
-              sx={styleButtonResultPayment.pay}
-            >
-              {resultPayment.pay}
-            </Button>
-            <Button
-              fullWidth
-              sx={styleButtonResultPayment.cancel}
-              onClick={handleFailPayment}
-            >
-              {resultPayment.cancel}
-            </Button>
-          </CardActions>
-          <Timer timeLeft={timeLeft} />
-        </Card>
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: mdDown ? "column" : "row",
+          justifyContent: mdDown ? "center" : "space-evenly",
+          alignItems: mdDown ? "center" : "flex-start",
+          rowGap: 3,
+          bgcolor: "secondary.light",
+          padding: 2,
+          borderRadius: "8px",
+        }}
+      >
+        <UserCartResultPayment />
+        <CartResultPayment
+          handleSuccessPayment={handleSuccessPayment}
+          handleFailPayment={handleFailPayment}
+          timeLeft={timeLeft}
+        />
       </Container>
     </Stack>
   );

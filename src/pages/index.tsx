@@ -1,4 +1,3 @@
-import { getAllProducts } from "@/api/shared/shared.api";
 import { getAllProductsShop } from "@/api/shop/getAllProductsShop";
 import Home from "@/components/home/Home";
 import RootLayout from "@/components/layout/root-layout/RootLayout";

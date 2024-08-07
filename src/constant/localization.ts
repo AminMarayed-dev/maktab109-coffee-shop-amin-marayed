@@ -222,5 +222,10 @@ export const localization = {
     backToHome: "بازگشت به صفحه اصلی",
     failPaymentTitle: "پرداخت ناموفق",
     failPaymentBody: "متاسفانه مشکلی در پرداخت به وجود آمد",
+    name: "نام پذیرنده",
+    website: "آدرس سایت پذیرنده",
+    code: "کد پذیرنده",
+    price: "مبلغ قابل پرداخت",
+    shapark: "shaparak.ir",
   },
 };

@@ -111,6 +111,6 @@ export const cssClass = {
     flexDirection: "column",
     padding: 1.5,
     alignItems: "center",
-    border: "3px solid rgb(211,169,127)",
+    border: "3px solid #52525b",
   },
 };
