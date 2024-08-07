@@ -19,7 +19,7 @@
   "liveServer.settings.donotShowInfoMsg": true,
   "workbench.preferredDarkColorTheme": "Monokai",
   "git.openRepositoryInParentFolders": "never",
-  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.colorTheme": "GitHub Dark Default",
   "files.autoSave": "onFocusChange",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.run": "onSave",
