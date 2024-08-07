@@ -88,10 +88,11 @@ export const cssClass = {
   },
   styleCard: {
     alignItems: "center",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     display: "flex",
     flexDirection: "column",
     border: "1px solid #52525b",
+    height: "405px",
   },
   styleButtonResultPayment: {
     pay: {

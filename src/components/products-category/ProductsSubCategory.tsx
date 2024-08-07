@@ -115,9 +115,9 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                         : truncateText(product.name, 25)}
                     </Typography>
                     <Typography
-                      variant="h6"
+                      variant="h4"
                       textAlign={"center"}
-                      mt={3}
+                      mt={6}
                       color="error"
                     >
                       {shop.unavailable}

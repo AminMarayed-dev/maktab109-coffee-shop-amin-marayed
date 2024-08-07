@@ -1,6 +1,7 @@
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
+import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import useCommonStore from "@/zustand/common/store";
@@ -23,7 +24,6 @@ import ButtonDrawerFilter from "../shared/ButtonDrawerFilter";
 import DrawerFilter from "../shared/DrawerFilter";
 import SelectFilter from "../shared/SelectFilter";
 import CheckQuantityAndRate from "./checkQuantityAndRate";
-import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 
 const { shop, common } = localization;
 const { styleCard, styleButtonLink } = cssClass;
@@ -100,6 +100,8 @@ function Shop({ props }) {
                 sx={{
                   cursor: "pointer",
                   ...styleCard,
+                  justifyContent:
+                    product.quantity > 0 ? "space-between" : "flex-start",
                 }}
                 elevation={0}
                 onClick={() => router.push(`/shop/${product._id}`)}
@@ -151,9 +153,9 @@ function Shop({ props }) {
                         : truncateText(product.name, 25)}
                     </Typography>
                     <Typography
-                      variant="h6"
+                      variant="h4"
                       textAlign={"center"}
-                      mt={3}
+                      mt={6}
                       color="error"
                     >
                       {shop.unavailable}

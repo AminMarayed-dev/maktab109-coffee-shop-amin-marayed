@@ -17,9 +17,9 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
-import { useRouter } from "next/router";
 
 const { singleProduct, shop, common } = localization;
 const { styleCard, styleButtonLink } = cssClass;
@@ -66,7 +66,16 @@ function ProductsRelated({ product }: { product: any }) {
                       sx={styleButtonLink}
                       onClick={() => router.push(`/shop/${product._id}`)}
                     >
-                      <Card sx={styleCard} elevation={0}>
+                      <Card
+                        sx={{
+                          ...styleCard,
+                          justifyContent:
+                            product.quantity > 0
+                              ? "space-between"
+                              : "flex-start",
+                        }}
+                        elevation={0}
+                      >
                         <Image
                           src={`http://${product.images[0]}`}
                           width={mdDown ? 200 : 300}
@@ -120,9 +129,9 @@ function ProductsRelated({ product }: { product: any }) {
                                 : truncateText(product.name, 25)}
                             </Typography>
                             <Typography
-                              variant="h6"
+                              variant="h4"
                               textAlign={"center"}
-                              mt={3}
+                              mt={6}
                               color="error"
                             >
                               {shop.unavailable}
