@@ -131,6 +131,10 @@ export const localization = {
     createdDate: "زمان سفارش",
     delivary: "تحویل",
     noOrders: "هیچ سفارشی در جدول وجود ندارد",
+    messageSuccessDelivery:
+      "سفارش کاربر با موفقیت از حالت انتظار به حالت تحویل داده تبدیل شد",
+    messageFailDelivery:
+      "سفارش کابر از حالت انتظار به تحویل داده شده تبدیل نشد",
   },
   cart: {
     basket: "سبد خرید",
@@ -210,6 +214,7 @@ export const localization = {
     messageCheckBox: "من شرایط و مقررات سایت را خوانده ام و آن را می پذیرم. *",
     submitOrder: "ثبت سفارش",
     warningTickMessage: "لطفا تیک مقررات و قوانین را بزنید",
+    delivaryDate: "زمان تحویل",
   },
   resultPayment: {
     internetPortal: "درگاه اینترنتی",
