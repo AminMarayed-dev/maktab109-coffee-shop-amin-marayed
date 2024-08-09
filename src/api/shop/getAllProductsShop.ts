@@ -12,7 +12,7 @@ export async function getAllProductsShop({
       `/products?sort=${sort}&page=1&limit=${limit}
      `
     );
-    return response.data.data.products;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

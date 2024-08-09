@@ -5,13 +5,14 @@ export type Props = {
   limit: number | string;
   category?: string;
   time?: string;
-  deliveryStatus: boolean;
+  deliveryStatus?: boolean;
+  sort?: string;
 };
 
-export async function getAllProducts({ page, limit }: Props) {
+export async function getAllProducts({ page, limit, sort }: Props) {
   try {
     const response = await api.get(
-      `/products?sort=-createdAt&page=${page}&limit=${limit}`
+      `/products?sort=${sort}&page=${page}&limit=${limit}`
     );
     return {
       products: response.data.data.products,
