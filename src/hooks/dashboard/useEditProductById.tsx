@@ -7,7 +7,7 @@ const useEditProduct = () => {
     mutationFn: ({ id, productData }) => editProductById({ id, productData }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["products-dashboard", "products-shop"],
+        queryKey: ["products-dashboard"],
       });
     },
   });
