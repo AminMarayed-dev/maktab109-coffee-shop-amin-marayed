@@ -38,7 +38,7 @@ export const useCartStore = create(
 
       addToCart: (product: Product) => {
         const { cart, productCounts } = get();
-        const count = productCounts[product._id] || 1;
+        const count = productCounts[product?._id] || 1;
         const cartItem = cart.find((item) => item._id === product._id);
 
         if (cartItem) {
@@ -54,7 +54,7 @@ export const useCartStore = create(
             totalPrice: state.totalPrice + product.price * count,
             productCounts: {
               ...state.productCounts,
-              [product._id]: state.productCounts[product._id] || 0,
+              [product._id]: state.productCounts[product?._id] || 0 + count,
             },
           }));
         } else {
@@ -75,7 +75,10 @@ export const useCartStore = create(
       removeCart: (productID: string) => {
         const { cart, productCounts } = get();
         const itemToRemove = cart.find((item) => item._id === productID);
-        const updatedCart = cart.filter((item) => item._id !== productID);
+        console.log(itemToRemove);
+        const updatedCart = cart.filter(
+          (item) => item._id !== itemToRemove?._id
+        );
 
         set((state) => ({
           cart: updatedCart,
