@@ -1,5 +1,4 @@
 import { localization } from "@/constant/localization";
-import useNavigateToPaymentOrLogin from "@/hooks/shared/useNavigateToPaymentOrLogin";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import { useCartStore } from "@/zustand/cart/store";
 import {
@@ -65,9 +64,12 @@ function FactorCart() {
           spacing={2}
           padding={2}
         >
-          <Typography variant="h6">{cart.totalPrice}</Typography>
+          <Typography variant="h6">
+            {toPersianNumbersWithComma(cart.totalPrice)}
+          </Typography>
           <Typography variant="h5">
-            {totalPrice + costTransportation} {common.rial}
+            {toPersianNumbersWithComma(totalPrice + costTransportation)}{" "}
+            {common.rial}
           </Typography>
         </Stack>
       </CardContent>

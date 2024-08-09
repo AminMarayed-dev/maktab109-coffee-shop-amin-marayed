@@ -106,7 +106,18 @@ function RegisterComponent() {
           </Alert>
         </Snackbar>
 
-        <Button onClick={() => router.push(routes.login)}>{auth.login}</Button>
+        <Button
+          onClick={() => router.push(routes.login)}
+          sx={{
+            bgcolor: "primary.main",
+            "&:hover": {
+              bgcolor: "primary.main",
+              color: "secondary.main",
+            },
+          }}
+        >
+          {auth.login}
+        </Button>
       </Box>
     </Container>
   );

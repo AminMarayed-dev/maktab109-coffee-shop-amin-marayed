@@ -41,6 +41,7 @@ function TableInventory() {
   const { data, isLoading, isError } = useGetAllProductsToDashboard({
     page: page + 1,
     limit: 5,
+    sort: "-createdAt",
   });
   const { mutate: editProductApi, isPending } = useEditProduct();
 

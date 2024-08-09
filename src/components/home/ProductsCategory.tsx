@@ -14,17 +14,24 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import TextDivider from "./TextDivider";
+import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 
 const { common, home } = localization;
 const { styleButtonLink } = cssClass;
 function ProductsCategory({ title, data }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const router = useRouter();
+  const { data: sampleData } = useGetAllProductsToShop({
+    limit: 12,
+    sort: "createdAt",
+    initialData: data.dehydratedState,
+  });
+  const sampleProductsShop = sampleData?.data?.products;
   return (
     <Stack mt={5} mb={3} rowGap={4} justifyContent="center" alignItems="center">
       <TextDivider text={title} />
       <Grid container lg={12} xs={12} spacing={2}>
-        {data.queries[0].state.data.map((product, index) => (
+        {sampleProductsShop?.map((product, index) => (
           <Grid item lg={4} xs={6} key={index}>
             <Button
               sx={styleButtonLink}

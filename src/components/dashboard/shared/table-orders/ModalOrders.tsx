@@ -7,51 +7,49 @@ import { toLocalDateStringShort } from "@/utils/formatDatePersian";
 import useDashboardStore from "@/zustand/dashboard/store";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
+  Alert,
   Backdrop,
   Box,
   Button,
   Fade,
   IconButton,
   Modal,
+  Snackbar,
   Stack,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import TableModalOrdres from "./TableModalOrdres";
-
-const orders = [
-  {
-    name: "fsdfsd",
-    count: "2",
-    price: "2222",
-  },
-  {
-    name: "dfsdfs",
-    count: "2",
-    price: "222222",
-  },
-  {
-    name: "dfsdf",
-    count: "2",
-    price: "22222",
-  },
-];
 
 const { styleModal, center } = cssClass;
 const { dashboard } = localization;
 function ModalOrders() {
+  const [open, setOpen] = useState(false);
+  const [isDelivery, setIsDelivery] = useState(false);
   const orderID = useDashboardStore((state) => state.orderID);
   const { data, isLoading, isError } = useGetOrderById(orderID);
-  console.log(data);
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const openModalOrder = useDashboardStore((state) => state.openModalOrder);
   const handleCloseModal = useDashboardStore((state) => state.handleCloseModal);
   const { mutate: editOrderByID, isPending } = useEditOrderById();
 
   const handleEditOrder = () => {
-    editOrderByID({
-      id: orderID,
-      orderData: { user: data?.user?._id, deliveryStatus: "true" },
-    });
+    editOrderByID(
+      {
+        id: orderID,
+        orderData: { user: data?.user?._id, deliveryStatus: "true" },
+      },
+      {
+        onSuccess: () => {
+          setIsDelivery(true);
+          setOpen(true);
+        },
+        onError: () => {
+          setIsDelivery(false);
+          setOpen(true);
+        },
+      }
+    );
   };
   return (
     <Modal
@@ -97,7 +95,9 @@ function ModalOrders() {
                   {dashboard.mobile}
                   {":"}
                 </Typography>
-                <Typography variant="body2">{data?.user.phoneNumber}</Typography>
+                <Typography variant="body2">
+                  {data?.user.phoneNumber}
+                </Typography>
               </Stack>
               <Stack direction="row" columnGap={2} alignItems="center">
                 <Typography variant="body1">
@@ -114,7 +114,7 @@ function ModalOrders() {
                   {":"}
                 </Typography>
                 <Typography variant="body2">
-                  {toLocalDateStringShort(data? .createdAt)}
+                  {toLocalDateStringShort(data?.createdAt)}
                 </Typography>
               </Stack>
             </Box>
@@ -132,6 +132,22 @@ function ModalOrders() {
                 {dashboard.delivary}
               </Button>
             )}
+            <Snackbar
+              open={open}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              autoHideDuration={3000}
+              onClose={() => setOpen(false)}
+            >
+              <Alert
+                severity={isDelivery ? "success" : "error"}
+                variant="filled"
+                sx={{ width: "100%" }}
+              >
+                {isDelivery
+                  ? dashboard.messageSuccessDelivery
+                  : dashboard.messageFailDelivery}
+              </Alert>
+            </Snackbar>
           </Stack>
         </Box>
       </Fade>

@@ -1,10 +1,10 @@
-import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useEditProduct from "@/hooks/dashboard/useEditProductById";
 import useAddOrders from "@/hooks/result-payment/useAddOrders";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { useStorage } from "@/hooks/shared/useStorage";
 import { useCartStore } from "@/zustand/cart/store";
+import usePaymentStore from "@/zustand/payment/store";
 import { Container, Divider, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,7 +12,6 @@ import CartResultPayment from "./CartResultPayment";
 import UserCartResultPayment from "./UserCartResultPayment";
 
 const { resultPayment } = localization;
-const { styleButtonResultPayment, styleCardResultPayment } = cssClass;
 
 function ResultPayment() {
   const [timeLeft, setTimeLeft] = useState(300);
@@ -22,6 +21,8 @@ function ResultPayment() {
   const [, , removeCartBasket] = useStorage("cart-storage", null);
   const [user] = useStorage("user", null);
   const carts = useCartStore((state) => state.cart);
+  const { valueDatePicker } = usePaymentStore();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -54,6 +55,7 @@ function ResultPayment() {
       {
         user: user._id,
         products: productsOrders,
+        deliveryDate: valueDatePicker,
       },
       {
         onSuccess: () => {
@@ -84,7 +86,7 @@ function ResultPayment() {
           justifyContent: mdDown ? "center" : "space-evenly",
           alignItems: mdDown ? "center" : "flex-start",
           rowGap: 3,
-          bgcolor: "secondary.light",
+          bgcolor: "primary.dark",
           padding: 2,
           borderRadius: "8px",
         }}

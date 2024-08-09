@@ -2,7 +2,10 @@ import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
-import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
+import {
+  toPersianNumbers,
+  toPersianNumbersWithComma,
+} from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import useCommonStore from "@/zustand/common/store";
 import {
@@ -26,22 +29,29 @@ import SelectFilter from "../shared/SelectFilter";
 import CheckQuantityAndRate from "./checkQuantityAndRate";
 
 const { shop, common } = localization;
-const { styleCard, styleButtonLink } = cssClass;
+const { styleCard } = cssClass;
 
 function Shop({ props }) {
-  const { data: productsShop } = useGetAllProductsToShop({
+  const router = useRouter();
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  const openDrawerFilter = useCommonStore((state) => state.openDrawerFilter);
+  const { data } = useGetAllProductsToShop({
     limit: props.limit || 15,
     sort: props?.sort || "-createdAt",
     initialData: props.dehydratedState,
   });
-  const router = useRouter();
+
   const handleLimitProduct = () => {
     const currentLimit = router.query.limit ? parseInt(router.query.limit) : 15;
     const newLimit = currentLimit + 15;
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, limit: newLimit },
-    });
+    router.replace(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, limit: newLimit },
+      },
+      undefined,
+      { scroll: false }
+    );
   };
   const handleSelectFilterProduct = (filter) => {
     router.push({
@@ -50,11 +60,11 @@ function Shop({ props }) {
     });
   };
 
-  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
-  const openDrawerFilter = useCommonStore((state) => state.openDrawerFilter);
   const handleCloseDrawerFilter = useCommonStore(
     (state) => state.handleCloseDrawerFilter
   );
+
+  const productsShop = data?.data?.products;
 
   return (
     <Container>
@@ -70,7 +80,9 @@ function Shop({ props }) {
         }}
       >
         <Typography variant="body2">{shop.shopInternet}</Typography>
-        <Typography variant="body1">نمایش 1–48 از 2584 نتیجه</Typography>
+        <Typography variant="body1">{`نمایش ${toPersianNumbers(
+          1
+        )}-${toPersianNumbers(productsShop?.length)}`}</Typography>
       </Box>
       <Divider />
       <Box
@@ -166,7 +178,12 @@ function Shop({ props }) {
             </Grid>
           ))}
         </Grid>
-        <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button>
+        {data?.total <= props.limit ||
+          (15 && (
+            <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button>
+          ))}
+
+        {/* <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button> */}
       </Stack>
     </Container>
   );

@@ -23,7 +23,7 @@ function Cart() {
         columnGap: 3,
         flexDirection: mdDown ? "column" : "row",
         rowGap: mdDown ? 3 : 0,
-        minHeight: "50vh", // Full height of the viewport
+        minHeight: "50vh",
         justifyContent: carts.length === 0 ? "center" : "flex-start",
         alignItems: carts.length === 0 ? "center" : "flex-start",
       }}

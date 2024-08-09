@@ -26,19 +26,26 @@ import SocialMedia from "./SocialMedia";
 const { common, singleProduct, shop, cart } = localization;
 function SingleProductDetail({ product }: { product: any }) {
   const [open, setOpen] = useState(false);
-  const carts = useCartStore((state) => state.cart);
+  const productsCount = useCartStore((state) => state.productCounts);
 
   const addToCart = useCartStore((state) => state.addToCart);
   const handleOpenDialog = useShopStore((state) => state.handleOpenDialog);
+  const carts = useCartStore((state) => state.cart);
+  const [total, setTotal] = useState([productsCount[product?._id] || 1]);
 
   const handleAddToCart = () => {
-    const cart = carts.find((cart) => cart._id === product?._id);
-    if (cart && cart.count >= product?.quantity) setOpen(true);
-    else {
+    const cartItem = carts.find((item) => item._id === product._id);
+    if (
+      (cartItem?.count || 0) + (productsCount[product?._id] || 1) <=
+      product?.quantity
+    ) {
       addToCart(product);
       handleOpenDialog();
+    } else {
+      setOpen(true);
     }
   };
+
   return (
     <Stack rowGap={2} flexGrow={1.5}>
       <Box

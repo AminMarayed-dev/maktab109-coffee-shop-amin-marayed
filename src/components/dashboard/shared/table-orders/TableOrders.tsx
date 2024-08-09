@@ -30,6 +30,7 @@ const { dashboard, common } = localization;
 function TableOrders() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isSort, setIsSort] = useState(false);
   const setOrderID = useDashboardStore((state) => state.setOrderID);
   const deliveryStatus = useDashboardStore((state) => state.delivaryStatus);
@@ -42,9 +43,13 @@ function TableOrders() {
   const handleSortByTime = () => {
     setIsSort((prev) => !prev);
   };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   const { data, isLoading, isError } = useGetAllOrdersToDashboard({
     page: page + 1,
-    limit: "all",
+    limit: rowsPerPage,
     time: isSort ? "createdAt" : "-createdAt",
     deliveryStatus,
   });
@@ -98,7 +103,7 @@ function TableOrders() {
               </TableHead>
               <TableBody>
                 {data?.orders?.map((item, index) => {
-                  const { user, products, totalPrice, deliveryDate } = item;
+                  const { user, products, totalPrice, createdAt } = item;
                   return (
                     <TableRow key={index}>
                       <TableCell>
@@ -108,7 +113,7 @@ function TableOrders() {
                         {toPersianNumbersWithComma(totalPrice)} {common.rial}
                       </TableCell>
                       <TableCell align="center">
-                        {toLocalDateStringShort(deliveryDate)}
+                        {toLocalDateStringShort(createdAt)}
                       </TableCell>
                       <TableCell
                         align="center"
@@ -134,7 +139,7 @@ function TableOrders() {
               rowsPerPageOptions={[]}
               component="div"
               count={data?.totalOrders || 0}
-              rowsPerPage={5}
+              rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
               sx={{ ...center }}

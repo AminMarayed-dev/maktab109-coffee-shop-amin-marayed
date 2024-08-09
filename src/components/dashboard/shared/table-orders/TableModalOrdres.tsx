@@ -1,10 +1,8 @@
 import { localization } from "@/constant/localization";
-import useGetOrderById from "@/hooks/dashboard/useGetOrderById";
 import {
   toPersianNumbers,
   toPersianNumbersWithComma,
 } from "@/utils/toPersianNumbers";
-import useDashboardStore from "@/zustand/dashboard/store";
 import {
   Paper,
   Table,
@@ -34,12 +32,12 @@ function TableModalOrdres({ data }: { data: any }) {
         <TableBody>
           {data?.products?.map((item, index) => (
             <TableRow key={index}>
-              <TableCell>{item.product.name}</TableCell>
+              <TableCell>{item?.product?.name}</TableCell>
               <TableCell align="center">
-                {toPersianNumbersWithComma(item.product.price)} {common.rial}
+                {toPersianNumbersWithComma(item?.product?.price)} {common.rial}
               </TableCell>
               <TableCell align="center">
-                {toPersianNumbers(item.count)}
+                {toPersianNumbers(item?.count)}
               </TableCell>
             </TableRow>
           ))}

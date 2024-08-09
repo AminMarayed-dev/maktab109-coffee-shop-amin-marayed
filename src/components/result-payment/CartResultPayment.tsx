@@ -1,4 +1,4 @@
-import resultPaymantLogo from "@/assets/images/result-payment-img.jpg";
+import resultPaymantLogo from "@/assets/images/cheque_7377382.png";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
@@ -31,11 +31,11 @@ function CartResultPayment({
       }}
       elevation={0}
     >
-      <CardMedia>
+      <CardMedia sx={{ mt: 4 }}>
         <Image
           src={resultPaymantLogo}
-          width={mdDown ? 300 : 500}
-          height={mdDown ? 200 : 300}
+          width={mdDown ? 150 : 200}
+          height={mdDown ? 100 : 200}
           alt="result"
         />
       </CardMedia>

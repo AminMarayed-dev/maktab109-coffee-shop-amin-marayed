@@ -16,14 +16,20 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import Image from "next/image";
+import { useState } from "react";
 import CountBox from "../shared/CountBox";
 import DialogDeleteCart from "./DialogDeleteCart";
 
 const { cart, common, dashboard } = localization;
 
 function TableCart() {
+  const [cartID, setCartID] = useState("");
   const carts = useCartStore((state) => state.cart);
   const handleOpenDialog = useCartStore((state) => state.handleOpenDialog);
+  const handleDeleteIcon = (id) => {
+    setCartID(id);
+    handleOpenDialog();
+  };
   return (
     <TableContainer>
       <Table>
@@ -75,12 +81,15 @@ function TableCart() {
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <IconButton onClick={handleOpenDialog}>
+                  <IconButton
+                    onClick={(e) => handleDeleteIcon(item._id)}
+                    id={item._id}
+                  >
                     <DeleteIcon sx={{ fill: red[600] }} />
                   </IconButton>
                 </TableCell>
               </TableRow>
-              <DialogDeleteCart cartID={item._id} />
+              <DialogDeleteCart cartID={cartID} />
             </>
           ))}
         </TableBody>

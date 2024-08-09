@@ -2,12 +2,15 @@ import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { useGetAllProductsToDashboard } from "@/hooks/dashboard/useGetAllProducts";
 import truncateText from "@/utils/trancateText";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
   IconButton,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -32,6 +35,7 @@ const { center, styleModal } = cssClass;
 function TableProducts() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [page, setPage] = useState(0);
+  const [isSort, setIsSort] = useState(false);
   const handleOpenModalAdd = useDashboardStore(
     (state) => state.handleOpenModalAdd
   );
@@ -60,9 +64,14 @@ function TableProducts() {
     handleOpenModalEdit();
   };
 
+  const handleSortByCategory = () => {
+    setIsSort((prev) => !prev);
+  };
+
   const { data, isLoading, isError } = useGetAllProductsToDashboard({
     page: page + 1,
     limit: 5,
+    sort: isSort ? "-category" : "category",
   });
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -94,7 +103,25 @@ function TableProducts() {
             <TableRow>
               <TableCell align="center">{dashboard.picture}</TableCell>
               <TableCell align="center">{dashboard.nameProduct}</TableCell>
-              <TableCell align="center">{dashboard.category}</TableCell>
+              <TableCell
+                align="center"
+                sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
+                onClick={handleSortByCategory}
+              >
+                <Stack direction="row" justifyContent="center">
+                  {isSort ? (
+                    <>
+                      {dashboard.category}
+                      <ArrowDropUpIcon />
+                    </>
+                  ) : (
+                    <>
+                      {dashboard.category}
+                      <ArrowDropDownIcon />
+                    </>
+                  )}
+                </Stack>
+              </TableCell>
               <TableCell align="center">{dashboard.subCategory}</TableCell>
               <TableCell align={`${mdDown ? "left" : "center"}`}>
                 {dashboard.actions}

@@ -7,6 +7,7 @@ import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
 import useLogin from "@/hooks/auth/login/useLogin";
 import useResponsive from "@/hooks/shared/useResponsive";
+import { useStorage } from "@/hooks/shared/useStorage";
 import { IUserDataLogin } from "@/types/auth/login/login.type";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,7 +26,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginValidationSchema } from "../validation/auth.valiation";
-import { useStorage } from "@/hooks/shared/useStorage";
 
 const { auth } = localization;
 const { styleContainerAuth } = cssClass;
@@ -112,7 +112,16 @@ function LoginComponent() {
             {isLoginSuccess ? auth.loginSuccess : auth.loginFail}
           </Alert>
         </Snackbar>
-        <Button onClick={() => router.push(routes.register)} color="secondary">
+        <Button
+          onClick={() => router.push(routes.register)}
+          sx={{
+            bgcolor: "primary.main",
+            "&:hover": {
+              bgcolor: "primary.main",
+              color: "secondary.main",
+            },
+          }}
+        >
           {auth.submit}
         </Button>
       </Box>
