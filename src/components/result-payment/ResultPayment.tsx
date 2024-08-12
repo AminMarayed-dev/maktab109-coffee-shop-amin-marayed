@@ -1,3 +1,5 @@
+import CartResultPayment from "@/components/result-payment/CartResultPayment";
+import UserCartResultPayment from "@/components/result-payment/UserCartResultPayment";
 import { localization } from "@/constant/localization";
 import useEditProduct from "@/hooks/dashboard/useEditProductById";
 import useAddOrders from "@/hooks/result-payment/useAddOrders";
@@ -8,8 +10,6 @@ import usePaymentStore from "@/zustand/payment/store";
 import { Container, Divider, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import CartResultPayment from "./CartResultPayment";
-import UserCartResultPayment from "./UserCartResultPayment";
 
 const { resultPayment } = localization;
 
@@ -53,7 +53,7 @@ function ResultPayment() {
     }));
     addOrders(
       {
-        user: user._id,
+        user: user?._id,
         products: productsOrders,
         deliveryDate: valueDatePicker,
       },

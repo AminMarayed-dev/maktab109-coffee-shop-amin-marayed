@@ -1,8 +1,10 @@
+import ButtonActionTable from "@/components/dashboard/shared/ButtonActionTable";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useEditProduct from "@/hooks/dashboard/useEditProductById";
 import { useGetAllProductsToDashboard } from "@/hooks/dashboard/useGetAllProducts";
 import useResponsive from "@/hooks/shared/useResponsive";
+import { ProductData } from "@/types/dashboard/type";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
@@ -19,8 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import { green } from "@mui/material/colors";
-import { useState } from "react";
-import ButtonActionTable from "../ButtonActionTable";
+import { MouseEvent, useState } from "react";
 
 const { center } = cssClass;
 const { dashboard, common } = localization;
@@ -45,7 +46,7 @@ function TableInventory() {
   });
   const { mutate: editProductApi, isPending } = useEditProduct();
 
-  const handleShowInput = (event, item) => {
+  const handleShowInput = (event: unknown, item: ProductData) => {
     setShowInput(true);
     setRowData(item);
     setButtonBgColor(green[500]);
@@ -108,7 +109,7 @@ function TableInventory() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.products?.map((item, index) => (
+            {data?.products?.map((item: ProductData, index: number) => (
               <TableRow key={index}>
                 <TableCell align={`${mdDown ? "center" : "left"}`}>
                   {mdDown ? truncateText(item.name, 22) : item.name}

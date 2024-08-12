@@ -1,5 +1,4 @@
 import { localization } from "@/constant/localization";
-import useResponsive from "@/hooks/shared/useResponsive";
 import {
   FormControl,
   FormControlLabel,

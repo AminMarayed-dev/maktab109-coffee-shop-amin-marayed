@@ -27,7 +27,7 @@ const LinkCategory = () => {
     OnlyDesktop && (
       <Container>
         <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-          {slicedMenuItems.map((menuItem, index) => (
+          {slicedMenuItems.map((menuItem: any, index) => (
             <TooltipStyled
               key={index}
               title={

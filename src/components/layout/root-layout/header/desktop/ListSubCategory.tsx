@@ -1,7 +1,12 @@
 import { List, ListItem, ListItemButton } from "@mui/material";
 import { useRouter } from "next/router";
 
-function ListSubCategory({ subCategoryItems, slugCategory }) {
+export type Props = {
+  slugCategory: string;
+  subCategoryItems: [{ slug: string; text: string }];
+};
+
+function ListSubCategory({ subCategoryItems, slugCategory }: Props) {
   const router = useRouter();
   return (
     <List sx={{ fontSize: "1rem" }}>

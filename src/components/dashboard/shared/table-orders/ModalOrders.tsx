@@ -1,3 +1,4 @@
+import TableModalOrdres from "@/components/dashboard/shared/table-orders/TableModalOrdres";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useEditOrderById from "@/hooks/dashboard/useEditOrderById";
@@ -19,7 +20,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import TableModalOrdres from "./TableModalOrdres";
 
 const { styleModal, center } = cssClass;
 const { dashboard } = localization;

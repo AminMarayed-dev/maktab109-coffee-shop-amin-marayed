@@ -5,7 +5,6 @@ import { Box, Container, IconButton } from "@mui/material";
 import Image from "next/image";
 
 function Header() {
-  // const router = useRouter();
   const logout = useLogout();
   return (
     <Container

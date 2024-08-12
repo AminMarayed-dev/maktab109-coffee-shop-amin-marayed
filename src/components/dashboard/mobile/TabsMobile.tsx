@@ -1,11 +1,14 @@
+import {
+  a11yProps,
+  CustomTabPanel,
+} from "@/components/dashboard/mobile/CustomTabPanel";
+import TableInventory from "@/components/dashboard/shared/table-inventory/TableInventory";
+import TableOrders from "@/components/dashboard/shared/table-orders/TableOrders";
+import TableProducts from "@/components/dashboard/shared/table-products/TableProducts";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useDashboardStore from "@/zustand/dashboard/store";
 import { Stack, Tab, Tabs, Typography } from "@mui/material";
-import TableInventory from "../shared/table-inventory/TableInventory";
-import TableOrders from "../shared/table-orders/TableOrders";
-import TableProducts from "../shared/table-products/TableProducts";
-import { a11yProps, CustomTabPanel } from "./CustomTabPanel";
 
 const tabPanelData = [
   {

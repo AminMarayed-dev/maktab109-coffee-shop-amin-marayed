@@ -1,3 +1,4 @@
+import CheckQuantityAndRate from "@/components/shop/checkQuantityAndRate";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useGetProductsByCategoryID from "@/hooks/product-category/useGetProductsByCategoryID";
@@ -19,7 +20,6 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
 
 const { singleProduct, shop, common } = localization;
 const { styleCard, styleButtonLink } = cssClass;
@@ -60,7 +60,7 @@ function ProductsRelated({ product }: { product: any }) {
           {productsRelatedCategory
             ? productsRelatedCategory
                 .slice(currentIndex, currentIndex + numberSliceProducts)
-                .map((product, index) => (
+                .map((product: any, index: number) => (
                   <Grid key={index} item lg={3} xs={6}>
                     <Button
                       sx={styleButtonLink}

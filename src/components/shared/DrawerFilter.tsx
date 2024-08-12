@@ -1,3 +1,4 @@
+import ButtonLoading from "@/components/shared/ButtonLoading";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import useCommonStore from "@/zustand/common/store";
@@ -12,7 +13,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import ButtonLoading from "./ButtonLoading";
 
 const {
   common,

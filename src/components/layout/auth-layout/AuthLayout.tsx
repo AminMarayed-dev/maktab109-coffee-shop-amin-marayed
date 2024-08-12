@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
 import { PropsWithChildren } from "react";
-import backgroundAuth from "../../../../public/background-auth.jpg";
 
 function AuthLayout({ children }: PropsWithChildren) {
   return (

@@ -1,6 +1,8 @@
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
+import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
+import { ProductData } from "@/types/dashboard/type";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
@@ -14,11 +16,10 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import TextDivider from "./TextDivider";
-import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
 
 const { common, home } = localization;
 const { styleButtonLink } = cssClass;
-function ProductsCategory({ title, data }) {
+function ProductsCategory({ title, data }: { title: string; data: any }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const router = useRouter();
   const { data: sampleData } = useGetAllProductsToShop({
@@ -31,7 +32,7 @@ function ProductsCategory({ title, data }) {
     <Stack mt={5} mb={3} rowGap={4} justifyContent="center" alignItems="center">
       <TextDivider text={title} />
       <Grid container lg={12} xs={12} spacing={2}>
-        {sampleProductsShop?.map((product, index) => (
+        {sampleProductsShop?.map((product: ProductData, index: number) => (
           <Grid item lg={4} xs={6} key={index}>
             <Button
               sx={styleButtonLink}

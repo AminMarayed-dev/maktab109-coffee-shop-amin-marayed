@@ -8,6 +8,7 @@ import useRegister from "@/hooks/auth/register/useRegister";
 import { IUserDataRegister } from "@/types/auth/register/register.type";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { Token } from "@/types/auth/login/login.type";
 import {
   Alert,
   Box,
@@ -17,6 +18,7 @@ import {
   Snackbar,
   TextField,
 } from "@mui/material";
+import { AxiosResponse } from "axios";
 import { setCookie } from "cookies-next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -46,7 +48,9 @@ function RegisterComponent() {
       const {
         status,
         data: { token },
-      } = await mutateAsync(userData);
+      } = (await mutateAsync(userData)) as AxiosResponse<{
+        token: Token;
+      }>;
 
       if (status === 201) {
         setIsRegisterSucces(true);

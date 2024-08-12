@@ -4,6 +4,7 @@ import useGetCategoryBySlug from "@/hooks/product-category/useGetCategoryBySlug"
 import useGetProductsBySubCategoryID from "@/hooks/product-category/useGetProductsBySubID";
 import useGetSubCategoryBySlug from "@/hooks/product-category/useGetSubCategoryByslug";
 import useResponsive from "@/hooks/shared/useResponsive";
+import { ProductData } from "@/types/dashboard/type";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
@@ -59,7 +60,7 @@ function ProductsSubCategory({ slug }: { slug: any }) {
       <Divider />
       <Stack justifyContent="center" alignItems="center">
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {productsBySubCategory?.map((product, index) => (
+          {productsBySubCategory?.map((product: ProductData, index: number) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{

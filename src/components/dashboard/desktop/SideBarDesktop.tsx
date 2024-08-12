@@ -1,3 +1,7 @@
+import { sideBarItems } from "@/components/dashboard/desktop/utils/SideBarItems";
+import TableInventory from "@/components/dashboard/shared/table-inventory/TableInventory";
+import TableOrders from "@/components/dashboard/shared/table-orders/TableOrders";
+import TableProducts from "@/components/dashboard/shared/table-products/TableProducts";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { routes } from "@/constant/routes";
@@ -15,11 +19,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
-import TableInventory from "../shared/table-inventory/TableInventory";
-import TableOrders from "../shared/table-orders/TableOrders";
-import TableProducts from "../shared/table-products/TableProducts";
-import { sideBarItems } from "./utils/SideBarItems";
+import { useRouter } from "next/router";
 const {
   dashboard,
   home: { menuList },

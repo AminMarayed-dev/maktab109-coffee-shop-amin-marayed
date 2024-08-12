@@ -6,9 +6,8 @@ import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
 import useLogin from "@/hooks/auth/login/useLogin";
-import useResponsive from "@/hooks/shared/useResponsive";
 import { useStorage } from "@/hooks/shared/useStorage";
-import { IUserDataLogin } from "@/types/auth/login/login.type";
+import { Token, User, userDataLogin } from "@/types/auth/login/login.type";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -20,6 +19,7 @@ import {
   Snackbar,
   TextField,
 } from "@mui/material";
+import { AxiosResponse } from "axios";
 import { getCookie, setCookie } from "cookies-next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -33,9 +33,8 @@ const { styleContainerAuth } = cssClass;
 function LoginComponent() {
   const [open, setOpen] = useState(false);
   const [isLoginSuccess, setIsLoginSuccess] = useState(false);
-  const [user, setUser] = useStorage("user", null);
+  const [user, setUser] = useStorage<User | null>("user", null);
   const handleCloseDrawer = useHeaderStore((state) => state.handleCloseDrawer);
-  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const {
     register,
     handleSubmit,
@@ -43,7 +42,7 @@ function LoginComponent() {
   } = useForm({ resolver: yupResolver(loginValidationSchema) });
   const { mutateAsync, isPending } = useLogin();
 
-  const handleLogin = async (userData) => {
+  const handleLogin = async (userData: userDataLogin) => {
     try {
       const {
         status,
@@ -51,8 +50,12 @@ function LoginComponent() {
         data: {
           data: { user },
         },
-      } = await mutateAsync(userData);
+      } = (await mutateAsync(userData)) as AxiosResponse<{
+        token: Token;
+        data: { user: User };
+      }>;
       if (status === 200) {
+        console.log(token, user);
         setIsLoginSuccess(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
@@ -84,17 +87,17 @@ function LoginComponent() {
           <TextField
             key={index}
             fullWidth
-            error={!!errors[item.name as keyof IUserDataLogin]}
+            error={!!errors[item.name as keyof userDataLogin]}
             placeholder={item.placeholder}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">{item.icon}</InputAdornment>
               ),
             }}
-            {...register(item.name as keyof IUserDataLogin)}
+            {...register(item.name as keyof userDataLogin)}
             type={item.type}
             sx={{ mb: 2 }}
-            helperText={errors[item.name as keyof IUserDataLogin]?.message}
+            helperText={errors[item.name as keyof userDataLogin]?.message}
           />
         ))}
         <ButtonAuth loading={isPending} text={auth.login} />

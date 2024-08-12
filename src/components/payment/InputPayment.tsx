@@ -5,7 +5,6 @@ interface InputPaymentProps {
   value?: string | number;
   disabled?: boolean;
   placeholder?: string;
-  // Add other props you might be spreading
 }
 
 function InputPayment({

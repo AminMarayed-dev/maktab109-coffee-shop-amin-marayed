@@ -1,3 +1,5 @@
+import DrawerFilter from "@/components/shared/DrawerFilter";
+import SelectFilter from "@/components/shared/SelectFilter";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
@@ -24,14 +26,12 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import ButtonDrawerFilter from "../shared/ButtonDrawerFilter";
-import DrawerFilter from "../shared/DrawerFilter";
-import SelectFilter from "../shared/SelectFilter";
 import CheckQuantityAndRate from "./checkQuantityAndRate";
 
 const { shop, common } = localization;
 const { styleCard } = cssClass;
 
-function Shop({ props }) {
+function Shop({ props }: { props: any }) {
   const router = useRouter();
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const openDrawerFilter = useCommonStore((state) => state.openDrawerFilter);
@@ -53,7 +53,7 @@ function Shop({ props }) {
       { scroll: false }
     );
   };
-  const handleSelectFilterProduct = (filter) => {
+  const handleSelectFilterProduct = (filter: string) => {
     router.push({
       pathname: router.pathname,
       query: { ...router.query, sort: filter },
@@ -106,7 +106,7 @@ function Shop({ props }) {
 
       <Stack justifyContent="center" alignItems="center" rowGap={2}>
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {productsShop?.map((product, index) => (
+          {productsShop?.map((product: any, index: number) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
@@ -182,8 +182,6 @@ function Shop({ props }) {
           (15 && (
             <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button>
           ))}
-
-        {/* <Button onClick={handleLimitProduct}>{shop.moreProducts}</Button> */}
       </Stack>
     </Container>
   );

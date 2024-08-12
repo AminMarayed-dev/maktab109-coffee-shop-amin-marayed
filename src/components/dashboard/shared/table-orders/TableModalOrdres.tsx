@@ -1,4 +1,5 @@
 import { localization } from "@/constant/localization";
+import { Data } from "@/types/dashboard/type";
 import {
   toPersianNumbers,
   toPersianNumbersWithComma,
@@ -14,7 +15,7 @@ import {
 } from "@mui/material";
 
 const { common, dashboard, cart } = localization;
-function TableModalOrdres({ data }: { data: any }) {
+function TableModalOrdres({ data }: { data: Data }) {
   return (
     <TableContainer
       component={Paper}
@@ -30,7 +31,7 @@ function TableModalOrdres({ data }: { data: any }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.products?.map((item, index) => (
+          {data?.products?.map((item, index: number) => (
             <TableRow key={index}>
               <TableCell>{item?.product?.name}</TableCell>
               <TableCell align="center">

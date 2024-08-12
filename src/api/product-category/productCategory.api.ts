@@ -1,4 +1,4 @@
-import { api } from "../config/config";
+import { api } from "@/api/config/config";
 
 export async function getCategoryBySlug(categorySlug: string | undefined) {
   try {
@@ -33,7 +33,13 @@ export async function getProductsByCategory(categoryID: string) {
   }
 }
 
-export async function getProductsBySubCategory({ categoryID, subCategoryID }) {
+export async function getProductsBySubCategory({
+  categoryID,
+  subCategoryID,
+}: {
+  categoryID: string;
+  subCategoryID: string;
+}) {
   try {
     const response = await api.get(
       `/products?sort=createdAt&limit=all&category=${categoryID}&subcategory=${subCategoryID}`

@@ -4,6 +4,8 @@ import useResponsive from "@/hooks/shared/useResponsive";
 import { toLocalDateStringShort } from "@/utils/formatDatePersian";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 
+import ModalOrders from "@/components/dashboard/shared/table-orders/ModalOrders";
+import RadioGroupOrders from "@/components/dashboard/shared/table-orders/RadioGroupOrders";
 import { cssClass } from "@/constant/cssClass";
 import useDashboardStore from "@/zustand/dashboard/store";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -21,11 +23,15 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import ModalOrders from "./ModalOrders";
-import RadioGroupOrders from "./RadioGroupOrders";
 
 const { center } = cssClass;
 const { dashboard, common } = localization;
+type Item = {
+  user: { firstname: string; lastname: string };
+  totalPrice: number;
+  createdAt: string;
+  _id: string;
+};
 
 function TableOrders() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
@@ -43,10 +49,7 @@ function TableOrders() {
   const handleSortByTime = () => {
     setIsSort((prev) => !prev);
   };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+
   const { data, isLoading, isError } = useGetAllOrdersToDashboard({
     page: page + 1,
     limit: rowsPerPage,
@@ -102,8 +105,8 @@ function TableOrders() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data?.orders?.map((item, index) => {
-                  const { user, products, totalPrice, createdAt } = item;
+                {data?.orders?.map((item: Item, index: number) => {
+                  const { user, totalPrice, createdAt } = item;
                   return (
                     <TableRow key={index}>
                       <TableCell>

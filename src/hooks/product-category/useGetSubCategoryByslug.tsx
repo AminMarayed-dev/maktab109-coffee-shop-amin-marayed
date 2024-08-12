@@ -5,7 +5,6 @@ function useGetSubCategoryBySlug(slug: string) {
   return useQuery<any>({
     queryKey: ["subCategoryID-by-slug", slug],
     queryFn: () => getSubCategoryBySlug(slug),
-    // initialData: props.serverData,
   });
 }
 
