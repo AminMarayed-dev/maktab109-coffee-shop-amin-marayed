@@ -113,4 +113,16 @@ export const cssClass = {
     alignItems: "center",
     border: "3px solid #52525b",
   },
+  styleButtonLinkSingleProduct: {
+    backgroundColor: "primary.main",
+    color: "primary.contrastText",
+    borderRadius: 0,
+    "&:hover": {
+      backgroundColor: "primary.main",
+      color: "secondary.light",
+    },
+    padding: 0,
+    fontSize: "0.7rem",
+    minWidth: 0,
+  },
 };
