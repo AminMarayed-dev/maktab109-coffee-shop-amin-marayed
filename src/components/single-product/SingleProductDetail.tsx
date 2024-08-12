@@ -60,16 +60,16 @@ function SingleProductDetail({ product }: { product: any }) {
   };
   const { mutate: editProductByRate } = useEditProduct();
 
-  const handleSetRateValue = (event, newValue) => {
-    setRateValue(newValue);
-    const formData = new FormData();
-    formData.append("rating", JSON.stringify({ rate: 3, count: 0 }));
+  // const handleSetRateValue = (event, newValue) => {
+  //   setRateValue(newValue);
+  //   const formData = new FormData();
+  //   formData.append("rating", JSON.stringify({ rate: 3, count: 0 }));
 
-    editProductByRate({
-      id: product?._id,
-      productsData: formData,
-    });
-  };
+  //   editProductByRate({
+  //     id: product?._id,
+  //     productsData: formData,
+  //   });
+  // };
 
   return (
     <Stack rowGap={2} flexGrow={1.5}>
@@ -110,26 +110,25 @@ function SingleProductDetail({ product }: { product: any }) {
             {product.subcategory.name}
           </Button>
           {">>"}
-          <Typography variant={`${mdDown ? "body2" : "body1"}`}>
+          <Typography variant="body2">
             {mdDown ? truncateText(product.name, 15) : product.name}
           </Typography>
         </Stack>
         <ListItemIcon
           sx={{
             display: "flex",
-            // justifyContent: "space-center",
           }}
         >
-          <IconButton>
+          <IconButton sx={{ padding: 0 }}>
             <KeyboardArrowRightIcon sx={{ cursor: "pointer" }} />
           </IconButton>
 
-          <Tooltip title={"بازگشت به محصولات"}>
-            <IconButton>
+          <Tooltip title={singleProduct.backToShop} sx={{ padding: 0 }}>
+            <IconButton onClick={() => router.push("/shop")}>
               <GridViewIcon sx={{ cursor: "pointer" }} />
             </IconButton>
           </Tooltip>
-          <IconButton>
+          <IconButton sx={{ padding: 0 }}>
             <KeyboardArrowLeftIcon sx={{ cursor: "pointer" }} />
           </IconButton>
         </ListItemIcon>
@@ -137,8 +136,9 @@ function SingleProductDetail({ product }: { product: any }) {
       <Typography variant="h6">{product.name}</Typography>
       <Rating
         name="simple-controlled"
-        value={rateValue}
-        onChange={(event, newValue) => handleSetRateValue(event, newValue)}
+        // value={rateValue}
+        // onChange={(event, newValue) => handleSetRateValue(event, newValue)}
+        readOnly
       />
       <Typography variant="h6" color="secondary.dark">
         {toPersianNumbersWithComma(product.price)} {common.rial}

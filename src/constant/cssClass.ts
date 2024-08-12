@@ -1,3 +1,5 @@
+import { whitespace } from "stylis";
+
 export const cssClass = {
   center: { alignItems: "center", justifyContent: "center", display: "flex" },
   borderInput: {

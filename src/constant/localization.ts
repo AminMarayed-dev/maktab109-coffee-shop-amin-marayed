@@ -196,6 +196,7 @@ export const localization = {
     category: "دسته",
     shared: "اشتراک گذاری",
     productsRelated: "محصولات مرتبط",
+    backToShop: "بازگشت به محصولات",
   },
   payment: {
     factorPayment: "صورت حساب و حمل و نقل",
