@@ -1,8 +1,8 @@
+import ProductsRelated from "@/components/single-product/ProductsRelated";
+import SingleProductDetail from "@/components/single-product/SingleProductDetail";
+import SingleProductImages from "@/components/single-product/SingleProductImages";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { Container, Divider, Stack } from "@mui/material";
-import ProductsRelated from "./ProductsRelated";
-import SingleProductDetail from "./SingleProductDetail";
-import SingleProductImages from "./SingleProductImages";
 
 function SingleProduct({ product }: { product: any }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });

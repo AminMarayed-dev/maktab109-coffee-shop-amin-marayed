@@ -1,6 +1,6 @@
+import { listItemsFooter } from "@/components/layout/root-layout/footer/utils/list.data";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { listItemsFooter } from "./utils/list.data";
 
 function Footer() {
   return (
@@ -20,7 +20,7 @@ function Footer() {
           <Stack rowGap={0.5}>
             {item.hasImage ? (
               <Box>
-                <Image src={item.imageURL} alt={item.title} />
+                <Image src={item.imageURL ?? ""} alt={item.title} />
               </Box>
             ) : (
               item.body?.map((text, i) => (

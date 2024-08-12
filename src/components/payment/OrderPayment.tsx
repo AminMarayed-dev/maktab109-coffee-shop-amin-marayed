@@ -1,5 +1,5 @@
 import { localization } from "@/constant/localization";
-import "@/styles/datepicker.module.css";
+
 import usePaymentStore from "@/zustand/payment/store";
 import {
   Alert,
@@ -36,7 +36,7 @@ function OrderPayment() {
     setIsChecked(checked);
   };
 
-  const handleDateChange = (date) => {
+  const handleDateChange = (date: Date) => {
     setValueDataPicker(new Date(date).toISOString());
   };
   const handleSubmitOrder = () => {

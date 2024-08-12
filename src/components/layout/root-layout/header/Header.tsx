@@ -8,6 +8,7 @@ import { localization } from "@/constant/localization";
 import { routes } from "@/constant/routes";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
+import { useCartStore } from "@/zustand/cart/store";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -27,8 +28,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import MenuUser from "./shared/MenuUser";
-import { useCartStore } from "@/zustand/cart/store";
 
+type anchor = "left" | "right" | "bottom" | "top" | undefined;
 const {
   home: { menuList },
 } = localization;
@@ -41,7 +42,7 @@ function Header() {
   const onlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const openDrawer = useHeaderStore((state) => state.openDrawer);
-  const anchorDrawer = useHeaderStore((state) => state.anchorDrawer);
+  const anchorDrawer: anchor = useHeaderStore((state) => state.anchorDrawer);
   const isPersist = useHeaderStore((state) => state.isPersist);
   const setIsPersist = useHeaderStore((state) => state.setIsPersist);
   const handleDrawerMenu = useHeaderStore((state) => state.handleDrawerMenu);
@@ -113,7 +114,6 @@ function Header() {
               edge="start"
               onClick={() => {
                 if (router.pathname !== "/cart") handleDrawerBasket();
-                // else router.reload();
               }}
             >
               <Badge

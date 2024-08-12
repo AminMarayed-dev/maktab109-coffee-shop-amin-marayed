@@ -1,5 +1,4 @@
 import emptyBasket from "@/assets/images/empty-cart.png";
-import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { useCartStore } from "@/zustand/cart/store";
@@ -7,9 +6,8 @@ import useHeaderStore from "@/zustand/root-layout/header/store";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import FactorCart from "./FactorCart";
-import TableCart from "./TableCart";
-const { center } = cssClass;
+import FactorCart from "@/components/cart/FactorCart";
+import TableCart from "@/components/cart/TableCart";
 const { cart } = localization;
 function Cart() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });

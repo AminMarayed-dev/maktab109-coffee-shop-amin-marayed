@@ -10,9 +10,10 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+import { ChangeEvent } from "react";
 
 const { center } = cssClass;
-const { dashboard, common } = localization;
+const { dashboard } = localization;
 
 function RadioGroupOrders() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
@@ -20,7 +21,7 @@ function RadioGroupOrders() {
     (state) => state.setDelivaryStatus
   );
   const deliveryStatus = useDashboardStore((state) => state.delivaryStatus);
-  const handleDeliveryStatus = (e) => {
+  const handleDeliveryStatus = (e: ChangeEvent<HTMLInputElement>) => {
     setDeliveryStatus(e.target.value);
   };
   return (

@@ -1,6 +1,13 @@
 import { Button, CircularProgress } from "@mui/material";
 
-function ButtonAuth({ loading, text, ...rest }) {
+function ButtonAuth({
+  loading,
+  text,
+  ...rest
+}: {
+  loading: boolean;
+  text: string;
+}) {
   return (
     <>
       {loading ? (

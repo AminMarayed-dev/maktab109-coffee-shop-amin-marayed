@@ -4,7 +4,7 @@ import RootLayout from "@/components/layout/root-layout/RootLayout";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ReactElement } from "react";
 
-export default function HomePage(props) {
+export default function HomePage(props: any) {
   return <Home data={props.dehydratedState} />;
 }
 

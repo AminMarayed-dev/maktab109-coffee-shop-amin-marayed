@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 
 const { cart, common } = localization;
-function DialogDeleteCart({ cartID }: { cartID: any }) {
+function DialogDeleteCart({ cartID }: { cartID: string }) {
   const [open, setOpen] = useState(false);
   const openDialog = useCartStore((state) => state.openDialog);
 

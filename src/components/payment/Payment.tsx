@@ -1,7 +1,7 @@
+import FactorPayment from "@/components/payment/FactorPayment";
+import OrderPayment from "@/components/payment/OrderPayment";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { Container } from "@mui/material";
-import FactorPayment from "./FactorPayment";
-import OrderPayment from "./OrderPayment";
 
 function Payment() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });

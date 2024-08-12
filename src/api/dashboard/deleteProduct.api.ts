@@ -1,4 +1,4 @@
-import { api } from "../config/config";
+import { api } from "@/api/config/config";
 
 export async function deleteProductById(id: string) {
   try {

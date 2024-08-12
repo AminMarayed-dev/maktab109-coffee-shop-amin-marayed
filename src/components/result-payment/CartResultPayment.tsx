@@ -1,4 +1,5 @@
 import resultPaymantLogo from "@/assets/images/cheque_7377382.png";
+import Timer from "@/components/result-payment/Timer";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
@@ -11,7 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import Timer from "./Timer";
+
+type Props = {
+  handleSuccessPayment: () => void;
+  handleFailPayment: () => void;
+  timeLeft: number;
+};
 
 const { styleCardResultPayment, styleButtonResultPayment } = cssClass;
 const { resultPayment } = localization;
@@ -19,7 +25,7 @@ function CartResultPayment({
   handleSuccessPayment,
   handleFailPayment,
   timeLeft,
-}) {
+}: Props) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   return (
     <Card

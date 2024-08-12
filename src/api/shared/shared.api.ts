@@ -1,3 +1,4 @@
+import { OrderData } from "@/types/dashboard/type";
 import { api } from "../config/config";
 
 export type Props = {
@@ -5,7 +6,7 @@ export type Props = {
   limit: number | string;
   category?: string;
   time?: string;
-  deliveryStatus?: boolean;
+  deliveryStatus?: boolean | string;
   sort?: string;
 };
 
@@ -61,7 +62,13 @@ export async function getOrderByID(id: string) {
   }
 }
 
-export async function editOrderByID({ id, orderData }) {
+export async function editOrderByID({
+  id,
+  orderData,
+}: {
+  id: string;
+  orderData: OrderData;
+}) {
   try {
     return await api.patch(`/orders/${id}`, orderData);
   } catch (error) {
@@ -69,13 +76,15 @@ export async function editOrderByID({ id, orderData }) {
   }
 }
 
-async function urlToFile(url, filename, mimeType) {
+async function urlToFile(url: string, filename: string, mimeType: string) {
   const response = await fetch(`http://${url}`);
   const blob = await response.blob();
   return new File([blob], filename, { type: mimeType });
 }
 
-export async function convertImagesToFiles(imageUrls) {
+export async function convertImagesToFiles(
+  imageUrls: string[]
+): Promise<File[]> {
   const files = await Promise.all(
     imageUrls.map((imageUrl, index) => {
       const mimeType = imageUrl.split(".").pop();

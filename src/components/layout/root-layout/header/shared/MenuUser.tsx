@@ -6,17 +6,10 @@ import { IconButton, Menu, MenuItem, Stack } from "@mui/material";
 const menuItems = ["پیشخوان", "سفارش ها", "خروج"];
 
 function MenuUser() {
-  // const router = useRouter();
   const logout = useLogout();
   const anchorMenu = useHeaderStore((state) => state.anchorMenu);
   const handleCloseMenu = useHeaderStore((state) => state.handleCloseMenu);
   const handleOpenMenu = useHeaderStore((state) => state.handleOpenMenu);
-  // const handleUserLogOut = () => {
-  //   deleteCookie("accessToken");
-  //   deleteCookie("refreshToken");
-  //   deleteCookie("role");
-  //   router.push(routes.login);
-  // };
   return (
     <Stack>
       <IconButton size="large" edge="start" onClick={handleOpenMenu}>

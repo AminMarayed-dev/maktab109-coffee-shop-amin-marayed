@@ -1,8 +1,10 @@
+import CheckQuantityAndRate from "@/components/shop/checkQuantityAndRate";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useGetCategoryBySlug from "@/hooks/product-category/useGetCategoryBySlug";
 import useGetProductsByCategoryID from "@/hooks/product-category/useGetProductsByCategoryID";
 import useResponsive from "@/hooks/shared/useResponsive";
+import { ProductData } from "@/types/dashboard/type";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
@@ -19,10 +21,9 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import CheckQuantityAndRate from "../shop/checkQuantityAndRate";
 
 const { shop, common } = localization;
-const { center, styleCard } = cssClass;
+const { styleCard } = cssClass;
 function ProductsCategory({ slug }: { slug: string }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const router = useRouter();
@@ -32,6 +33,7 @@ function ProductsCategory({ slug }: { slug: string }) {
     isLoading,
     isError,
   } = useGetProductsByCategoryID(categoryData?._id);
+  console.log(productsByCategory);
   if (isLoading) <div>loading...</div>;
   if (isError) <div>isError...</div>;
   return (
@@ -53,7 +55,7 @@ function ProductsCategory({ slug }: { slug: string }) {
       <Divider />
       <Stack justifyContent="center" alignItems="center">
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {productsByCategory?.map((product, index) => (
+          {productsByCategory?.map((product: ProductData, index: number) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{

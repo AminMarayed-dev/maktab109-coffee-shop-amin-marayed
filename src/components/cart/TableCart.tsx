@@ -1,3 +1,5 @@
+import DialogDeleteCart from "@/components/cart/DialogDeleteCart";
+import CountBox from "@/components/shared/CountBox";
 import { localization } from "@/constant/localization";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
@@ -17,8 +19,6 @@ import {
 import { red } from "@mui/material/colors";
 import Image from "next/image";
 import { useState } from "react";
-import CountBox from "../shared/CountBox";
-import DialogDeleteCart from "./DialogDeleteCart";
 
 const { cart, common, dashboard } = localization;
 
@@ -26,7 +26,7 @@ function TableCart() {
   const [cartID, setCartID] = useState("");
   const carts = useCartStore((state) => state.cart);
   const handleOpenDialog = useCartStore((state) => state.handleOpenDialog);
-  const handleDeleteIcon = (id) => {
+  const handleDeleteIcon = (id: string) => {
     setCartID(id);
     handleOpenDialog();
   };
@@ -82,7 +82,7 @@ function TableCart() {
                 </TableCell>
                 <TableCell>
                   <IconButton
-                    onClick={(e) => handleDeleteIcon(item._id)}
+                    onClick={() => handleDeleteIcon(item._id.toString())}
                     id={item._id}
                   >
                     <DeleteIcon sx={{ fill: red[600] }} />

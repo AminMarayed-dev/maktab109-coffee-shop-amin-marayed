@@ -1,7 +1,13 @@
 import { getAllProductsShop } from "@/api/shop/getAllProductsShop";
 import { useQuery } from "@tanstack/react-query";
 
-function useGetAllProductsToShop({ limit, initialData, sort }) {
+type Props = {
+  limit: string | number;
+  sort: string;
+  initialData: any;
+};
+
+function useGetAllProductsToShop({ limit, initialData, sort }: Props) {
   return useQuery<any>({
     queryKey: ["products-shop", "products-dashboard", limit, sort],
     queryFn: () => getAllProductsShop({ limit, sort }),
