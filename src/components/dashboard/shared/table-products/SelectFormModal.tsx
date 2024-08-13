@@ -34,7 +34,6 @@ function SelectFormModal() {
 
   if (isLoading) <div>loading...</div>;
   if (isError) <div>Errro...</div>;
-  console.log(categoryID);
   return (
     <Stack direction="row" spacing={2}>
       <FormControl fullWidth>

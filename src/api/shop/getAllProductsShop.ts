@@ -1,4 +1,4 @@
-import { api } from "../config/config";
+import { api } from "@/api/config/config";
 
 export async function getAllProductsShop({
   limit,
@@ -14,6 +14,6 @@ export async function getAllProductsShop({
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }

@@ -2,7 +2,6 @@ import useResponsive from "@/hooks/shared/useResponsive";
 import { Button, Container, Stack, styled } from "@mui/material";
 import Tooltip, { tooltipClasses, TooltipProps } from "@mui/material/Tooltip";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import menuItems from "../utils/menu.data";
 import ListSubCategory from "./ListSubCategory";
 

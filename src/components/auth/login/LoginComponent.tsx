@@ -25,7 +25,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginValidationSchema } from "../validation/auth.valiation";
+import { loginValidationSchema } from "@/components/auth/validation/auth.valiation";
 
 const { auth } = localization;
 const { styleContainerAuth } = cssClass;
@@ -55,7 +55,6 @@ function LoginComponent() {
         data: { user: User };
       }>;
       if (status === 200) {
-        console.log(token, user);
         setIsLoginSuccess(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
@@ -72,7 +71,7 @@ function LoginComponent() {
       }
     } catch (error) {
       setIsLoginSuccess(false);
-      console.log(error);
+      throw error;
     }
     setOpen(true);
   };

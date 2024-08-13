@@ -62,15 +62,15 @@ function ResultPayment() {
           location.href = "/result-payment/success";
           removeCartBasket();
         },
-        onError: () => {
-          location.href = "/result-payment/fail";
-        },
+        // onError: () => {
+        //   location.href = "/result-payment/fail";
+        // },
       }
     );
   };
 
   const handleFailPayment = () => {
-    location.href = "/";
+    location.href = "/result-payment/fail";
   };
 
   return (

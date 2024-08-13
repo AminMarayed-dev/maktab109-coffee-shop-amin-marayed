@@ -14,6 +14,6 @@ export async function postUserApi(data: userDataRegister) {
     const response = await api.post("/auth/signup", data);
     return response;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
