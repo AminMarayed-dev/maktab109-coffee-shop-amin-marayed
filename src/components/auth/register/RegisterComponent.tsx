@@ -1,5 +1,5 @@
 import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
-import textFieldItems from "@/components/auth/register/register.data";
+import textFieldItems from "@/components/auth/register/utils/register.data";
 import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
@@ -27,13 +27,12 @@ import { useForm } from "react-hook-form";
 import { registerValidationSchema } from "../validation/auth.valiation";
 
 const { auth } = localization;
-const { styleContainerAuth } = cssClass;
+const { styleContainerAuth, styleLinkAuth } = cssClass;
 
 function RegisterComponent() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isRegisterSuccess, setIsRegisterSucces] = useState(false);
-
-  const router = useRouter();
 
   const {
     register,
@@ -62,7 +61,7 @@ function RegisterComponent() {
       }
     } catch (error) {
       setIsRegisterSucces(false);
-      console.log(error);
+      throw error;
     }
     setOpen(true);
   };
@@ -110,16 +109,7 @@ function RegisterComponent() {
           </Alert>
         </Snackbar>
 
-        <Button
-          onClick={() => router.push(routes.login)}
-          sx={{
-            bgcolor: "primary.main",
-            "&:hover": {
-              bgcolor: "primary.main",
-              color: "secondary.main",
-            },
-          }}
-        >
+        <Button onClick={() => router.push(routes.login)} sx={styleLinkAuth}>
           {auth.login}
         </Button>
       </Box>

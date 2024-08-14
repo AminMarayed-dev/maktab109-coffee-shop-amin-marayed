@@ -1,7 +1,7 @@
 import { localization } from "@/constant/localization";
 
 import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
-import textFieldItems from "@/components/auth/login/login.data";
+import textFieldItems from "@/components/auth/login/utils/login.data";
 import ButtonAuth from "@/components/auth/shared/ButtonAuth";
 import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
@@ -28,9 +28,10 @@ import { useForm } from "react-hook-form";
 import { loginValidationSchema } from "../validation/auth.valiation";
 
 const { auth } = localization;
-const { styleContainerAuth } = cssClass;
+const { styleContainerAuth, styleLinkAuth } = cssClass;
 
 function LoginComponent() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isLoginSuccess, setIsLoginSuccess] = useState(false);
   const [user, setUser] = useStorage<User | null>("user", null);
@@ -72,12 +73,11 @@ function LoginComponent() {
       }
     } catch (error) {
       setIsLoginSuccess(false);
-      console.log(error);
+      throw error;
     }
     setOpen(true);
   };
 
-  const router = useRouter();
   return (
     <Container sx={styleContainerAuth} maxWidth="sm">
       <Image src={logo} alt="Logo" width={130} height={130} />
@@ -115,16 +115,7 @@ function LoginComponent() {
             {isLoginSuccess ? auth.loginSuccess : auth.loginFail}
           </Alert>
         </Snackbar>
-        <Button
-          onClick={() => router.push(routes.register)}
-          sx={{
-            bgcolor: "primary.main",
-            "&:hover": {
-              bgcolor: "primary.main",
-              color: "secondary.main",
-            },
-          }}
-        >
+        <Button onClick={() => router.push(routes.register)} sx={styleLinkAuth}>
           {auth.submit}
         </Button>
       </Box>
