@@ -18,7 +18,7 @@ const {
   common,
   home: { menuList },
 } = localization;
-function DrawerFilter() {
+function DrawerFilter({slugname} : {slugname:string}) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const handleCloseDrawerFilter = useCommonStore(
     (state) => state.handleCloseDrawerFilter
