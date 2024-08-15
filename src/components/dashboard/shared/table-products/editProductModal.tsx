@@ -1,15 +1,6 @@
 import { localization } from "@/constant/localization";
 import CancelIcon from "@mui/icons-material/Cancel";
-import {
-  Alert,
-  Box,
-  Grid,
-  IconButton,
-  Snackbar,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, IconButton, Snackbar, Stack, Typography } from "@mui/material";
 import "react-quill/dist/quill.snow.css";
 
 import { convertImagesToFiles } from "@/api/shared/shared.api";
@@ -21,11 +12,7 @@ import useDashboardStore from "@/zustand/dashboard/store";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import ResultEditImage from "./ResultEditImage";
-import SelectFormModal from "./SelectFormModal";
-import TextAreaModal from "./TextAreaModal";
-import UploadImageModal from "./UploadImageModal";
-import { textFieldItems } from "./utils/textFieldItems.data";
+import FieldsEditProductsModal from "./FieldsEditProductsModal";
 
 const { dashboard } = localization;
 function EditProductModal() {
@@ -45,20 +32,7 @@ function EditProductModal() {
     setImages,
     setCategoryID,
     setSubCategoryID,
-    isUpload,
-  } = useDashboardStore((state) => ({
-    description: state.description,
-    categoryID: state.categoryID,
-    subCategoryID: state.subCategoryID,
-    images: state.images,
-    handleCloseModal: state.handleCloseModal,
-    productID: state.productID,
-    setDescription: state.setDescription,
-    setImages: state.setImages,
-    setCategoryID: state.setCategoryID,
-    setSubCategoryID: state.setSubCategoryID,
-    isUpload: state.isUpload,
-  }));
+  } = useDashboardStore();
 
   const { data: product } = useGetProductById(productID);
 
@@ -112,41 +86,7 @@ function EditProductModal() {
       >
         <CancelIcon />
       </IconButton>
-      <Grid
-        container
-        xs={12}
-        lg={12}
-        // spacing={{ xs: 0, lg: 2 }}
-        gap={{ xs: 2, lg: 2 }}
-        justifyContent="center"
-      >
-        {textFieldItems.map((item, index) => {
-          return (
-            <Grid key={index} item lg={5} xs={12}>
-              <TextField
-                type={`${item.name === "quantity" ? "number" : "text"}`}
-                key={index}
-                fullWidth
-                placeholder={item.placeholder}
-                {...register(item.name)}
-              />
-            </Grid>
-          );
-        })}
-        <Grid item lg={10.26} xs={12}>
-          <SelectFormModal />
-        </Grid>
-        <Grid item lg={12} xs={12}>
-          <Box sx={{ display: "flex", alignItems: "center", columnGap: 2 }}>
-            <UploadImageModal />
-            <ResultEditImage productImages={product?.images} />
-          </Box>
-        </Grid>
-
-        <Grid item lg={12} xs={12}>
-          <TextAreaModal />
-        </Grid>
-      </Grid>
+      <FieldsEditProductsModal register={register} images={product?.images} />
       <ButtonLoading text={dashboard.edit} loading={isPending} />
       <Snackbar
         open={open}

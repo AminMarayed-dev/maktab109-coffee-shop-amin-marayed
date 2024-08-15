@@ -1,10 +1,10 @@
+import ModalOrdersFactor from "@/components/dashboard/shared/table-orders/ModalOrdersFactor";
 import TableModalOrdres from "@/components/dashboard/shared/table-orders/TableModalOrdres";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useEditOrderById from "@/hooks/dashboard/useEditOrderById";
 import useGetOrderById from "@/hooks/dashboard/useGetOrderById";
 import useResponsive from "@/hooks/shared/useResponsive";
-import { toLocalDateStringShort } from "@/utils/formatDatePersian";
 import useDashboardStore from "@/zustand/dashboard/store";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
@@ -21,17 +21,16 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const { styleModal, center } = cssClass;
+const { styleModal, styleButtonModalOrder } = cssClass;
 const { dashboard } = localization;
 function ModalOrders() {
   const [open, setOpen] = useState(false);
   const [isDelivery, setIsDelivery] = useState(false);
-  const orderID = useDashboardStore((state) => state.orderID);
-  const { data, isLoading, isError } = useGetOrderById(orderID);
+  const { orderID, openModalOrder, handleCloseModal } = useDashboardStore();
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
-  const openModalOrder = useDashboardStore((state) => state.openModalOrder);
-  const handleCloseModal = useDashboardStore((state) => state.handleCloseModal);
-  const { mutate: editOrderByID, isPending } = useEditOrderById();
+
+  const { data, isLoading, isError } = useGetOrderById(orderID);
+  const { mutate: editOrderByID } = useEditOrderById();
 
   const handleEditOrder = () => {
     editOrderByID(
@@ -73,62 +72,10 @@ function ModalOrders() {
               <CancelIcon />
             </IconButton>
             <Typography variant="h6">{dashboard.showOrder}</Typography>
-            <Box sx={{ ...center, flexDirection: "column", rowGap: 2 }}>
-              <Stack direction="row" columnGap={2} alignItems="center">
-                <Typography variant="body1">
-                  {dashboard.customer}
-                  {":"}
-                </Typography>
-                <Typography variant="body2">
-                  {data?.user.firstname} {data?.user.lastname}
-                </Typography>
-              </Stack>
-              <Stack direction="row" columnGap={2} alignItems="center">
-                <Typography variant="body1">
-                  {dashboard.address}
-                  {":"}
-                </Typography>
-                <Typography variant="body2">{data?.user.address}</Typography>
-              </Stack>
-              <Stack direction="row" columnGap={2} alignItems="center">
-                <Typography variant="body1">
-                  {dashboard.mobile}
-                  {":"}
-                </Typography>
-                <Typography variant="body2">
-                  {data?.user.phoneNumber}
-                </Typography>
-              </Stack>
-              <Stack direction="row" columnGap={2} alignItems="center">
-                <Typography variant="body1">
-                  {dashboard.delivaryDate}
-                  {":"}
-                </Typography>
-                <Typography variant="body2">
-                  {toLocalDateStringShort(data?.deliveryDate)}
-                </Typography>
-              </Stack>
-              <Stack direction="row" columnGap={2} alignItems="center">
-                <Typography variant="body1">
-                  {dashboard.createdDate}
-                  {":"}
-                </Typography>
-                <Typography variant="body2">
-                  {toLocalDateStringShort(data?.createdAt)}
-                </Typography>
-              </Stack>
-            </Box>
+            <ModalOrdersFactor userData={data} />
             <TableModalOrdres data={data} />
             {!data?.deliveryStatus && (
-              <Button
-                sx={{
-                  mt: 2.5,
-                  backgroundColor: "green",
-                  color: "primary.main",
-                  "&:hover": { backgroundColor: "darkgreen" },
-                }}
-                onClick={handleEditOrder}
-              >
+              <Button sx={styleButtonModalOrder} onClick={handleEditOrder}>
                 {dashboard.delivary}
               </Button>
             )}

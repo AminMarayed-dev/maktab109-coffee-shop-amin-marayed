@@ -1,16 +1,10 @@
+import ButtonActionTable from "@/components/dashboard/shared/ButtonActionTable";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import { useGetAllProductsToDashboard } from "@/hooks/dashboard/useGetAllProducts";
-import truncateText from "@/utils/trancateText";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
-  IconButton,
   Paper,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -20,36 +14,27 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import { useState } from "react";
-import ButtonActionTable from "../ButtonActionTable";
 
-import useResponsive from "@/hooks/shared/useResponsive";
+import DeleteDialogProduct from "@/components/dashboard/shared/table-products/DeleteDialogProduct";
+import TableBodyChildProducts from "@/components/dashboard/shared/table-products/TableBodyChildProducts";
+import TableModalProducts from "@/components/dashboard/shared/table-products/TableModalProducts";
+import { tableHeadCells } from "@/components/dashboard/shared/table-products/utils/TableProducts.data";
 import useDashboardStore from "@/zustand/dashboard/store";
-import DeleteDialogProduct from "./DeleteDialogProduct";
-import TableModalProducts from "./TableModalProducts";
 
 const { dashboard } = localization;
-const { center, styleModal } = cssClass;
+const { center } = cssClass;
 
 function TableProducts() {
-  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [page, setPage] = useState(0);
-  const [isSort, setIsSort] = useState(false);
-  const handleOpenModalAdd = useDashboardStore(
-    (state) => state.handleOpenModalAdd
-  );
-  const handleOpenModalEdit = useDashboardStore(
-    (state) => state.handleOpenModalEdit
-  );
-  const handleOpenDialogDelete = useDashboardStore(
-    (state) => state.handleOpenDialogDelete
-  );
-  const setProductID = useDashboardStore((state) => state.setProductID);
-  const setIsEdit = useDashboardStore((state) => state.setIsEdit);
-  const setIsUpload = useDashboardStore((state) => state.setIsUpload);
-  // reset description, images, categoryid and subcategory id state
-  const resetFieldsEdit = useDashboardStore((state) => state.resetFieldsEdit);
+  const {
+    handleOpenModalAdd,
+    handleOpenModalEdit,
+    handleOpenDialogDelete,
+    setProductID,
+    resetFieldsEdit,
+  } = useDashboardStore();
+
   const handleShowModalAdd = () => {
     resetFieldsEdit();
     handleOpenModalAdd();
@@ -64,14 +49,10 @@ function TableProducts() {
     handleOpenModalEdit();
   };
 
-  const handleSortByCategory = () => {
-    setIsSort((prev) => !prev);
-  };
-
   const { data, isLoading, isError } = useGetAllProductsToDashboard({
     page: page + 1,
     limit: 5,
-    sort: isSort ? "-category" : "category",
+    sort: "-createdAt",
   });
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -101,72 +82,20 @@ function TableProducts() {
         <Table stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell align="center">{dashboard.picture}</TableCell>
-              <TableCell align="center">{dashboard.nameProduct}</TableCell>
-              <TableCell
-                align="center"
-                sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
-                onClick={handleSortByCategory}
-              >
-                <Stack direction="row" justifyContent="center">
-                  {isSort ? (
-                    <>
-                      {dashboard.category}
-                      <ArrowDropUpIcon />
-                    </>
-                  ) : (
-                    <>
-                      {dashboard.category}
-                      <ArrowDropDownIcon />
-                    </>
-                  )}
-                </Stack>
-              </TableCell>
-              <TableCell align="center">{dashboard.subCategory}</TableCell>
-              <TableCell align={`${mdDown ? "left" : "center"}`}>
-                {dashboard.actions}
-              </TableCell>
+              {tableHeadCells.map((item, index) => (
+                <TableCell key={index} align={item.align}>
+                  {item.name}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {data?.products?.map((item, index) => (
-              <TableRow key={data._id}>
-                <TableCell align={`${mdDown ? "left" : "center"}`}>
-                  <Image
-                    src={`http://${item.images[0]}`}
-                    width={mdDown ? 50 : 60}
-                    height={mdDown ? 50 : 60}
-                    alt="Logo"
-                  />
-                </TableCell>
-                <TableCell align="center">
-                  {mdDown ? truncateText(item.name, 13) : item.name}
-                </TableCell>
-                <TableCell align="center">{item.category.name}</TableCell>
-                <TableCell align="center">{item.subcategory.name}</TableCell>
-                <TableCell
-                  align={`${mdDown ? "left" : "center"}`}
-                  sx={{ whiteSpace: mdDown ? "wrap" : "nowrap" }}
-                >
-                  <IconButton
-                    onClick={() => {
-                      handleEditIcon(item?._id);
-                      setIsEdit(true);
-                      setIsUpload(false);
-                    }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => {
-                      handleDeleteIcon(item?._id);
-                      setIsEdit(false);
-                    }}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+              <TableBodyChildProducts
+                product={item}
+                handleDeleteIcon={handleDeleteIcon}
+                handleEditIcon={handleEditIcon}
+              />
             ))}
           </TableBody>
         </Table>

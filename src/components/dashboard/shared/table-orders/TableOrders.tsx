@@ -1,8 +1,6 @@
 import { localization } from "@/constant/localization";
 import { useGetAllOrdersToDashboard } from "@/hooks/dashboard/useGetAllOrders";
 import useResponsive from "@/hooks/shared/useResponsive";
-import { toLocalDateStringShort } from "@/utils/formatDatePersian";
-import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 
 import ModalOrders from "@/components/dashboard/shared/table-orders/ModalOrders";
 import RadioGroupOrders from "@/components/dashboard/shared/table-orders/RadioGroupOrders";
@@ -23,9 +21,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import TableBodyChildOrders from "./TableBodyChildOrders";
 
 const { center } = cssClass;
-const { dashboard, common } = localization;
+const { dashboard } = localization;
 type Item = {
   user: { firstname: string; lastname: string };
   totalPrice: number;
@@ -38,11 +37,9 @@ function TableOrders() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isSort, setIsSort] = useState(false);
-  const setOrderID = useDashboardStore((state) => state.setOrderID);
-  const deliveryStatus = useDashboardStore((state) => state.delivaryStatus);
-  const handleOpenModalOrder = useDashboardStore(
-    (state) => state.handleOpenModalOrder
-  );
+  const { setOrderID, delivaryStatus, handleOpenModalOrder } =
+    useDashboardStore();
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -54,7 +51,7 @@ function TableOrders() {
     page: page + 1,
     limit: rowsPerPage,
     time: isSort ? "createdAt" : "-createdAt",
-    deliveryStatus,
+    deliveryStatus: delivaryStatus,
   });
 
   if (isLoading) {
@@ -108,32 +105,12 @@ function TableOrders() {
                 {data?.orders?.map((item: Item, index: number) => {
                   const { user, totalPrice, createdAt } = item;
                   return (
-                    <TableRow key={index}>
-                      <TableCell>
-                        {user.firstname} {user.lastname}
-                      </TableCell>
-                      <TableCell>
-                        {toPersianNumbersWithComma(totalPrice)} {common.rial}
-                      </TableCell>
-                      <TableCell align="center">
-                        {toLocalDateStringShort(createdAt)}
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{
-                          cursor: "pointer",
-                          "&:hover": {
-                            color: "secondary.light",
-                          },
-                        }}
-                        onClick={() => {
-                          handleOpenModalOrder();
-                          setOrderID(item._id);
-                        }}
-                      >
-                        {dashboard.checkOrder}
-                      </TableCell>
-                    </TableRow>
+                    <TableBodyChildOrders
+                      key={index}
+                      data={item}
+                      handleOpenModalOrder={handleOpenModalOrder}
+                      setOrderID={setOrderID}
+                    />
                   );
                 })}
               </TableBody>

@@ -8,9 +8,7 @@ import Image from "next/image";
 const { dashboard } = localization;
 
 function ResultEditImage({ productImages }: { productImages: string[] }) {
-  const isUpload = useDashboardStore((state) => state.isUpload);
-  const imageUpload = useDashboardStore((state) => state.images);
-  const removeImage = useDashboardStore((state) => state.removeImage);
+  const { isUpload, images: imageUpload, removeImage } = useDashboardStore();
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
 
   return (

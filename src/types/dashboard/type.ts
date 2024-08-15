@@ -2,10 +2,10 @@ import { IUserDataRegister } from "../auth/register/register.type";
 
 export type ProductData = {
   _id?: string;
-  name?: string;
-  price?: number;
+  name: string;
+  price: number;
   brand?: string;
-  quantity?: number | string | undefined;
+  quantity: number | string | undefined;
   category?: string;
   subcategory?: string;
   images?: string[];

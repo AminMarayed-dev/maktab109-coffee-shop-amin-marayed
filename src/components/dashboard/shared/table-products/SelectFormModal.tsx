@@ -3,7 +3,6 @@ import { useGetAllCategory } from "@/hooks/dashboard/useGetAllCategory";
 import useGetAllSubCategory from "@/hooks/dashboard/useGetAllSubCategory";
 import useDashboardStore from "@/zustand/dashboard/store";
 import {
-  Box,
   FormControl,
   MenuItem,
   Select,
@@ -15,10 +14,9 @@ import { useEffect } from "react";
 const { dashboard } = localization;
 
 function SelectFormModal() {
-  const categoryID = useDashboardStore((state) => state.categoryID);
-  const setCategoryID = useDashboardStore((state) => state.setCategoryID);
-  const subCategoryID = useDashboardStore((state) => state.subCategoryID);
-  const setSubCategoryID = useDashboardStore((state) => state.setSubCategoryID);
+  const { categoryID, setCategoryID, subCategoryID, setSubCategoryID } =
+    useDashboardStore();
+
   const handleChangeCategoryID = (event: SelectChangeEvent) =>
     setCategoryID(event.target.value);
   const handleChangeSubCategoryID = (event: SelectChangeEvent) =>

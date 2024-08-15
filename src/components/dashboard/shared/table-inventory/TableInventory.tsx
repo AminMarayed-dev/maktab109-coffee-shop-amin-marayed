@@ -5,8 +5,6 @@ import useEditProduct from "@/hooks/dashboard/useEditProductById";
 import { useGetAllProductsToDashboard } from "@/hooks/dashboard/useGetAllProducts";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { ProductData } from "@/types/dashboard/type";
-import { toPersianNumbers } from "@/utils/toPersianNumbers";
-import truncateText from "@/utils/trancateText";
 import {
   Box,
   Paper,
@@ -17,11 +15,12 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  TextField,
   Typography,
 } from "@mui/material";
 import { green } from "@mui/material/colors";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
+import TableBodyChildInventory from "./TableBodyChildInventory";
+import { tableHeadCells } from "./utils/tableInventory.data";
 
 const { center } = cssClass;
 const { dashboard, common } = localization;
@@ -97,57 +96,26 @@ function TableInventory() {
         <Table sx={{ minWidth: mdDown ? "auto" : "700px" }}>
           <TableHead>
             <TableRow>
-              <TableCell align={`${mdDown ? "center" : "left"}`}>
-                {dashboard.product}
-              </TableCell>
-              <TableCell align={`${mdDown ? "center" : "left"}`}>
-                {common.price}
-              </TableCell>
-              <TableCell align={`${mdDown ? "left" : "center"}`}>
-                {common.inventory}
-              </TableCell>
+              {tableHeadCells.map((item, index) => (
+                <TableCell
+                  key={index}
+                  align={`${mdDown ? item.alignMobile : item.alignDesktop}`}
+                >
+                  {item.name}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {data?.products?.map((item: ProductData, index: number) => (
-              <TableRow key={index}>
-                <TableCell align={`${mdDown ? "center" : "left"}`}>
-                  {mdDown ? truncateText(item.name, 22) : item.name}
-                </TableCell>
-                <TableCell
-                  align={`${mdDown ? "center" : "left"}`}
-                  onClick={(e) => handleShowInput(e, item)}
-                >
-                  {showInput && rowData?._id === item?._id ? (
-                    <TextField
-                      fullWidth
-                      defaultValue={item.price}
-                      onChange={(e) => setNewPrice(+e.target.value)}
-                      type="number"
-                    />
-                  ) : (
-                    <Box>
-                      {toPersianNumbers(item.price)}
-                      {common.rial}
-                    </Box>
-                  )}
-                </TableCell>
-                <TableCell
-                  align="center"
-                  defaultValue={item.quantity}
-                  onClick={(e) => handleShowInput(e, item)}
-                >
-                  {showInput && rowData?._id === item?._id ? (
-                    <TextField
-                      type="number"
-                      defaultValue={item.quantity}
-                      onChange={(e) => setNewQuantity(+e.target.value)}
-                    />
-                  ) : (
-                    toPersianNumbers(item.quantity)
-                  )}
-                </TableCell>
-              </TableRow>
+              <TableBodyChildInventory
+                product={item}
+                handleShowInput={handleShowInput}
+                showInput={showInput}
+                rowData={rowData}
+                setNewPrice={setNewPrice}
+                setNewQuantity={setNewQuantity}
+              />
             ))}
           </TableBody>
         </Table>

@@ -1,18 +1,15 @@
+import AddProductModal from "@/components/dashboard/shared/table-products/AddProductModal";
+import EditProductModal from "@/components/dashboard/shared/table-products/editProductModal";
 import { cssClass } from "@/constant/cssClass";
 import useResponsive from "@/hooks/shared/useResponsive";
 import useDashboardStore from "@/zustand/dashboard/store";
 import { Backdrop, Box, Fade, Modal } from "@mui/material";
-import { ReactNode } from "react";
-import AddProductModal from "./AddProductModal";
-import EditProductModal from "./editProductModal";
 
 const { styleModal } = cssClass;
-type Props = { children: ReactNode };
+
 function TableModalProducts() {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
-  const openModalAdd = useDashboardStore((state) => state.openModalAdd);
-  const openModalEdit = useDashboardStore((state) => state.openModalEdit);
-  const handleCloseModal = useDashboardStore((state) => state.handleCloseModal);
+  const { openModalAdd, openModalEdit, handleCloseModal } = useDashboardStore();
   return (
     <>
       <Modal

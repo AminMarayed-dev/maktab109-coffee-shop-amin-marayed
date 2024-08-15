@@ -18,7 +18,6 @@ export const cssClass = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    // width: 800,
     bgcolor: "background.paper",
     border: "none",
     boxShadow: 24,
@@ -45,7 +44,6 @@ export const cssClass = {
   styleContainerToobar: {
     display: "flex",
     justifyContent: "space-between",
-    // py: 2.5,
     alignItems: "center",
   },
   styleContainerAuth: {
@@ -88,7 +86,6 @@ export const cssClass = {
   },
   styleCard: {
     alignItems: "center",
-    // justifyContent: "space-between",
     display: "flex",
     flexDirection: "column",
     border: "1px solid #52525b",
@@ -112,5 +109,18 @@ export const cssClass = {
     padding: 1.5,
     alignItems: "center",
     border: "3px solid #52525b",
+  },
+  styleLinkAuth: {
+    bgcolor: "primary.main",
+    "&:hover": {
+      bgcolor: "primary.main",
+      color: "secondary.main",
+    },
+  },
+  styleButtonModalOrder: {
+    mt: 2.5,
+    backgroundColor: "green",
+    color: "primary.main",
+    "&:hover": { backgroundColor: "darkgreen" },
   },
 };

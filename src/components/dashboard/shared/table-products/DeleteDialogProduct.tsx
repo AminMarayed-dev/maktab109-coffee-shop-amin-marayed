@@ -14,25 +14,22 @@ import { useState } from "react";
 const { dashboard, common } = localization;
 function DeleteDialogProduct() {
   const [open, setOpen] = useState(false);
-  const openDialog = useDashboardStore((state) => state.openDialogDelete);
-  const handleCloseDialog = useDashboardStore(
-    (state) => state.handleCloseDialogDelete
-  );
-  const productID = useDashboardStore((state) => state.productID);
-  const { mutate: deleteProduct } = useDeleteProduct();
+  const { openDialogDelete, handleCloseDialogDelete, productID } =
+    useDashboardStore();
 
+  const { mutate: deleteProduct } = useDeleteProduct();
   const handleSubmitYes = () => {
     deleteProduct(productID);
-    handleCloseDialog();
+    handleCloseDialogDelete();
     setOpen(true);
   };
   return (
     <>
-      <Dialog open={openDialog} keepMounted>
+      <Dialog open={openDialogDelete} keepMounted>
         <DialogTitle>{dashboard.questionDeleteProduct}</DialogTitle>
         <DialogActions>
           <Button onClick={handleSubmitYes}>{common.yes}</Button>
-          <Button onClick={handleCloseDialog}>{common.no}</Button>
+          <Button onClick={handleCloseDialogDelete}>{common.no}</Button>
         </DialogActions>
       </Dialog>
       <Snackbar
