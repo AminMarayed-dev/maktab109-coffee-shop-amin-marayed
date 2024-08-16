@@ -100,7 +100,7 @@ function Shop({ props }: { props: any }) {
           anchor={"left"}
           onClose={handleCloseDrawerFilter}
         >
-          <DrawerFilter slugname={slugname} />
+          <DrawerFilter slugname={props.slugname} />
         </Drawer>
       </Box>
 
