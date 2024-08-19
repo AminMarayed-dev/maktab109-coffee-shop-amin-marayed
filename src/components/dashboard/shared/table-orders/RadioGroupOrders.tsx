@@ -20,9 +20,11 @@ function RadioGroupOrders() {
   const setDeliveryStatus = useDashboardStore(
     (state) => state.setDelivaryStatus
   );
+  const handleCloseModal = useDashboardStore((state) => state.handleCloseModal);
   const deliveryStatus = useDashboardStore((state) => state.delivaryStatus);
   const handleDeliveryStatus = (e: ChangeEvent<HTMLInputElement>) => {
     setDeliveryStatus(e.target.value);
+    handleCloseModal();
   };
   return (
     <Box

@@ -1,5 +1,5 @@
 import { OrderData } from "@/types/dashboard/type";
-import { api } from "../config/config";
+import { api } from "@/api/config/config";
 
 export type Props = {
   page: number;
@@ -20,7 +20,7 @@ export async function getAllProducts({ page, limit, sort }: Props) {
       totalProducts: response.data.total,
     };
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
@@ -41,7 +41,7 @@ export async function getAllOrders({
       totalOrders: response.data.total,
     };
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 

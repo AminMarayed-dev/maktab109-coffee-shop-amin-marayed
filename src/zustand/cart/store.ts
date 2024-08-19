@@ -75,7 +75,6 @@ export const useCartStore = create(
       removeCart: (productID: string) => {
         const { cart, productCounts } = get();
         const itemToRemove = cart.find((item) => item._id === productID);
-        console.log(itemToRemove);
         const updatedCart = cart.filter(
           (item) => item._id !== itemToRemove?._id
         );

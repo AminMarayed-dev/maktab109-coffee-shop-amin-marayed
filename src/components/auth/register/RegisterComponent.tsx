@@ -8,6 +8,7 @@ import useRegister from "@/hooks/auth/register/useRegister";
 import { IUserDataRegister } from "@/types/auth/register/register.type";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { registerValidationSchema } from "@/components/auth/validation/auth.valiation";
 import { Token } from "@/types/auth/login/login.type";
 import {
   Alert,
@@ -24,7 +25,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { registerValidationSchema } from "../validation/auth.valiation";
 
 const { auth } = localization;
 const { styleContainerAuth, styleLinkAuth } = cssClass;

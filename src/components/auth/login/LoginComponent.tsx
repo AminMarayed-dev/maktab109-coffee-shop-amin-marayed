@@ -25,7 +25,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginValidationSchema } from "../validation/auth.valiation";
+import { loginValidationSchema } from "@/components/auth/validation/auth.valiation";
 
 const { auth } = localization;
 const { styleContainerAuth, styleLinkAuth } = cssClass;

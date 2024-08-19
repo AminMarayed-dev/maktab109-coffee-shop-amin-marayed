@@ -33,7 +33,6 @@ function ProductsCategory({ slug }: { slug: string }) {
     isLoading,
     isError,
   } = useGetProductsByCategoryID(categoryData?._id);
-  console.log(productsByCategory);
   if (isLoading) <div>loading...</div>;
   if (isError) <div>isError...</div>;
   return (
@@ -55,7 +54,7 @@ function ProductsCategory({ slug }: { slug: string }) {
       <Divider />
       <Stack justifyContent="center" alignItems="center">
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {productsByCategory?.map((product: ProductData, index: number) => (
+          {productsByCategory?.map((product: any, index: number) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{

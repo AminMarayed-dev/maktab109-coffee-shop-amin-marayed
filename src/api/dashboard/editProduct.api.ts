@@ -11,6 +11,6 @@ export async function editProductById({
   try {
     return await api.patch(`/products/${id}`, productData);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
