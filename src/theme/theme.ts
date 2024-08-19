@@ -1,4 +1,3 @@
-import { yellow } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 let theme = createTheme({
   direction: "rtl",
@@ -62,6 +61,7 @@ let theme = createTheme({
           backgroundColor: "rgb(211,169,127)",
           color: "rgb(15,15,15)",
           borderRadius: "35px",
+          padding: "5px 15px",
           "&:hover": {
             backgroundColor: "rgb(65,42,34)",
             color: "#fff",
