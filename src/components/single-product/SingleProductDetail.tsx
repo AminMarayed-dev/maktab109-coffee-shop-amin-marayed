@@ -26,6 +26,7 @@ import SocialMedia from "./SocialMedia";
 const { common, singleProduct, shop, cart } = localization;
 function SingleProductDetail({ product }: { product: any }) {
   const [open, setOpen] = useState(false);
+  const [valueRating, setValueRating] = useState<null | number>(0);
   const productsCount = useCartStore((state) => state.productCounts);
 
   const addToCart = useCartStore((state) => state.addToCart);
@@ -70,7 +71,14 @@ function SingleProductDetail({ product }: { product: any }) {
         </ListItemIcon>
       </Box>
       <Typography variant="h6">{product.name}</Typography>
-      <Rating name="read-only" value={product.rating.rate} readOnly />
+      <Rating
+        name="read-only"
+        value={valueRating}
+        onChange={(event, newValue) => {
+          setValueRating(newValue);
+        }}
+        color="secondary.main"
+      />
       <Typography variant="h6" color="secondary.dark">
         {toPersianNumbersWithComma(product.price)} {common.rial}
       </Typography>
