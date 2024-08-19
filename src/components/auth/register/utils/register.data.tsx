@@ -8,37 +8,37 @@ const { auth } = localization;
 const textFieldItems = [
   {
     placeholder: auth.username,
-    icon: <EmailIcon />,
+    icon: <EmailIcon sx={{ fill: "black" }} />,
     name: "username",
     type: "text",
   },
   {
     placeholder: auth.password,
-    icon: <LockIcon />,
+    icon: <LockIcon sx={{ fill: "black" }} />,
     name: "password",
     type: "password",
   },
   {
     placeholder: auth.firstname,
-    icon: <PersonIcon />,
+    icon: <PersonIcon sx={{ fill: "black" }} />,
     name: "firstname",
     type: "text",
   },
   {
     placeholder: auth.lastname,
-    icon: <PersonIcon />,
+    icon: <PersonIcon sx={{ fill: "black" }} />,
     name: "lastname",
     type: "text",
   },
   {
     placeholder: auth.address,
-    icon: <LocationOnIcon />,
+    icon: <LocationOnIcon sx={{ fill: "black" }} />,
     name: "address",
     type: "text",
   },
   {
     placeholder: auth.phoneNumber,
-    icon: <StayCurrentPortraitIcon />,
+    icon: <StayCurrentPortraitIcon sx={{ fill: "black" }} />,
     name: "phoneNumber",
     type: "text",
   },

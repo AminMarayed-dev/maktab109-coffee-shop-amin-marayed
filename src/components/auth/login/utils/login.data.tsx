@@ -5,13 +5,13 @@ const { auth } = localization;
 const textFieldItems = [
   {
     placeholder: auth.username,
-    icon: <PersonIcon />,
+    icon: <PersonIcon sx={{ fill: "black" }} />,
     name: "username",
     type: "text",
   },
   {
     placeholder: auth.password,
-    icon: <LockIcon />,
+    icon: <LockIcon sx={{ fill: "black" }} />,
     name: "password",
     type: "password",
   },

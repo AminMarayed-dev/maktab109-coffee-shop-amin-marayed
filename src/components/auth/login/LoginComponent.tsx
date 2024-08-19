@@ -3,6 +3,7 @@ import { localization } from "@/constant/localization";
 import logo from "@/assets/images/marayedcoffee-high-resolution-logo.png";
 import textFieldItems from "@/components/auth/login/utils/login.data";
 import ButtonAuth from "@/components/auth/shared/ButtonAuth";
+import { loginValidationSchema } from "@/components/auth/validation/auth.valiation";
 import { cssClass } from "@/constant/cssClass";
 import { routes } from "@/constant/routes";
 import useLogin from "@/hooks/auth/login/useLogin";
@@ -25,10 +26,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginValidationSchema } from "@/components/auth/validation/auth.valiation";
 
 const { auth } = localization;
-const { styleContainerAuth, styleLinkAuth } = cssClass;
+const { styleContainerAuth } = cssClass;
 
 function LoginComponent() {
   const router = useRouter();
@@ -72,7 +72,7 @@ function LoginComponent() {
       }
     } catch (error) {
       setIsLoginSuccess(false);
-      throw error;
+      console.log(error);
     }
     setOpen(true);
   };
@@ -114,7 +114,18 @@ function LoginComponent() {
             {isLoginSuccess ? auth.loginSuccess : auth.loginFail}
           </Alert>
         </Snackbar>
-        <Button onClick={() => router.push(routes.register)} sx={styleLinkAuth}>
+        <Button
+          onClick={() => router.push(routes.register)}
+          sx={{
+            backgroundColor: "primary.main",
+            color: "secondary.main",
+            borderRadius: 0,
+            "&:hover": {
+              backgroundColor: "primary.main",
+              color: "secondary.main",
+            },
+          }}
+        >
           {auth.submit}
         </Button>
       </Box>

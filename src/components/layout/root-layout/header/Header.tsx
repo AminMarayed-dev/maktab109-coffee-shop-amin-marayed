@@ -70,7 +70,7 @@ function Header() {
                 size="large"
                 edge="start"
                 onClick={handleDrawerMenu}
-                sx={{ mr: `${isPersist && 3}` }}
+                sx={{ mr: `${isPersist && 3}`, color: "#000" }}
               >
                 <MenuIcon />
               </IconButton>
@@ -117,6 +117,7 @@ function Header() {
                     setSearchValue("");
                     handleOpenDialogSearchBox();
                   }}
+                  sx={{ color: "#000" }}
                 >
                   <SearchIcon />
                 </IconButton>
@@ -127,6 +128,7 @@ function Header() {
                 onClick={() => {
                   if (router.pathname !== "/cart") handleDrawerBasket();
                 }}
+                sx={{ color: "#000" }}
               >
                 <Badge
                   badgeContent={toPersianNumbers(totalItems)}

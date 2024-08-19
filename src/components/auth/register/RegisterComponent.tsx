@@ -27,7 +27,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const { auth } = localization;
-const { styleContainerAuth, styleLinkAuth } = cssClass;
+const { styleContainerAuth } = cssClass;
 
 function RegisterComponent() {
   const router = useRouter();
@@ -109,7 +109,18 @@ function RegisterComponent() {
           </Alert>
         </Snackbar>
 
-        <Button onClick={() => router.push(routes.login)} sx={styleLinkAuth}>
+        <Button
+          onClick={() => router.push(routes.login)}
+          sx={{
+            backgroundColor: "primary.main",
+            color: "secondary.main",
+            borderRadius: 0,
+            "&:hover": {
+              backgroundColor: "primary.main",
+              color: "secondary.main",
+            },
+          }}
+        >
           {auth.login}
         </Button>
       </Box>

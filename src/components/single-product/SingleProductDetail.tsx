@@ -19,7 +19,6 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import { cssClass } from "@/constant/cssClass";
-import useEditProduct from "@/hooks/dashboard/useEditProductById";
 import useResponsive from "@/hooks/shared/useResponsive";
 import truncateText from "@/utils/trancateText";
 import { useCartStore } from "@/zustand/cart/store";
@@ -58,18 +57,6 @@ function SingleProductDetail({ product }: { product: any }) {
   const handleRouteButtonLink = (route: string) => {
     router.push(route);
   };
-  const { mutate: editProductByRate } = useEditProduct();
-
-  // const handleSetRateValue = (event, newValue) => {
-  //   setRateValue(newValue);
-  //   const formData = new FormData();
-  //   formData.append("rating", JSON.stringify({ rate: 3, count: 0 }));
-
-  //   editProductByRate({
-  //     id: product?._id,
-  //     productsData: formData,
-  //   });
-  // };
 
   return (
     <Stack rowGap={2} flexGrow={1.5}>
@@ -119,16 +106,19 @@ function SingleProductDetail({ product }: { product: any }) {
             display: "flex",
           }}
         >
-          <IconButton sx={{ padding: 0 }}>
+          <IconButton sx={{ padding: 0, color: "#000" }}>
             <KeyboardArrowRightIcon sx={{ cursor: "pointer" }} />
           </IconButton>
 
           <Tooltip title={singleProduct.backToShop} sx={{ padding: 0 }}>
-            <IconButton onClick={() => router.push("/shop")}>
+            <IconButton
+              onClick={() => router.push("/shop")}
+              sx={{ color: "#000" }}
+            >
               <GridViewIcon sx={{ cursor: "pointer" }} />
             </IconButton>
           </Tooltip>
-          <IconButton sx={{ padding: 0 }}>
+          <IconButton sx={{ padding: 0, color: "#000" }}>
             <KeyboardArrowLeftIcon sx={{ cursor: "pointer" }} />
           </IconButton>
         </ListItemIcon>
@@ -136,15 +126,16 @@ function SingleProductDetail({ product }: { product: any }) {
       <Typography variant="h6">{product.name}</Typography>
       <Rating
         name="simple-controlled"
-        // value={rateValue}
-        // onChange={(event, newValue) => handleSetRateValue(event, newValue)}
-        readOnly
+        value={rateValue}
+        onChange={(event, newValue) => {
+          setRateValue(newValue);
+        }}
       />
       <Typography variant="h6" color="secondary.dark">
         {toPersianNumbersWithComma(product.price)} {common.rial}
       </Typography>
-      <Typography variant="body2" color="primary.light">
-        {product.description}
+      <Typography variant="body2" color="primary.light" lineHeight={1.8}>
+        {product.description.replace(/<[^>]+>/g, "")}
       </Typography>
       {product.quantity > 0 ? (
         <Stack direction="row" columnGap={3}>

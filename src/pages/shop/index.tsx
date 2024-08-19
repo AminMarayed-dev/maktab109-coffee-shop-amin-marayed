@@ -26,8 +26,8 @@ export async function getServerSideProps(context) {
   const limit = context.query.limit ? parseInt(context.query.limit) : 15;
   const sort = context.query?.sort || "-createdAt";
   const slugname = context.query.slugname || "";
-  const urlRoute = context?.resolvedUrl?.split("?")[1].split("&");
-  console.log(urlRoute);
+  // const urlRoute = context?.resolvedUrl?.split("?")[1].split("&");
+  // console.log(urlRoute);
 
   const queryClient = new QueryClient();
 
@@ -36,10 +36,10 @@ export async function getServerSideProps(context) {
       queryKey: ["products-shop", limit, sort],
       queryFn: () => getAllProductsShop({ limit, sort }),
     }),
-    queryClient.prefetchQuery({
-      queryKey: ["products-by-slug", slugname],
-      queryFn: () => getCategoryBySlug(slugname),
-    }),
+    // queryClient.prefetchQuery({
+    //   queryKey: ["products-by-slug", slugname],
+    //   queryFn: () => getCategoryBySlug(slugname),
+    // }),
   ];
   await Promise.all(queries);
 

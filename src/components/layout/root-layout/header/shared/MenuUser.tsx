@@ -1,20 +1,19 @@
 import useLogout from "@/hooks/dashboard/useLogout";
+import { useStorage } from "@/hooks/shared/useStorage";
 import useHeaderStore from "@/zustand/root-layout/header/store";
-import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import {
   Divider,
   IconButton,
+  ListItemIcon,
   Menu,
   MenuItem,
-  ListItemIcon,
   Stack,
-  ListItem,
   Typography,
 } from "@mui/material";
-import { useStorage } from "@/hooks/shared/useStorage";
 
 const menuItems = [
   { label: "پیشخوان", icon: <DashboardIcon /> },
@@ -30,7 +29,12 @@ function MenuUser() {
   const handleOpenMenu = useHeaderStore((state) => state.handleOpenMenu);
   return (
     <Stack>
-      <IconButton size="large" edge="start" onClick={handleOpenMenu}>
+      <IconButton
+        size="large"
+        edge="start"
+        onClick={handleOpenMenu}
+        sx={{ color: "#000" }}
+      >
         <PersonIcon />
       </IconButton>
       <Menu
@@ -64,7 +68,7 @@ function MenuUser() {
                 if (item.label === "خروج") logout();
               }}
             >
-              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemIcon sx={{ color: "#000" }}>{item.icon}</ListItemIcon>
               {item.label}
             </MenuItem>
           ))}

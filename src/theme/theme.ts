@@ -48,13 +48,13 @@ let theme = createTheme({
         },
       },
     },
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          fill: "black",
-        },
-      },
-    },
+    // MuiSvgIcon: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: "black",
+    //     },
+    //   },
+    // },
     MuiButton: {
       styleOverrides: {
         root: {
