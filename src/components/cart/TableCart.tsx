@@ -26,7 +26,7 @@ function TableCart() {
   const [cartID, setCartID] = useState("");
   const carts = useCartStore((state) => state.cart);
   const handleOpenDialog = useCartStore((state) => state.handleOpenDialog);
-  const handleDeleteIcon = (id: string) => {
+  const handleDeleteIcon = (id: any) => {
     setCartID(id);
     handleOpenDialog();
   };
@@ -82,8 +82,8 @@ function TableCart() {
                 </TableCell>
                 <TableCell>
                   <IconButton
-                    onClick={() => handleDeleteIcon(item._id.toString())}
-                    id={item._id}
+                    onClick={() => handleDeleteIcon(item._id)}
+                    // id={item._id}
                   >
                     <DeleteIcon sx={{ fill: red[600] }} />
                   </IconButton>

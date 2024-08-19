@@ -50,7 +50,13 @@ function DialogSearchBox() {
     return () => {
       clearTimeout(handler);
     };
-  }, [searchValue, debouncedSearchValue, data]);
+  }, [
+    searchValue,
+    debouncedSearchValue,
+    data,
+    setDebouncedSearchValue,
+    setRecentSearchProducts,
+  ]);
 
   return (
     <Dialog

@@ -10,7 +10,7 @@ const useEditProduct = () => {
       productData,
     }: {
       id: string | number;
-      productData: ProductData;
+      productData: any;
     }) => editProductById({ id, productData }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({

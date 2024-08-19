@@ -45,7 +45,7 @@ function TableInventory() {
   });
   const { mutate: editProductApi, isPending } = useEditProduct();
 
-  const handleShowInput = (event: unknown, item: ProductData) => {
+  const handleShowInput = (event: unknown, item: any) => {
     setShowInput(true);
     setRowData(item);
     setButtonBgColor(green[500]);
@@ -99,7 +99,15 @@ function TableInventory() {
               {tableHeadCells.map((item, index) => (
                 <TableCell
                   key={index}
-                  align={`${mdDown ? item.alignMobile : item.alignDesktop}`}
+                  align={
+                    mdDown
+                      ? item.alignMobile === "left"
+                        ? "left"
+                        : "right"
+                      : item.alignDesktop === "left"
+                      ? "left"
+                      : "right"
+                  }
                 >
                   {item.name}
                 </TableCell>
@@ -109,6 +117,7 @@ function TableInventory() {
           <TableBody>
             {data?.products?.map((item: ProductData, index: number) => (
               <TableBodyChildInventory
+                key={index}
                 product={item}
                 handleShowInput={handleShowInput}
                 showInput={showInput}

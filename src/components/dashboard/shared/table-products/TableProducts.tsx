@@ -92,6 +92,7 @@ function TableProducts() {
           <TableBody>
             {data?.products?.map((item, index) => (
               <TableBodyChildProducts
+                key={index}
                 product={item}
                 handleDeleteIcon={handleDeleteIcon}
                 handleEditIcon={handleEditIcon}

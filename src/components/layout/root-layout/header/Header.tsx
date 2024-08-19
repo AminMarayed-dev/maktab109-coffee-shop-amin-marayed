@@ -58,7 +58,7 @@ function Header() {
     if (token) {
       setIsPersist(true);
     }
-  }, []);
+  }, [setIsPersist]);
 
   return (
     <>

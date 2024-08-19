@@ -71,7 +71,14 @@ function EditProductModal() {
       setCategoryID(product.category._id);
       setSubCategoryID(product.subcategory._id);
     }
-  }, [product, setValue]);
+  }, [
+    product,
+    setValue,
+    setCategoryID,
+    setDescription,
+    setImages,
+    setSubCategoryID,
+  ]);
 
   return (
     <Stack
