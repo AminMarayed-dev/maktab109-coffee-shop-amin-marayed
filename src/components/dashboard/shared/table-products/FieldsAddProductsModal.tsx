@@ -19,7 +19,11 @@ interface FieldsAddProductsModalProps {
   register: UseFormRegister<ProductFormData>;
 }
 
-function FieldsAddProductsModal({ register }: FieldsAddProductsModalProps) {
+interface Image {
+  name: string;
+}
+
+function FieldsAddProductsModal({ register }: any) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const { images, removeImage } = useDashboardStore();
   return (
@@ -50,7 +54,7 @@ function FieldsAddProductsModal({ register }: FieldsAddProductsModalProps) {
         <Stack direction="row" spacing={2} alignItems="center">
           <UploadImageModal />
           {images.length > 0 &&
-            images.map((image, index) => (
+            images.map((image: any, index: any) => (
               <Chip
                 key={index}
                 label={

@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const { styleModal, styleButtonModalOrder } = cssClass;
+const { styleModal } = cssClass;
 const { dashboard } = localization;
 function ModalOrders() {
   const [open, setOpen] = useState(false);
@@ -75,7 +75,17 @@ function ModalOrders() {
             <ModalOrdersFactor userData={data} />
             <TableModalOrdres data={data} />
             {!data?.deliveryStatus && (
-              <Button sx={styleButtonModalOrder} onClick={handleEditOrder}>
+              <Button
+                sx={{
+                  mt: 2,
+                  bgcolor: "green",
+                  color: "white",
+                  "&:hover": {
+                    bgcolor: "darkgreen",
+                  },
+                }}
+                onClick={handleEditOrder}
+              >
                 {dashboard.delivary}
               </Button>
             )}

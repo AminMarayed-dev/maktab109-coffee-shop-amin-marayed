@@ -28,7 +28,7 @@ function AddProductModal() {
     formData.append("quantity", productData.quantity);
     formData.append("category", categoryID);
     formData.append("subcategory", subCategoryID);
-    images?.map((i, index) => formData.append("images", i));
+    images?.map((i: any, index: any) => formData.append("images", i));
     addProductApi(formData, {
       onSuccess: (res) => {
         setOpen(true);

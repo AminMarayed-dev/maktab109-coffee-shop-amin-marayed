@@ -9,7 +9,7 @@ type State = {
   subCategoryID: string;
   productID: string;
   subCategoryList: string[] | null;
-  images: string[];
+  images: any;
   openModalAdd: boolean;
   openModalEdit: boolean;
   openModalOrder: boolean;
@@ -96,7 +96,7 @@ const useDashboardStore = create<State & Action>((set) => ({
     }),
   removeImage: (imageName) =>
     set((state) => ({
-      images: state.images.filter((image) => image.name !== imageName),
+      images: state.images.filter((image: any) => image.name !== imageName),
     })),
 }));
 

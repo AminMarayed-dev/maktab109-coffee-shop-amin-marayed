@@ -5,7 +5,7 @@ import Shop from "@/components/shop/Shop";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ReactElement } from "react";
 
-function ShopPage(props) {
+function ShopPage(props: any) {
   return (
     <Shop
       props={{
@@ -22,7 +22,7 @@ ShopPage.getLayout = function getLayout(page: ReactElement) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   const limit = context.query.limit ? parseInt(context.query.limit) : 15;
   const sort = context.query?.sort || "-createdAt";
   const slugname = context.query.slugname || "";
