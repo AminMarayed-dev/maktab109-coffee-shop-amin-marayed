@@ -56,7 +56,6 @@ function LoginComponent() {
         data: { user: User };
       }>;
       if (status === 200) {
-        console.log(token, user);
         setIsLoginSuccess(true);
         setCookie("accessToken", token.accessToken);
         setCookie("refreshToken", token.refreshToken);
