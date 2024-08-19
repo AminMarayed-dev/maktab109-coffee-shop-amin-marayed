@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import ButtonDrawerBasket from "./ButtonDrawerBasket";
 import CardBasket from "./CardBasket";
 
-const { cart, common } = localization;
+const { cart } = localization;
 const { center, styleDrawerBasket } = cssClass;
 
 function DrawerBasket() {

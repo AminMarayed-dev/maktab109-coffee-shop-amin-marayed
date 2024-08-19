@@ -1,11 +1,29 @@
 import useLogout from "@/hooks/dashboard/useLogout";
 import useHeaderStore from "@/zustand/root-layout/header/store";
 import PersonIcon from "@mui/icons-material/Person";
-import { IconButton, Menu, MenuItem, Stack } from "@mui/material";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import {
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Stack,
+  ListItem,
+  Typography,
+} from "@mui/material";
+import { useStorage } from "@/hooks/shared/useStorage";
 
-const menuItems = ["پیشخوان", "سفارش ها", "خروج"];
+const menuItems = [
+  { label: "پیشخوان", icon: <DashboardIcon /> },
+  { label: "سفارش ها", icon: <ShoppingBagIcon /> },
+  { label: "خروج", icon: <ExitToAppIcon /> },
+];
 
 function MenuUser() {
+  const [user] = useStorage("user", null);
   const logout = useLogout();
   const anchorMenu = useHeaderStore((state) => state.anchorMenu);
   const handleCloseMenu = useHeaderStore((state) => state.handleCloseMenu);
@@ -27,18 +45,30 @@ function MenuUser() {
           vertical: "top",
           horizontal: "left",
         }}
+        PaperProps={{
+          style: {
+            width: 200, // adjust the width to your desired value
+          },
+        }}
       >
-        {menuItems.map((item, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => {
-              handleCloseMenu();
-              if (item === "خروج") logout();
-            }}
-          >
-            {item}
-          </MenuItem>
-        ))}
+        <>
+          <Typography sx={{ p: 1 }} textAlign="center">
+            {user.firstname} {user.lastname}
+          </Typography>
+          <Divider />
+          {menuItems.map((item, index) => (
+            <MenuItem
+              key={index}
+              onClick={() => {
+                handleCloseMenu();
+                if (item.label === "خروج") logout();
+              }}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              {item.label}
+            </MenuItem>
+          ))}
+        </>
       </Menu>
     </Stack>
   );
