@@ -1,7 +1,6 @@
 import ProductsRelated from "@/components/single-product/ProductsRelated";
 import SingleProductDetail from "@/components/single-product/SingleProductDetail";
 import SingleProductImages from "@/components/single-product/SingleProductImages";
-import { cssClass } from "@/constant/cssClass";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { Container, Divider, Stack } from "@mui/material";
 

@@ -3,10 +3,12 @@ import {
   Box,
   Button,
   Divider,
+  IconButton,
   ListItemIcon,
   Rating,
   Snackbar,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -16,22 +18,30 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
+import { cssClass } from "@/constant/cssClass";
+import useEditProduct from "@/hooks/dashboard/useEditProductById";
+import useResponsive from "@/hooks/shared/useResponsive";
+import truncateText from "@/utils/trancateText";
 import { useCartStore } from "@/zustand/cart/store";
 import useShopStore from "@/zustand/shop/store";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CountBox from "../shared/CountBox";
 import DialogAddProducts from "./DialogAddProducts";
 import SocialMedia from "./SocialMedia";
 
 const { common, singleProduct, shop, cart } = localization;
+const { styleButtonLinkSingleProduct } = cssClass;
 function SingleProductDetail({ product }: { product: any }) {
+  const router = useRouter();
+  const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const [open, setOpen] = useState(false);
+  const [rateValue, setRateValue] = useState<number | null>(0);
   const productsCount = useCartStore((state) => state.productCounts);
 
   const addToCart = useCartStore((state) => state.addToCart);
   const handleOpenDialog = useShopStore((state) => state.handleOpenDialog);
   const carts = useCartStore((state) => state.cart);
-  const [total, setTotal] = useState([productsCount[product?._id] || 1]);
 
   const handleAddToCart = () => {
     const cartItem = carts.find((item) => item._id === product._id);
@@ -45,6 +55,21 @@ function SingleProductDetail({ product }: { product: any }) {
       setOpen(true);
     }
   };
+  const handleRouteButtonLink = (route: string) => {
+    router.push(route);
+  };
+  const { mutate: editProductByRate } = useEditProduct();
+
+  // const handleSetRateValue = (event, newValue) => {
+  //   setRateValue(newValue);
+  //   const formData = new FormData();
+  //   formData.append("rating", JSON.stringify({ rate: 3, count: 0 }));
+
+  //   editProductByRate({
+  //     id: product?._id,
+  //     productsData: formData,
+  //   });
+  // };
 
   return (
     <Stack rowGap={2} flexGrow={1.5}>
@@ -55,22 +80,66 @@ function SingleProductDetail({ product }: { product: any }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="body2" fontSize={12.5}>
-          {`${shop.shopInternet} >> ${product.category.name} << ${product.subcategory.name} >> ${product.name}`}
-        </Typography>
+        <Stack direction="row" alignItems="center" justifyContent="center">
+          <Button
+            sx={styleButtonLinkSingleProduct}
+            onClick={() => handleRouteButtonLink("/shop")}
+          >
+            {shop.shopInternet}
+          </Button>
+          {">>"}
+          <Button
+            sx={styleButtonLinkSingleProduct}
+            onClick={() =>
+              handleRouteButtonLink(
+                `/product-category/${product.category.slugname}`
+              )
+            }
+          >
+            {product.category.name}
+          </Button>
+          {">>"}
+          <Button
+            sx={styleButtonLinkSingleProduct}
+            onClick={() =>
+              handleRouteButtonLink(
+                `/product-category/${product.category.slugname}/${product.subcategory.slugname}`
+              )
+            }
+          >
+            {product.subcategory.name}
+          </Button>
+          {">>"}
+          <Typography variant="body2">
+            {mdDown ? truncateText(product.name, 15) : product.name}
+          </Typography>
+        </Stack>
         <ListItemIcon
           sx={{
             display: "flex",
-            justifyContent: "space-between",
           }}
         >
-          <KeyboardArrowRightIcon sx={{ cursor: "pointer" }} />
-          <GridViewIcon sx={{ cursor: "pointer" }} />
-          <KeyboardArrowLeftIcon sx={{ cursor: "pointer" }} />
+          <IconButton sx={{ padding: 0 }}>
+            <KeyboardArrowRightIcon sx={{ cursor: "pointer" }} />
+          </IconButton>
+
+          <Tooltip title={singleProduct.backToShop} sx={{ padding: 0 }}>
+            <IconButton onClick={() => router.push("/shop")}>
+              <GridViewIcon sx={{ cursor: "pointer" }} />
+            </IconButton>
+          </Tooltip>
+          <IconButton sx={{ padding: 0 }}>
+            <KeyboardArrowLeftIcon sx={{ cursor: "pointer" }} />
+          </IconButton>
         </ListItemIcon>
       </Box>
       <Typography variant="h6">{product.name}</Typography>
-      <Rating name="read-only" value={product.rating.rate} readOnly />
+      <Rating
+        name="simple-controlled"
+        // value={rateValue}
+        // onChange={(event, newValue) => handleSetRateValue(event, newValue)}
+        readOnly
+      />
       <Typography variant="h6" color="secondary.dark">
         {toPersianNumbersWithComma(product.price)} {common.rial}
       </Typography>

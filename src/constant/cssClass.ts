@@ -110,17 +110,16 @@ export const cssClass = {
     alignItems: "center",
     border: "3px solid #52525b",
   },
-  styleLinkAuth: {
-    bgcolor: "primary.main",
+  styleButtonLinkSingleProduct: {
+    backgroundColor: "primary.main",
+    color: "primary.contrastText",
+    borderRadius: 0,
     "&:hover": {
-      bgcolor: "primary.main",
-      color: "secondary.main",
+      backgroundColor: "primary.main",
+      color: "secondary.light",
     },
-  },
-  styleButtonModalOrder: {
-    mt: 2.5,
-    backgroundColor: "green",
-    color: "primary.main",
-    "&:hover": { backgroundColor: "darkgreen" },
+    padding: 0,
+    fontSize: "0.7rem",
+    minWidth: 0,
   },
 };
