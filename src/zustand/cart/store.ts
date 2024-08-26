@@ -74,7 +74,7 @@ export const useCartStore = create(
 
       removeCart: (productID: string) => {
         const { cart, productCounts } = get();
-        const itemToRemove = cart.find((item) => item._id === productID);
+        const itemToRemove = cart.find((item: any) => item._id === productID);
         const updatedCart = cart.filter(
           (item) => item._id !== itemToRemove?._id
         );
@@ -107,7 +107,7 @@ export const useCartStore = create(
         const currentCount = productCounts[productId] || 0;
         const updatedTotalItems = totalItems - currentCount + count;
 
-        const updatedCart = cart.map((item) =>
+        const updatedCart = cart.map((item: any) =>
           item._id === productId ? { ...item, count } : item
         );
 

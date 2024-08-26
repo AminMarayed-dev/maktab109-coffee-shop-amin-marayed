@@ -47,7 +47,7 @@ function EditProductModal() {
     formData.append("quantity", productData.quantity);
     formData.append("category", categoryID);
     formData.append("subcategory", subCategoryID);
-    images?.map((i, index) => formData.append("images", i));
+    images?.map((i: any, index: any) => formData.append("images", i));
 
     editProductApi(
       { id: product._id, productData: formData },

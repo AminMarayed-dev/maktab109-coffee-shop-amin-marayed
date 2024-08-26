@@ -22,7 +22,7 @@ function ResultEditImage({ productImages }: { productImages: string[] }) {
       )}
 
       {isUpload
-        ? imageUpload.map((imageU, indexU) => (
+        ? imageUpload.map((imageU: any, indexU: any) => (
             <Chip
               key={indexU}
               label={
@@ -36,7 +36,8 @@ function ResultEditImage({ productImages }: { productImages: string[] }) {
         : productImages?.map((image, index) => (
             <Image
               key={index}
-              src={`http://${image}`}
+              // src={`http://${image}`}
+              src={image}
               width={mdDown ? 30 : 60}
               height={mdDown ? 30 : 60}
               alt="image"

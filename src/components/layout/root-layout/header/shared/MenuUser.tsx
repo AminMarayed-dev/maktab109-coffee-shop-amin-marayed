@@ -22,7 +22,7 @@ const menuItems = [
 ];
 
 function MenuUser() {
-  const [user] = useStorage("user", null);
+  const [user] = useStorage<any>("user", null);
   const logout = useLogout();
   const anchorMenu = useHeaderStore((state) => state.anchorMenu);
   const handleCloseMenu = useHeaderStore((state) => state.handleCloseMenu);

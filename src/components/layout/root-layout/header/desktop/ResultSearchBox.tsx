@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import RecentSearchProducts from "./RecentSearchProducts";
 
 const { common, home } = localization;
-function ResultSearchBox({ filteredProducts }) {
+function ResultSearchBox({ filteredProducts }: { filteredProducts: any }) {
   const router = useRouter();
   const {
     handleCloseDialogSearchBox,
@@ -41,7 +41,7 @@ function ResultSearchBox({ filteredProducts }) {
         <Grid container spacing={4} mt={3} justifyContent="center">
           {debouncedSearchValue ? (
             filteredProducts?.length > 0 ? (
-              filteredProducts.map((item, index) => (
+              filteredProducts.map((item: any, index: any) => (
                 <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
                   <Card
                     sx={{
@@ -53,7 +53,8 @@ function ResultSearchBox({ filteredProducts }) {
                     }}
                   >
                     <Image
-                      src={`http://${item.images[0]}`}
+                      // src={`http://${item.images[0]}`}
+                      src={item.images[0]}
                       width={265}
                       height={200}
                       objectFit="cover"

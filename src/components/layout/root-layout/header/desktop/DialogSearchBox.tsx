@@ -29,7 +29,7 @@ function DialogSearchBox() {
     recentSearchProducts,
   } = useHeaderStore();
 
-  const handleSearchValue = (e) => {
+  const handleSearchValue = (e: any) => {
     setSearchValue(e.target.value);
   };
 
@@ -38,7 +38,7 @@ function DialogSearchBox() {
       setDebouncedSearchValue(searchValue);
     }, 1000);
 
-    const filteredProducts = data?.products?.filter((product) =>
+    const filteredProducts = data?.products?.filter((product: any) =>
       product?.name.includes(debouncedSearchValue)
     );
     setList(filteredProducts);

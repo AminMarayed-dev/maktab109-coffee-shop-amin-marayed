@@ -83,14 +83,24 @@ function TableProducts() {
           <TableHead>
             <TableRow>
               {tableHeadCells.map((item, index) => (
-                <TableCell key={index} align={item.align}>
+                <TableCell
+                  key={index}
+                  align={
+                    item.align as
+                      | "center"
+                      | "right"
+                      | "left"
+                      | "inherit"
+                      | "justify"
+                  }
+                >
                   {item.name}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.products?.map((item, index) => (
+            {data?.products?.map((item: any, index: any) => (
               <TableBodyChildProducts
                 key={index}
                 product={item}

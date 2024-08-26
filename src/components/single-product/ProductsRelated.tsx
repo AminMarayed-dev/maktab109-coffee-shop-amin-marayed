@@ -64,27 +64,28 @@ function ProductsRelated({ product }: { product: any }) {
                   <Grid key={index} item lg={3} xs={6}>
                     <Button
                       sx={styleButtonLink}
-                      onClick={() => router.push(`/shop/${product._id}`)}
+                      onClick={() => router.push(`/shop/${product?._id}`)}
                     >
                       <Card
                         sx={{
                           ...styleCard,
                           justifyContent:
-                            product.quantity > 0
+                            product?.quantity > 0
                               ? "space-between"
                               : "flex-start",
                         }}
                         elevation={0}
                       >
                         <Image
-                          src={`http://${product.images[0]}`}
+                          // src={`http://${product?.images[0]}`}
+                          src={product.images[0]}
                           width={mdDown ? 200 : 300}
                           height={195}
                           objectFit="cover"
-                          alt={product.name}
+                          alt={product?.name}
                           loading="lazy"
                         />
-                        {product.quantity > 0 ? (
+                        {product?.quantity > 0 ? (
                           <>
                             <CardContent>
                               <Typography
@@ -93,8 +94,8 @@ function ProductsRelated({ product }: { product: any }) {
                                 textAlign="center"
                               >
                                 {mdDown
-                                  ? truncateText(product.name, 16)
-                                  : truncateText(product.name, 25)}
+                                  ? truncateText(product?.name, 16)
+                                  : truncateText(product?.name, 25)}
                               </Typography>
                               <CheckQuantityAndRate rate={3} />
                               <Typography
@@ -103,7 +104,7 @@ function ProductsRelated({ product }: { product: any }) {
                                 color="secondary.dark"
                                 textAlign={"center"}
                               >
-                                {toPersianNumbersWithComma(product.price)}{" "}
+                                {toPersianNumbersWithComma(product?.price)}{" "}
                                 {common.rial}
                               </Typography>
                             </CardContent>
@@ -125,8 +126,8 @@ function ProductsRelated({ product }: { product: any }) {
                               textAlign="center"
                             >
                               {mdDown
-                                ? truncateText(product.name, 16)
-                                : truncateText(product.name, 25)}
+                                ? truncateText(product?.name, 16)
+                                : truncateText(product?.name, 25)}
                             </Typography>
                             <Typography
                               variant="h4"

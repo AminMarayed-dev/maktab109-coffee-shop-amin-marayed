@@ -60,7 +60,7 @@ function ProductsSubCategory({ slug }: { slug: any }) {
       <Divider />
       <Stack justifyContent="center" alignItems="center">
         <Grid container lg={15} xs={12} mt={3} spacing={2}>
-          {productsBySubCategory?.map((product: ProductData, index: number) => (
+          {productsBySubCategory?.map((product: any, index: number) => (
             <Grid item lg={3} xs={6} key={index}>
               <Card
                 sx={{
@@ -71,7 +71,8 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                 onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
-                  src={`http://${product.images[0]}`}
+                  // src={`http://${product.images[0]}`}
+                  src={product.images[0]}
                   width={mdDown ? 200 : 300}
                   height={195}
                   objectFit="cover"

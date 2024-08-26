@@ -67,7 +67,8 @@ function ProductsCategory({ slug }: { slug: string }) {
                 onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
-                  src={`http://${product.images[0]}`}
+                  // src={`http://${product.images[0]}`}
+                  src={product.images[0]}
                   width={mdDown ? 200 : 300}
                   height={195}
                   objectFit="cover"

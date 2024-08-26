@@ -32,7 +32,7 @@ function ProductsCategory({ title, data }: { title: string; data: any }) {
     <Stack mt={5} mb={3} rowGap={4} justifyContent="center" alignItems="center">
       <TextDivider text={title} />
       <Grid container lg={12} xs={12} spacing={2}>
-        {sampleProductsShop?.map((product: ProductData, index: number) => (
+        {sampleProductsShop?.map((product: any, index: number) => (
           <Grid item lg={4} xs={6} key={index}>
             <Button
               sx={styleButtonLink}
@@ -45,7 +45,8 @@ function ProductsCategory({ title, data }: { title: string; data: any }) {
                 }}
               >
                 <Image
-                  src={`http://${product.images[0]}`}
+                  // src={`http://${product.images[0]}`}
+                  src={product.images[0]}
                   width={mdDown ? 200 : 380}
                   height={mdDown ? 200 : 300}
                   objectFit="cover"

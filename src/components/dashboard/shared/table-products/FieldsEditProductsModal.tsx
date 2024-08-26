@@ -5,7 +5,13 @@ import UploadImageModal from "@/components/dashboard/shared/table-products/Uploa
 import { textFieldItems } from "@/components/dashboard/shared/table-products/utils/textFieldItems.data";
 import { Box, Grid, TextField } from "@mui/material";
 
-function FieldsEditProductsModal({ register, images }) {
+function FieldsEditProductsModal({
+  register,
+  images,
+}: {
+  register: any;
+  images: any;
+}) {
   return (
     <Grid
       container

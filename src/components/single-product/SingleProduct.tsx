@@ -6,6 +6,7 @@ import { Container, Divider, Stack } from "@mui/material";
 
 function SingleProduct({ product }: { product: any }) {
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
+  if (!product) return <div>Loading...</div>;
   return (
     <Container>
       <Stack

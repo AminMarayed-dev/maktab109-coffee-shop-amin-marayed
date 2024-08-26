@@ -43,7 +43,7 @@ function SelectFormModal() {
           <MenuItem value="" disabled>
             <em>{dashboard.category}</em>
           </MenuItem>
-          {categoryList?.map((category, index) => (
+          {categoryList?.map((category: any, index: any) => (
             <MenuItem key={index} value={category._id}>
               {category.name}
             </MenuItem>
@@ -59,7 +59,7 @@ function SelectFormModal() {
           <MenuItem value="" disabled>
             <em>{dashboard.subCategory}</em>
           </MenuItem>
-          {subCategoryList?.map((subCategory, index) => (
+          {subCategoryList?.map((subCategory: any, index: any) => (
             <MenuItem key={index} value={subCategory._id}>
               {subCategory.name}
             </MenuItem>

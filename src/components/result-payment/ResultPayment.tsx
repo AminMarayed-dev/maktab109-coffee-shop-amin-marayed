@@ -19,7 +19,7 @@ function ResultPayment() {
   const { mutate: editQuantityProduct } = useEditProduct();
   const { mutate: addOrders } = useAddOrders();
   const [, , removeCartBasket] = useStorage("cart-storage", null);
-  const [user] = useStorage("user", null);
+  const [user] = useStorage<any>("user", null);
   const carts = useCartStore((state) => state.cart);
   const { valueDatePicker } = usePaymentStore();
 

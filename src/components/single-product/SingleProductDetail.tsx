@@ -79,7 +79,7 @@ function SingleProductDetail({ product }: { product: any }) {
             sx={styleButtonLinkSingleProduct}
             onClick={() =>
               handleRouteButtonLink(
-                `/product-category/${product.category.slugname}`
+                `/product-category/${product?.category?.slugname}`
               )
             }
           >
@@ -90,7 +90,7 @@ function SingleProductDetail({ product }: { product: any }) {
             sx={styleButtonLinkSingleProduct}
             onClick={() =>
               handleRouteButtonLink(
-                `/product-category/${product.category.slugname}/${product.subcategory.slugname}`
+                `/product-category/${product.category.slugname}/${product?.subcategory?.slugname}`
               )
             }
           >
@@ -98,7 +98,7 @@ function SingleProductDetail({ product }: { product: any }) {
           </Button>
           {">>"}
           <Typography variant="body2">
-            {mdDown ? truncateText(product.name, 15) : product.name}
+            {mdDown ? truncateText(product?.name, 15) : product?.name}
           </Typography>
         </Stack>
         <ListItemIcon
@@ -123,7 +123,7 @@ function SingleProductDetail({ product }: { product: any }) {
           </IconButton>
         </ListItemIcon>
       </Box>
-      <Typography variant="h6">{product.name}</Typography>
+      <Typography variant="h6">{product?.name}</Typography>
       <Rating
         name="simple-controlled"
         value={rateValue}
@@ -151,7 +151,7 @@ function SingleProductDetail({ product }: { product: any }) {
           >
             <Alert severity="error" variant="filled" sx={{ width: "100%" }}>
               {cart.messageGratherQuantity}{" "}
-              {`مقدار موجودی: ${product.quantity}`}
+              {`مقدار موجودی: ${product?.quantity}`}
             </Alert>
           </Snackbar>
         </Stack>

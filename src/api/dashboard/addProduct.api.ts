@@ -5,6 +5,6 @@ export async function addProductApi(productData: ProductData) {
   try {
     return await api.post("/products", productData);
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 }

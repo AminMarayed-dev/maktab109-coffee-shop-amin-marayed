@@ -36,8 +36,10 @@ function OrderPayment() {
     setIsChecked(checked);
   };
 
-  const handleDateChange = (date: Date) => {
-    setValueDataPicker(new Date(date).toISOString());
+  const handleDateChange = (date: DateObject | null, options: any) => {
+    if (date) {
+      setValueDataPicker(new Date(date.toString()).toISOString());
+    }
   };
   const handleSubmitOrder = () => {
     isChecked ? router.push("/result-payment") : setOpen(true);

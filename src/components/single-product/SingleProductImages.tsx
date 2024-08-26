@@ -9,7 +9,7 @@ function SingleProductImages({ product }: any) {
 
   useEffect(() => {
     if (product?.images && product?.images.length > 0) {
-      setMainImage(product.images[0]);
+      setMainImage(product?.images[0]);
     }
   }, [product]);
 
@@ -22,8 +22,9 @@ function SingleProductImages({ product }: any) {
         <Image
           width={mdDown ? 380 : 450}
           height={mdDown ? 260 : 450}
-          src={`http://${mainImage}`}
-          alt={product.name}
+          // src={`http://${mainImage}`}
+          src={mainImage}
+          alt={product?.name}
           style={{ borderRadius: "10px" }}
         />
       </Box>
@@ -34,8 +35,9 @@ function SingleProductImages({ product }: any) {
               key={index}
               width={mdDown ? 95 : 110}
               height={mdDown ? 95 : 110}
-              src={`http://${image}`}
-              alt={product.name}
+              // src={`http://${image}`}
+              src={image}
+              alt={product?.name}
               style={{ borderRadius: "10px", cursor: "pointer" }}
               onClick={() => handleImageClick(image)}
             />

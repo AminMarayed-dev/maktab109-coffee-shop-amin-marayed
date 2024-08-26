@@ -2,6 +2,7 @@ import { localization } from "@/constant/localization";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
+import { ChangeEvent } from "react";
 
 const { common } = localization;
 
@@ -28,7 +29,11 @@ const options = [
   },
 ];
 
-export default function SelectFilter({ handleSelectFilterProduct }) {
+type Props = {
+  handleSelectFilterProduct: (input:string) => void;
+};
+
+export default function SelectFilter({ handleSelectFilterProduct }: Props) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

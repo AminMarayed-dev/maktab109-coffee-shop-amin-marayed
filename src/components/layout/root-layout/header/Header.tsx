@@ -43,7 +43,7 @@ function Header() {
   const onlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
   const mdDown = useResponsive({ query: "down", breakpoints: "md" });
   const openDrawer = useHeaderStore((state) => state.openDrawer);
-  const anchorDrawer: anchor = useHeaderStore((state) => state.anchorDrawer);
+  const anchorDrawer = useHeaderStore((state) => state.anchorDrawer);
   const isPersist = useHeaderStore((state) => state.isPersist);
   const setIsPersist = useHeaderStore((state) => state.setIsPersist);
   const handleDrawerMenu = useHeaderStore((state) => state.handleDrawerMenu);

@@ -42,7 +42,9 @@ function Shop({ props }: { props: any }) {
   });
 
   const handleLimitProduct = () => {
-    const currentLimit = router.query.limit ? parseInt(router.query.limit) : 15;
+    const currentLimit = router.query.limit
+      ? parseInt(router.query.limit as any)
+      : 15;
     const newLimit = currentLimit + 15;
     router.replace(
       {
@@ -119,7 +121,8 @@ function Shop({ props }: { props: any }) {
                 onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
-                  src={`http://${product.images[0]}`}
+                  // src={`http://${product.images[0]}`}
+                  src={product.images[0]}
                   width={mdDown ? 200 : 300}
                   height={195}
                   objectFit="cover"

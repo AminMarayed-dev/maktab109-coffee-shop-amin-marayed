@@ -13,7 +13,7 @@ function RecentSearchProducts() {
   const { recentSearchProducts, handleCloseDialogSearchBox } = useHeaderStore();
   return (
     <>
-      {recentSearchProducts.map((product, index) => (
+      {recentSearchProducts.map((product: any, index: any) => (
         <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
           <Card
             sx={{
@@ -25,7 +25,8 @@ function RecentSearchProducts() {
             }}
           >
             <Image
-              src={`http://${product.images[0]}`}
+              // src={`http://${product.images[0]}`}
+              src={product.images[0]}
               width={265}
               height={200}
               objectFit="cover"

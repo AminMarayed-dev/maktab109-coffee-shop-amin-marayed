@@ -1,64 +1,9 @@
-// import { create } from "zustand";
-
-// type State = {
-//   openDrawer: boolean;
-//   anchorDrawer: string;
-//   anchorMenu: HTMLElement | null;
-//   isPersist: boolean;
-//   openDialogSearchBox: boolean;
-//   searchValue: string;
-//   filterProducts: any[];
-//   debouncedSearchValue: string;
-// };
-
-// type Action = {
-//   setIsPersist: (isPersist: State["isPersist"]) => void;
-//   handleDrawerMenu: () => void;
-//   handleDrawerBasket: () => void;
-//   handleCloseDrawer: () => void;
-//   handleOpenMenu: (event: React.MouseEvent<HTMLElement>) => void;
-//   handleCloseMenu: () => void;
-//   handleOpenDialogSearchBox: () => void;
-//   handleCloseDialogSearchBox: () => void;
-//   setSearchValue: (searchValue: State["searchValue"]) => void;
-//   setDebouncedSearchValue: (
-//     debouncedSearchValue: State["debouncedSearchValue"]
-//   ) => void;
-//   setFilterProducts: (filterProducts: State["filterProducts"]) => void;
-// };
-
-// const useHeaderStore = create<State & Action>((set) => ({
-//   openDrawer: false,
-//   anchorDrawer: "",
-//   isPersist: false,
-//   anchorMenu: null,
-//   openDrawerFilter: false,
-//   openDialogSearchBox: false,
-//   searchValue: "",
-//   debouncedSearchValue: "",
-//   filterProducts: [],
-//   setFilterProducts: (filterProducts) => set(() => ({ filterProducts })),
-//   setSearchValue: (searchValue) => set(() => ({ searchValue })),
-//   setDebouncedSearchValue: (debouncedSearchValue) =>
-//     set(() => ({ debouncedSearchValue })),
-//   setIsPersist: (isPersist) => set(() => ({ isPersist })),
-//   handleDrawerMenu: () => set({ anchorDrawer: "left", openDrawer: true }),
-//   handleDrawerBasket: () => set({ anchorDrawer: "right", openDrawer: true }),
-//   handleCloseDrawer: () => set({ openDrawer: false }),
-//   handleOpenMenu: (event) => set({ anchorMenu: event.currentTarget }),
-//   handleCloseMenu: () => set({ anchorMenu: null }),
-//   handleOpenDialogSearchBox: () => set({ openDialogSearchBox: true }),
-//   handleCloseDialogSearchBox: () => set({ openDialogSearchBox: false }),
-// }));
-
-// export default useHeaderStore;
-
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
   openDrawer: boolean;
-  anchorDrawer: string;
+  anchorDrawer: "left" | "right" | "bottom" | "top" | undefined | string;
   anchorMenu: HTMLElement | null;
   isPersist: boolean;
   openDialogSearchBox: boolean;
@@ -86,7 +31,7 @@ type Action = {
 };
 
 const useHeaderStore = create(
-  persist<State & Action>(
+  persist<any>(
     (set) => ({
       openDrawer: false,
       anchorDrawer: "",
@@ -97,19 +42,19 @@ const useHeaderStore = create(
       searchValue: "",
       debouncedSearchValue: "",
       recentSearchProducts: [],
-      setIsPersist: (isPersist) => set(() => ({ isPersist })),
+      setIsPersist: (isPersist: any) => set(() => ({ isPersist })),
       handleDrawerMenu: () => set({ anchorDrawer: "left", openDrawer: true }),
       handleDrawerBasket: () =>
         set({ anchorDrawer: "right", openDrawer: true }),
       handleCloseDrawer: () => set({ openDrawer: false }),
-      handleOpenMenu: (event) => set({ anchorMenu: event.currentTarget }),
+      handleOpenMenu: (event: any) => set({ anchorMenu: event.currentTarget }),
       handleCloseMenu: () => set({ anchorMenu: null }),
       handleOpenDialogSearchBox: () => set({ openDialogSearchBox: true }),
       handleCloseDialogSearchBox: () => set({ openDialogSearchBox: false }),
-      setSearchValue: (searchValue) => set(() => ({ searchValue })),
-      setDebouncedSearchValue: (debouncedSearchValue) =>
+      setSearchValue: (searchValue: any) => set(() => ({ searchValue })),
+      setDebouncedSearchValue: (debouncedSearchValue: any) =>
         set(() => ({ debouncedSearchValue })),
-      setRecentSearchProducts: (recentSearchProducts) =>
+      setRecentSearchProducts: (recentSearchProducts: any) =>
         set(() => ({ recentSearchProducts })),
     }),
     {

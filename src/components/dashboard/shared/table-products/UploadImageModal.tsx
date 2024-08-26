@@ -6,7 +6,7 @@ const { dashboard } = localization;
 function UploadImageModal() {
   const { images, isUpload, setIsUpload, setImages, isEdit } =
     useDashboardStore();
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: any) => {
     const file = event.target.files[0];
     if (isEdit && !isUpload) {
       setIsUpload(true);

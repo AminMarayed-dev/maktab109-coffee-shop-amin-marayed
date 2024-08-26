@@ -57,7 +57,8 @@ function TableCart() {
                   <Image
                     width={55}
                     height={55}
-                    src={`http://${item.images[0]}`}
+                    // src={`http://${item.images[0]}`}
+                    src={item.images[0]}
                     alt={item.name}
                   />
                   <Typography variant="body2">
