@@ -1,4 +1,3 @@
-import CheckQuantityAndRate from "@/components/shop/checkQuantityAndRate";
 import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useGetProductsByCategoryID from "@/hooks/product-category/useGetProductsByCategoryID";
@@ -10,7 +9,6 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   Grid,
   IconButton,
@@ -69,35 +67,39 @@ function ProductsRelated({ product }: { product: any }) {
                       <Card
                         sx={{
                           ...styleCard,
-                          justifyContent:
-                            product?.quantity > 0
-                              ? "space-between"
-                              : "flex-start",
+                          justifyContent: "flex-start",
+                          height: mdDown ? "295px" : "300px",
+                          alignItems: "center",
                         }}
                         elevation={0}
                       >
                         <Image
-                          // src={`http://${product?.images[0]}`}
-                          src={product.images[0]}
+                          src={`http://${product?.images[0]}`}
+                          // src={product.images[0]}
                           width={mdDown ? 200 : 300}
-                          height={195}
+                          height={mdDown ? 150 : 180}
                           objectFit="cover"
                           alt={product?.name}
                           loading="lazy"
                         />
                         {product?.quantity > 0 ? (
                           <>
-                            <CardContent>
+                            <CardContent
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                              }}
+                            >
                               <Typography
-                                variant="body1"
+                                variant={mdDown ? "body2" : "body1"}
                                 fontWeight={"bold"}
                                 textAlign="center"
                               >
                                 {mdDown
-                                  ? truncateText(product?.name, 16)
-                                  : truncateText(product?.name, 25)}
+                                  ? truncateText(product.name, 36)
+                                  : product.name}
                               </Typography>
-                              <CheckQuantityAndRate rate={3} />
                               <Typography
                                 variant="body2"
                                 mt={1}
@@ -108,7 +110,7 @@ function ProductsRelated({ product }: { product: any }) {
                                 {common.rial}
                               </Typography>
                             </CardContent>
-                            <CardActions>
+                            {/* <CardActions>
                               <Button
                                 sx={{
                                   fontSize: mdDown ? "small" : "medium",
@@ -116,23 +118,20 @@ function ProductsRelated({ product }: { product: any }) {
                               >
                                 {common.addProductToBasket}
                               </Button>
-                            </CardActions>
+                            </CardActions> */}
                           </>
                         ) : (
                           <CardContent>
                             <Typography
-                              variant="body1"
+                              variant={mdDown ? "body2" : "body1"}
                               fontWeight={"bold"}
                               textAlign="center"
                             >
-                              {mdDown
-                                ? truncateText(product?.name, 16)
-                                : truncateText(product?.name, 25)}
+                              {product.name}
                             </Typography>
                             <Typography
-                              variant="h4"
+                              variant="h6"
                               textAlign={"center"}
-                              mt={6}
                               color="error"
                             >
                               {shop.unavailable}

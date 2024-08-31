@@ -53,8 +53,8 @@ function ResultSearchBox({ filteredProducts }: { filteredProducts: any }) {
                     }}
                   >
                     <Image
-                      // src={`http://${item.images[0]}`}
-                      src={item.images[0]}
+                      src={`http://${item.images[0]}`}
+                      // src={item.images[0]}
                       width={265}
                       height={200}
                       objectFit="cover"

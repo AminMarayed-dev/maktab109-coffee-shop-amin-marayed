@@ -4,7 +4,6 @@ import { localization } from "@/constant/localization";
 import useGetCategoryBySlug from "@/hooks/product-category/useGetCategoryBySlug";
 import useGetProductsByCategoryID from "@/hooks/product-category/useGetProductsByCategoryID";
 import useResponsive from "@/hooks/shared/useResponsive";
-import { ProductData } from "@/types/dashboard/type";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
@@ -67,8 +66,8 @@ function ProductsCategory({ slug }: { slug: string }) {
                 onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
-                  // src={`http://${product.images[0]}`}
-                  src={product.images[0]}
+                  src={`http://${product.images[0]}`}
+                  // src={product.images[0]}
                   width={mdDown ? 200 : 300}
                   height={195}
                   objectFit="cover"

@@ -25,8 +25,8 @@ function RecentSearchProducts() {
             }}
           >
             <Image
-              // src={`http://${product.images[0]}`}
-              src={product.images[0]}
+              src={`http://${product.images[0]}`}
+              // src={product.images[0]}
               width={265}
               height={200}
               objectFit="cover"

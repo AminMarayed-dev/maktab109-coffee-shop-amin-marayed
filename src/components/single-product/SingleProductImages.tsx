@@ -18,12 +18,12 @@ function SingleProductImages({ product }: any) {
   };
   return (
     <Stack justifyContent="center" rowGap={2}>
-      <Box>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Image
           width={mdDown ? 380 : 450}
           height={mdDown ? 260 : 450}
-          // src={`http://${mainImage}`}
-          src={mainImage}
+          src={`http://${mainImage}`}
+          // src={mainImage}
           alt={product?.name}
           style={{ borderRadius: "10px" }}
         />
@@ -35,8 +35,8 @@ function SingleProductImages({ product }: any) {
               key={index}
               width={mdDown ? 95 : 110}
               height={mdDown ? 95 : 110}
-              // src={`http://${image}`}
-              src={image}
+              src={`http://${image}`}
+              // src={image}
               alt={product?.name}
               style={{ borderRadius: "10px", cursor: "pointer" }}
               onClick={() => handleImageClick(image)}

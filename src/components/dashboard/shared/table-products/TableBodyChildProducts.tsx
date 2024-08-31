@@ -29,8 +29,8 @@ function TableBodyChildProducts({
     <TableRow key={product._id}>
       <TableCell align={`${mdDown ? "left" : "center"}`}>
         <Image
-          // src={`http://${product.images[0]}`}
-          src={product.images[0]}
+          src={`http://${product.images[0]}`}
+          // src={product.images[0]}
           width={mdDown ? 50 : 60}
           height={mdDown ? 50 : 60}
           alt="Logo"

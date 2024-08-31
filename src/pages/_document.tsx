@@ -16,6 +16,7 @@ export default function Document(props: DocumentProps & DocumentHeadTagsProps) {
   return (
     <Html lang="fn" dir="rtl">
       <Head>
+        <link rel="icon" href="/coffee-logo.svg" />
         <DocumentHeadTags {...props} />
       </Head>
       <body>
