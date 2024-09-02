@@ -4,7 +4,10 @@ import useGetCategoryBySlug from "@/hooks/product-category/useGetCategoryBySlug"
 import useGetProductsBySubCategoryID from "@/hooks/product-category/useGetProductsBySubID";
 import useGetSubCategoryBySlug from "@/hooks/product-category/useGetSubCategoryByslug";
 import useResponsive from "@/hooks/shared/useResponsive";
-import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
+import {
+  toPersianNumbers,
+  toPersianNumbersWithComma,
+} from "@/utils/toPersianNumbers";
 import {
   Box,
   Button,
@@ -54,7 +57,7 @@ function ProductsSubCategory({ slug }: { slug: any }) {
       >
         <Typography variant="body2">{subCategoryData?.name}</Typography>
         <Typography variant="body1">
-          {toPersianNumbersWithComma(productsBySubCategory.length)} نتیجه
+          {toPersianNumbers(productsBySubCategory?.length)} نتیجه
         </Typography>
       </Box>
       <Divider />

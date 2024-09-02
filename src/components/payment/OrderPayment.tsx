@@ -38,7 +38,7 @@ function OrderPayment() {
 
   const handleDateChange = (date: DateObject | null, options: any) => {
     if (date) {
-      setValueDataPicker(new Date(date.toString()).toISOString());
+      setValueDataPicker(date.toDate().toISOString());
     }
   };
   const handleSubmitOrder = () => {
@@ -87,7 +87,18 @@ function OrderPayment() {
       <Divider />
       <FormControlLabel
         onChange={handleCheckboxChange}
-        control={<Checkbox />}
+        control={
+          <Checkbox
+            sx={{
+              "&.Mui-checked": {
+                color: "black",
+              },
+              "&.MuiCheckbox-root": {
+                color: "black",
+              },
+            }}
+          />
+        }
         label={payment.messageCheckBox}
       />
       <Button onClick={handleSubmitOrder}>{payment.submitOrder}</Button>
