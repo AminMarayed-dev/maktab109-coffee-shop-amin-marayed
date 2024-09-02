@@ -17,7 +17,8 @@ function ResultSearchBox({
       {resultSearchProduct ? (
         <Stack direction="row" columnGap={2} alignItems="center">
           <Image
-            src={`http://${resultSearchProduct?.images[0]}`}
+            // src={`http://${resultSearchProduct?.images[0]}`}
+            src={resultSearchProduct?.images[0]}
             alt={resultSearchProduct.name}
             width={60}
             height={60}

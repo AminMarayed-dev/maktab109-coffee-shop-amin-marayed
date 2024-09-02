@@ -27,8 +27,8 @@ function CardBasket({ card }: { card: any }) {
         <Image
           width={50}
           height={50}
-          src={`http://${card.images[0]}`}
-          // src={card.images[0]}
+          // src={`http://${card.images[0]}`}
+          src={card.images[0]}
           alt={card.name}
         />
 

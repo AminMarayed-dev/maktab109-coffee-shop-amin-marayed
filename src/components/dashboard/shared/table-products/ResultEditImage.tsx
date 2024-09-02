@@ -36,8 +36,8 @@ function ResultEditImage({ productImages }: { productImages: string[] }) {
         : productImages?.map((image, index) => (
             <Image
               key={index}
-              src={`http://${image}`}
-              // src={image}
+              // src={`http://${image}`}
+              src={image}
               width={mdDown ? 30 : 60}
               height={mdDown ? 30 : 60}
               alt="image"

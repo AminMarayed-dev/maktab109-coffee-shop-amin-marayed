@@ -46,8 +46,8 @@ function ProductsCategory({ title, data }: { title: string; data: any }) {
                 }}
               >
                 <Image
-                  src={`http://${product.images[0]}`}
-                  // src={product.images[0]}
+                  // src={`http://${product.images[0]}`}
+                  src={product.images[0]}
                   width={mdDown ? 200 : 280}
                   height={mdDown ? 150 : 250}
                   objectFit="cover"

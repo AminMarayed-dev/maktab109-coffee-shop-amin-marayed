@@ -75,8 +75,8 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                 onClick={() => router.push(`/shop/${product._id}`)}
               >
                 <Image
-                  src={`http://${product.images[0]}`}
-                  // src={product.images[0]}
+                  // src={`http://${product.images[0]}`}
+                  src={product.images[0]}
                   width={mdDown ? 210 : 300}
                   height={mdDown ? 150 : 195}
                   objectFit="cover"

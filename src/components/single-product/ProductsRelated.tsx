@@ -74,8 +74,8 @@ function ProductsRelated({ product }: { product: any }) {
                         elevation={0}
                       >
                         <Image
-                          src={`http://${product?.images[0]}`}
-                          // src={product.images[0]}
+                          // src={`http://${product?.images[0]}`}
+                          src={product.images[0]}
                           width={mdDown ? 200 : 300}
                           height={mdDown ? 150 : 180}
                           objectFit="cover"
