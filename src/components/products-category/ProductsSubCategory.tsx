@@ -4,9 +4,10 @@ import useGetCategoryBySlug from "@/hooks/product-category/useGetCategoryBySlug"
 import useGetProductsBySubCategoryID from "@/hooks/product-category/useGetProductsBySubID";
 import useGetSubCategoryBySlug from "@/hooks/product-category/useGetSubCategoryByslug";
 import useResponsive from "@/hooks/shared/useResponsive";
-import { ProductData } from "@/types/dashboard/type";
-import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
-import truncateText from "@/utils/trancateText";
+import {
+  toPersianNumbers,
+  toPersianNumbersWithComma,
+} from "@/utils/toPersianNumbers";
 import {
   Box,
   Button,
@@ -55,7 +56,9 @@ function ProductsSubCategory({ slug }: { slug: any }) {
         }}
       >
         <Typography variant="body2">{subCategoryData?.name}</Typography>
-        <Typography variant="body1">نمایش 1–48 از 2584 نتیجه</Typography>
+        <Typography variant="body1">
+          {toPersianNumbers(productsBySubCategory?.length)} نتیجه
+        </Typography>
       </Box>
       <Divider />
       <Stack justifyContent="center" alignItems="center">
@@ -66,6 +69,7 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                 sx={{
                   ...styleCard,
                   cursor: "pointer",
+                  height: mdDown ? "400px" : "430px",
                 }}
                 elevation={0}
                 onClick={() => router.push(`/shop/${product._id}`)}
@@ -73,8 +77,8 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                 <Image
                   // src={`http://${product.images[0]}`}
                   src={product.images[0]}
-                  width={mdDown ? 200 : 300}
-                  height={195}
+                  width={mdDown ? 210 : 300}
+                  height={mdDown ? 150 : 195}
                   objectFit="cover"
                   alt={product.name}
                   loading="lazy"
@@ -83,13 +87,11 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                   <>
                     <CardContent>
                       <Typography
-                        variant="body1"
+                        variant={mdDown ? "body2" : "body1"}
                         fontWeight={"bold"}
                         textAlign="center"
                       >
-                        {mdDown
-                          ? truncateText(product.name, 16)
-                          : truncateText(product.name, 25)}
+                        {product.name}
                       </Typography>
                       <CheckQuantityAndRate rate={3} />
                       <Typography
@@ -108,13 +110,11 @@ function ProductsSubCategory({ slug }: { slug: any }) {
                 ) : (
                   <CardContent>
                     <Typography
-                      variant="body1"
+                      variant={mdDown ? "body2" : "body1"}
                       fontWeight={"bold"}
                       textAlign="center"
                     >
-                      {mdDown
-                        ? truncateText(product.name, 16)
-                        : truncateText(product.name, 25)}
+                      {product.name}
                     </Typography>
                     <Typography
                       variant="h4"

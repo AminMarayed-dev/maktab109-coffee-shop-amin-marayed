@@ -89,7 +89,7 @@ export const cssClass = {
     display: "flex",
     flexDirection: "column",
     border: "1px solid #52525b",
-    height: "405px",
+    // height: "405px",
   },
   styleButtonResultPayment: {
     pay: {
@@ -112,14 +112,14 @@ export const cssClass = {
   },
   styleButtonLinkSingleProduct: {
     backgroundColor: "primary.main",
-    color: "primary.contrastText",
     borderRadius: 0,
     "&:hover": {
       backgroundColor: "primary.main",
       color: "secondary.light",
     },
     padding: 0,
-    fontSize: "0.7rem",
+    fontSize: "0.63rem",
     minWidth: 0,
+    color: "#6b7280",
   },
 };

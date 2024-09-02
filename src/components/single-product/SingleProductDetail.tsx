@@ -65,9 +65,16 @@ function SingleProductDetail({ product }: { product: any }) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexDirection: mdDown ? "column" : "row",
         }}
       >
-        <Stack direction="row" alignItems="center" justifyContent="center">
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          whiteSpace={"nowrap"}
+          color="primary.light"
+        >
           <Button
             sx={styleButtonLinkSingleProduct}
             onClick={() => handleRouteButtonLink("/shop")}

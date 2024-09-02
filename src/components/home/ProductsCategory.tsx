@@ -2,9 +2,7 @@ import { cssClass } from "@/constant/cssClass";
 import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import useGetAllProductsToShop from "@/hooks/shop/useGetAllProductsToShop";
-import { ProductData } from "@/types/dashboard/type";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
-import truncateText from "@/utils/trancateText";
 import {
   Button,
   Card,
@@ -33,35 +31,32 @@ function ProductsCategory({ title, data }: { title: string; data: any }) {
       <TextDivider text={title} />
       <Grid container lg={12} xs={12} spacing={2}>
         {sampleProductsShop?.map((product: any, index: number) => (
-          <Grid item lg={4} xs={6} key={index}>
+          <Grid item lg={3} xs={6} key={index}>
             <Button
               sx={styleButtonLink}
               onClick={() => router.push(`/shop/${product._id}`)}
             >
               <Card
                 sx={{
-                  height: `${mdDown} ? 200px : 400px`,
+                  height: mdDown ? "280px" : "360px",
                   bgcolor: "primary.dark",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
                 }}
               >
                 <Image
                   // src={`http://${product.images[0]}`}
                   src={product.images[0]}
-                  width={mdDown ? 200 : 380}
-                  height={mdDown ? 200 : 300}
+                  width={mdDown ? 200 : 280}
+                  height={mdDown ? 150 : 250}
                   objectFit="cover"
                   alt={product.name}
                   loading="lazy"
                 />
                 <CardContent>
-                  <Typography
-                    sx={{ whiteSpace: "nowrap" }}
-                    variant="body1"
-                    fontWeight={"bold"}
-                  >
-                    {mdDown
-                      ? truncateText(product.name, 16)
-                      : truncateText(product.name, 40)}
+                  <Typography variant="body2" fontWeight={"bold"}>
+                    {product.name}
                   </Typography>
                   <Typography variant="body2" mt={1} color="secondary.dark">
                     {toPersianNumbersWithComma(product.price)} {common.rial}

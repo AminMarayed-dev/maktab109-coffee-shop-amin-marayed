@@ -9,12 +9,6 @@ const nextConfig = {
         port: "",
         pathname: "/wp-content/uploads/**/**/**",
       },
-      {
-        protocol: "https",
-        hostname: "api-marayedcoffee.liara.run",
-        port: "",
-        pathname: "/images/products/**",
-      },
     ],
   },
 };

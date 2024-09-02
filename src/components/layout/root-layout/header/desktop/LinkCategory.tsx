@@ -1,3 +1,4 @@
+import { localization } from "@/constant/localization";
 import useResponsive from "@/hooks/shared/useResponsive";
 import { Button, Container, Stack, styled } from "@mui/material";
 import Tooltip, { tooltipClasses, TooltipProps } from "@mui/material/Tooltip";
@@ -15,6 +16,10 @@ const TooltipStyled = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
+const {
+  home: { menuList },
+} = localization;
+
 const LinkCategory = () => {
   const OnlyDesktop = useResponsive({ query: "only", breakpoints: "xl" });
   const router = useRouter();
@@ -26,6 +31,20 @@ const LinkCategory = () => {
     OnlyDesktop && (
       <Container>
         <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+          <Button
+            sx={{
+              bgcolor: "primary.main",
+              "&:hover": {
+                bgcolor: "primary.main",
+                color: "secondary.light",
+              },
+            }}
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            {menuList.home}
+          </Button>
           {slicedMenuItems.map((menuItem: any, index) => (
             <TooltipStyled
               key={index}

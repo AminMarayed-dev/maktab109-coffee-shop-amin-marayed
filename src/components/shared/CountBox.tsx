@@ -57,7 +57,7 @@ function CountBox({ product }: { product: any }) {
       borderRadius="5px"
     >
       <IconButton size="small" onClick={handleIncrement}>
-        <AddIcon fontSize="small" />
+        <AddIcon fontSize="small" sx={{ fill: "black" }} />
       </IconButton>
 
       <Typography
@@ -68,7 +68,7 @@ function CountBox({ product }: { product: any }) {
       </Typography>
 
       <IconButton size="small" onClick={handleDecrement}>
-        <RemoveIcon fontSize="small" />
+        <RemoveIcon fontSize="small" sx={{ fill: "black" }} />
       </IconButton>
     </Box>
   );

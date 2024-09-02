@@ -18,7 +18,7 @@ function SingleProductImages({ product }: any) {
   };
   return (
     <Stack justifyContent="center" rowGap={2}>
-      <Box>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Image
           width={mdDown ? 380 : 450}
           height={mdDown ? 260 : 450}

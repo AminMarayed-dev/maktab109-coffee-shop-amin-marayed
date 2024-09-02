@@ -4,8 +4,10 @@ import { localization } from "@/constant/localization";
 import useGetCategoryBySlug from "@/hooks/product-category/useGetCategoryBySlug";
 import useGetProductsByCategoryID from "@/hooks/product-category/useGetProductsByCategoryID";
 import useResponsive from "@/hooks/shared/useResponsive";
-import { ProductData } from "@/types/dashboard/type";
-import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
+import {
+  toPersianNumbers,
+  toPersianNumbersWithComma,
+} from "@/utils/toPersianNumbers";
 import truncateText from "@/utils/trancateText";
 import {
   Box,
@@ -49,7 +51,9 @@ function ProductsCategory({ slug }: { slug: string }) {
         }}
       >
         <Typography variant="body2">{categoryData?.name}</Typography>
-        <Typography variant="body1">نمایش 1–48 از 2584 نتیجه</Typography>
+        <Typography variant="body1">
+          {toPersianNumbers(productsByCategory?.length)} نتیجه
+        </Typography>
       </Box>
       <Divider />
       <Stack justifyContent="center" alignItems="center">
@@ -62,6 +66,7 @@ function ProductsCategory({ slug }: { slug: string }) {
                   justifyContent:
                     product.quantity > 0 ? "space-between" : "flex-start",
                   cursor: "pointer",
+                  minHeight: "350px",
                 }}
                 elevation={0}
                 onClick={() => router.push(`/shop/${product._id}`)}
